@@ -30,6 +30,10 @@ A **simple** information and service portal designed for barangays, built using 
 
 ## 🚀 Getting Started
 
+### Design Preview
+## In Progress 2% Done
+- [Design Figma Preview](https://www.figma.com/design/YlCFxMn6JjdnLNJZDtsBIR/Untitled?node-id=0-1&t=gMvCCkNUz1iYTphq-1)
+- 
 ### Prerequisites
 
 - [Visual Studio 2022](https://visualstudio.microsoft.com/) with **ASP.NET and web development** workload
