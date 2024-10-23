@@ -93,9 +93,9 @@ This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) f
 For any inquiries or suggestions, feel free to reach out:
 
 - **Email**: pyanz.jheo123@gmail.com
-- **GitHub**: [kurowatoshi](https://github.com/kurowatoshi)
+- **GitHub**: [Kurowatoshi](https://github.com/kurowatoshi)
 - **Email**: edrianvisagas01@gmail.com
-- **GitHub**: [kurowatoshi](https://github.com/Chocwasd)
+- **GitHub**: [Chocwasd](https://github.com/Chocwasd)
 ---
 
 Made with ❤️ using **ASP.NET Core** and **Bootstrap 5**.
