@@ -1,6 +1,7 @@
 using BrgyLink.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using BrgyLink.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -1,0 +1,216 @@
+
+body {
+	display: flex; /* Use flex to arrange sidebar and main content */
+	background-color: #f8f9fa; /* Light background for the body */
+	font-family: 'Candara', sans-serif; /* Use Candara font */
+	height: 100vh; /* Full height for the body */
+	transition: background-color 0.3s, color 0.3s; /* Smooth transition for background */
+}
+
+.sidebar {
+	min-height: 100vh; /* Ensure sidebar takes full height */
+	width: 250px; /* Fixed width for the sidebar */
+	background-color: white; /* White background for the sidebar */
+	display: flex; /* Flex to arrange the sidebar header and buttons vertically */
+	flex-direction: column; /* Arrange sidebar elements vertically */
+	border-right: 1px solid #ddd; /* Optional: Add border for better separation */
+	transition: transform 0.3s ease, opacity 0.3s ease; /* Smooth transition */
+	opacity: 1; /* Initial opacity */
+	transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.sidebar.hidden {
+	transform: translateX(-100%); /* Move sidebar out of view */
+	opacity: 0; /* Fade out */
+}
+
+.sidebar-header {
+	flex: 0 0 70px; /* Height for the sidebar header set to 70px */
+	padding: 10px; /* Padding for the header */
+	text-align: center;
+	background-color: #f8f9fa; /* Match the sidebar background color */
+	color: black; /* Change header text color to black */
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-bottom: 1px solid #ddd; /* Add bottom border */
+	transition: background-color 0.3s, color 0.3s, border-color 0.3s; /* Smooth transition */
+}
+
+.header-content {
+	width: 100%; /* Full width for the header */
+	transition: margin-left 0.3s ease; /* Smooth transition for content */
+}
+
+header {
+	width: 100%; /* Full width for the header */
+	height: 70px; /* Height for the content header set to 70px */
+	display: flex;
+	align-items: center; /* Center content vertically */
+	justify-content: space-between; /* Space between items */
+	padding: 0 15px; /* Add horizontal padding */
+	background-color: white; /* Background color for the header */
+	border-bottom: 1px solid #ddd; /* Add border for separation */
+	position: relative; /* For positioning */
+	z-index: 1; /* Ensure the header is above other elements */
+	transition: background-color 0.3s, color 0.3s, border-color 0.3s; /* Smooth transition */
+}
+
+.nav-buttons {
+	flex-grow: 1; /* Take up remaining space */
+	margin-top: 20px; /* Space below the header */
+}
+
+.nav-link {
+	opacity: 0;
+	transform: translateY(10px);
+	animation: fadeInUp 0.5s forwards;
+	border-radius: 0; /* Remove rounded corners */
+	margin: 0; /* No margin between buttons */
+	padding: 15px 15px; /* Added padding for bigger buttons */
+	text-decoration: none; /* Remove underline */
+	display: flex; /* Flex to align icon and text */
+	align-items: center; /* Center icon vertically */
+	color: gray; /* Default text color set to gray */
+	background-color: white; /* Button background color */
+	height: 50px; /* Set a fixed height for buttons */
+	border: none; /* Remove border */
+	transition: background-color 0.3s, color 0.3s, border-color 0.3s, transform 0.2s;
+}
+
+.nav-link i {
+	margin-right: 10px; /* Space between icon and text */
+	margin-left: 20px; /* Add left padding to the icon */
+	flex-shrink: 0; /* Prevent icon from shrinking */
+	transition: transform 0.2s; /* Transition for icon animation */
+}
+
+.nav-link span {
+	margin-left: 10px; /* Add margin to the left of the text */
+}
+
+.nav-link:hover {
+	color: #333; /* Darker text color on hover */
+	transform: scale(1.05); /* Slightly increase size on hover */
+}
+
+.nav-link:hover i {
+	transform: scale(1.2); /* Slightly increase icon size on hover */
+}
+
+@keyframes fadeInUp {
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.nav-link:nth-child(1) {
+	animation-delay: 0.2s;
+}
+
+.nav-link:nth-child(2) {
+	animation-delay: 0.4s;
+}
+
+.nav-link:nth-child(3) {
+	animation-delay: 0.6s;
+}
+
+.content {
+	padding: 20px; /* Padding for content area */
+	transition: background-color 0.3s, color 0.3s, border-color 0.3s; /* Smooth transition */
+	flex-grow: 1; /* Allow content to take up available space */
+	margin-left: 0; /* Reset margin */
+}
+
+/* Dark mode styles */
+body.bg-dark {
+	background-color: #343a40; /* Dark background */
+	color: white; /* Light text color */
+}
+
+.sidebar.bg-dark {
+	background-color: #212529; /* Dark sidebar */
+	border-right: 1px solid #444; /* Dark border */
+}
+
+.sidebar-header.bg-dark {
+	background-color: #212529; /* Dark header */
+	color: white; /* Light text color */
+	border-bottom: 1px solid #444; /* Dark border */
+}
+
+header.bg-dark {
+	background-color: #212529; /* Dark header */
+	color: white; /* Light text color */
+	border-bottom: 1px solid #444; /* Dark border */
+}
+
+.nav-link.bg-dark {
+	background-color: #212529; /* Dark button background */
+	color: gray; /* Default text color set to gray */
+	border: none; /* Remove border */
+}
+
+.nav-link.bg-dark:hover {
+	color: #ddd; /* Lighter text color on hover */
+}
+
+/* Toggler styles */
+.toggler-button {
+	border: none; /* Remove border */
+	background: none; /* Remove background */
+	color: inherit; /* Inherit color */
+	cursor: pointer; /* Change cursor to pointer */
+	transition: transform 0.2s; /* Add animation */
+	font-size: 1.5rem; /* Increased size for toggler icons */
+}
+
+.toggler-button:hover {
+	transform: scale(1.1); /* Scale up on hover */
+}
+
+.dropdown-menu {
+	transition: all 0.5s ease;
+}
+
+.dropdown-menu.show {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+.dropdown-menu.hide {
+	opacity: 0;
+	transform: translateY(-10px);
+}
+
+.dropdown-menu.bg-dark {
+	background-color: #212529; /* Dark button background */
+	color: gray; /* Default text color set to gray */
+	border: 1px solid #444;
+}
+
+.dropdown-menu.bg-dark:hover {
+	color: #ddd; /* Lighter text color on hover */
+}
+
+.dropdown-item.bg-dark {
+	background-color: #212529; /* Dark button background */
+	color: gray; /* Default text color set to gray */
+	border: none;
+}
+
+.dropdown-item.bg-dark:hover {
+	color: #ddd; /* Lighter text color on hover */
+}
+
+.btn-profile.bg-dark {
+	background-color: #212529; /* Dark button background */
+	color: gray; /* Default text color set to gray */
+	border: none;
+}
+
+.btn-profile.bg-dark:hover {
+	color: #ddd; /* Lighter text color on hover */
+}

@@ -1,51 +1,65 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Candara:wght@400&display=swap" rel="stylesheet"> <!-- Include Candara font -->
+    <link rel="stylesheet" href="~/css/sidebar-style.css" asp-append-version="true" />
     <title>@ViewData["Title"] - BrgyLink</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/BrgyLink.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">BrgyLink</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li>
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <h5>BrgyLink</h5>
+        </div>
+        <div class="nav-buttons d-flex flex-column">
+            <a href="#" class="nav-link mb-0">
+                <i class="bi bi-house-door"></i><span>Home</span>
+            </a>
+            <a href="#" class="nav-link mb-0">
+                <i class="bi bi-person-badge"></i><span>Resident</span>
+            </a>
+            <a href="#" class="nav-link mb-0">
+                <i class="bi bi-journal-text"></i><span>Blotter</span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="header-content">
+        <header>
+            <button id="sidebarToggler" class="toggler-button">
+                <i class="bi bi-list"></i> <!-- Navbar toggler icon -->
+            </button>
+            <div class="d-flex align-items-center">
+                <!-- Align items for the right section -->
+                <div class="dropdown me-3">
+                    <!-- Dropdown for profile -->
+                    <button class="btn btn-profile dropdown-toggle" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="border: none;">
+                        <i class="bi bi-person-circle"></i> Pyanz Jheo
+                    </button>
+
+                    <ul class="dropdown-menu" aria-labelledby="profileDropdown">
+                        <li><a class="dropdown-item" href="#">Manage Account</a></li>
+                        <li><a class="dropdown-item" href="#">Logout</a></li>
                     </ul>
                 </div>
+                <button id="darkModeToggle" class="toggler-button">
+                    <i class="bi bi-moon"></i> <!-- Dark mode toggler icon -->
+                </button>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
+        </header>
+
+        <div class="content">
+            <!-- Content area -->
             @RenderBody()
-        </main>
+        </div>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - BrgyLink - <a asp-area="" asp-page="/Privacy">Privacy</a>
-        </div>
-    </footer>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/layout-animations.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
