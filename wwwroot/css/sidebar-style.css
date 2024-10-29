@@ -14,9 +14,8 @@ body {
 	display: flex; /* Flex to arrange the sidebar header and buttons vertically */
 	flex-direction: column; /* Arrange sidebar elements vertically */
 	border-right: 1px solid #ddd; /* Optional: Add border for better separation */
-	transition: transform 0.3s ease, opacity 0.3s ease; /* Smooth transition */
+	transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s, color 0.3s, border-color 0.3s; /* Smooth transition */
 	opacity: 1; /* Initial opacity */
-	transition: background-color 0.3s, color 0.3s, border-color 0.3s;
 }
 
 .sidebar.hidden {
