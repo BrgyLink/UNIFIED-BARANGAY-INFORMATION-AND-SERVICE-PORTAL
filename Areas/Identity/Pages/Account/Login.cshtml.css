@@ -1,0 +1,93 @@
+﻿.bg-image {
+    overflow: hidden;
+    z-index: 1;
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px); /* For Safari support */
+}
+    .bg-image::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(255, 255, 255, 0.3); /* Adjust opacity as needed */
+        backdrop-filter: blur(2px);
+        -webkit-backdrop-filter: blur(2px);
+        z-index: -1;
+    }
+
+.card {
+    border: none;
+    border-radius: 8px;
+
+}
+
+.form-control {
+    border: 1px solid #dee2e6;
+    padding: 0.5rem 0.75rem;
+    font-size: 14px;
+}
+
+    .form-control::placeholder {
+        color: #adb5bd;
+    }
+
+    .form-control:focus {
+        box-shadow: none;
+        border-color: #0d6efd;
+    }
+
+.btn-primary {
+    padding: 0.5rem;
+    font-size: 14px;
+    font-weight: 500;
+    background-color: #0d6efd;
+}
+
+.input-group-text {
+    border-left: none;
+    padding: 0.5rem 0.75rem;
+}
+
+.input-group .form-control {
+    border-right: none;
+}
+
+    .input-group .form-control:focus {
+        border-right: none;
+        box-shadow: none;
+    }
+
+        .input-group .form-control:focus + .input-group-text {
+            border-color: #86b7fe;
+        }
+
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.container-fluid {
+    width: 100vw;
+    height: 100vh;
+}
+
+/* New styles for simplified design */
+.form-label {
+    color: #212529;
+    font-weight: 500;
+}
+
+.card-body {
+    padding: 2rem !important;
+}
+
+.text-primary {
+    color: #0d6efd !important;
+}
+
+    .text-primary:hover {
+        color: #0b5ed7 !important;
+    }
