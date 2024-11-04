@@ -72,6 +72,19 @@ A **simple** information and service portal designed for barangays, built using 
     ```
 
 ---
+### Installation
+
+1. **Migrate Database**
+    ```package manager console
+    Add-Migration "Migration Name"
+    ```
+2. **Update Database**
+    ```package manager console
+    Update Database
+    ```
+
+
+---
 
 ## 📸 Screenshots
 
