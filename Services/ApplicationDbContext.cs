@@ -1,32 +1,16 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using BrgyLink.Models;
+﻿using BrgyLink.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using System.Security.Cryptography.X509Certificates;
 
-namespace BrgyLink.Services
+public class ApplicationDbContext : IdentityDbContext
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        : base(options)
     {
-        public ApplicationDbContext(DbContextOptions options) : base(options)
-            {       
-
-            }
-        protected override void OnModelCreating(ModelBuilder builder)
-        {
-            base.OnModelCreating(builder);
-
-            var admin = new IdentityRole("admin");
-            admin.NormalizedName = "admin";
-
-            var client = new IdentityRole("client");
-            client.NormalizedName = "client";
-
-            var resident = new IdentityRole("resident");
-            resident.NormalizedName = "resident";
-
-            builder.Entity<IdentityRole>().HasData(admin, client, resident);
-
-
-        }
     }
+
+    // public DbSet<Resident> Residents { get; set; }
+    // public DbSet<CertificateRequest> CertificateRequests { get; set; }
 }
