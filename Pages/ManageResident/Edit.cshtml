@@ -1,0 +1,131 @@
+﻿@page
+@model BrgyLink.Pages.ManageResident.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Pages/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>Resident</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Resident.ResidentID" />
+            <div class="form-group">
+                <label asp-for="Resident.FirstName" class="control-label"></label>
+                <input asp-for="Resident.FirstName" class="form-control" />
+                <span asp-validation-for="Resident.FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Resident.LastName" class="control-label"></label>
+                <input asp-for="Resident.LastName" class="form-control" />
+                <span asp-validation-for="Resident.LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Resident.MiddleName" class="control-label"></label>
+                <input asp-for="Resident.MiddleName" class="form-control" />
+                <span asp-validation-for="Resident.MiddleName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Resident.Address" class="control-label"></label>
+                <input asp-for="Resident.Address" class="form-control" />
+                <span asp-validation-for="Resident.Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Resident.ContactNumber" class="control-label"></label>
+                <input asp-for="Resident.ContactNumber" class="form-control" />
+                <span asp-validation-for="Resident.ContactNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Resident.Email" class="control-label"></label>
+                <input asp-for="Resident.Email" class="form-control" />
+                <span asp-validation-for="Resident.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Resident.BirthDate" class="control-label"></label>
+                <input asp-for="Resident.BirthDate" class="form-control" />
+                <span asp-validation-for="Resident.BirthDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Resident.Gender" class="control-label"></label>
+                <input asp-for="Resident.Gender" class="form-control" />
+                <span asp-validation-for="Resident.Gender" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Resident.ResidencyStatus" class="control-label"></label>
+                <input asp-for="Resident.ResidencyStatus" class="form-control" />
+                <span asp-validation-for="Resident.ResidencyStatus" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Resident.IsSeniorCitizen" /> @Html.DisplayNameFor(model => model.Resident.IsSeniorCitizen)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Resident.IsPWD" /> @Html.DisplayNameFor(model => model.Resident.IsPWD)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="Resident.Nationality" class="control-label"></label>
+                <input asp-for="Resident.Nationality" class="form-control" />
+                <span asp-validation-for="Resident.Nationality" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Resident.CivilStatus" class="control-label"></label>
+                <input asp-for="Resident.CivilStatus" class="form-control" />
+                <span asp-validation-for="Resident.CivilStatus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Resident.Occupation" class="control-label"></label>
+                <input asp-for="Resident.Occupation" class="form-control" />
+                <span asp-validation-for="Resident.Occupation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Resident.VoterStatus" class="control-label"></label>
+                <input asp-for="Resident.VoterStatus" class="form-control" />
+                <span asp-validation-for="Resident.VoterStatus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Resident.DateRegistered" class="control-label"></label>
+                <input asp-for="Resident.DateRegistered" class="form-control" />
+                <span asp-validation-for="Resident.DateRegistered" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Resident.ProfilePicture" class="control-label"></label>
+                <input asp-for="Resident.ProfilePicture" class="form-control" />
+                <span asp-validation-for="Resident.ProfilePicture" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Resident.EmergencyContact" class="control-label"></label>
+                <input asp-for="Resident.EmergencyContact" class="form-control" />
+                <span asp-validation-for="Resident.EmergencyContact" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Resident.ImageData" class="control-label"></label>
+                <input asp-for="Resident.ImageData" class="form-control" />
+                <span asp-validation-for="Resident.ImageData" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Resident.HealthConditions" class="control-label"></label>
+                <input asp-for="Resident.HealthConditions" class="form-control" />
+                <span asp-validation-for="Resident.HealthConditions" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
