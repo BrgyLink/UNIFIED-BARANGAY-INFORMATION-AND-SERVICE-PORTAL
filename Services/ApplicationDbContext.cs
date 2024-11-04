@@ -11,6 +11,6 @@ public class ApplicationDbContext : IdentityDbContext
     {
     }
 
-    // public DbSet<Resident> Residents { get; set; }
+    public DbSet<Resident> Residents { get; set; }
     // public DbSet<CertificateRequest> CertificateRequests { get; set; }
 }
