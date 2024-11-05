@@ -83,13 +83,6 @@ A **simple** information and service portal designed for barangays, built using 
     Update Database
     ```
 
-
----
-
-## 📸 Screenshots
-
-**SOON! ❤️**
-
 ---
 
 ## 🤝 Contributing
