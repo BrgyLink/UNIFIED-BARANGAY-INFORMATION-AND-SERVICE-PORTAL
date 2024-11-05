@@ -8,7 +8,7 @@ body {
 }
 
 .sidebar {
-	min-height: 100vh; /* Ensure sidebar takes full height */
+	height:170vh;
 	width: 250px; /* Fixed width for the sidebar */
 	background-color: white; /* White background for the sidebar */
 	display: flex; /* Flex to arrange the sidebar header and buttons vertically */

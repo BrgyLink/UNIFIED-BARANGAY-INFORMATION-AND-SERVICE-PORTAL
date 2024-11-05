@@ -6,6 +6,18 @@ a.navbar-brand {
     word-break: break-all;
 }
 
+.sidebar {
+    position: fixed; /* Fix the sidebar */
+    top: 0; /* Align to the top */
+    left: 0; /* Align to the left */
+    width: 250px; /* Set a fixed width */
+    height: 100vh; /* Full height */
+    background-color: #f8f9fa; /* Background color */
+    border-right: 1px solid #dee2e6; /* Optional border */
+    padding: 20px; /* Optional padding */
+    overflow-y: auto; /* Optional: allows scrolling if content overflows */
+}
+
 a {
     color: #0077cc;
 }

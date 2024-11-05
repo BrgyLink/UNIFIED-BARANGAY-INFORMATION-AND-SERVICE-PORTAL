@@ -136,7 +136,7 @@ namespace BrgyLink.Areas.Identity.Pages.Account
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    ModelState.AddModelError(string.Empty, "Email or Password is Incorrect.");
                     return Page();
                 }
             }

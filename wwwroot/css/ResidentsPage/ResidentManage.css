@@ -125,3 +125,83 @@ li {
     text-align: -webkit-match-parent;
     unicode-bidi: isolate;
 }
+
+/* Container for action buttons */
+.action-buttons {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+/* Common styles for all action buttons */
+.view, .edit, .delete {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+/* View button styles */
+.view {
+    color: #2196F3;
+    background-color: #E3F2FD;
+}
+
+    .view:hover {
+        background-color: #2196F3;
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 2px 5px rgba(33, 150, 243, 0.3);
+    }
+
+/* Edit button styles */
+.edit {
+    color: #4CAF50;
+    background-color: #E8F5E9;
+}
+
+    .edit:hover {
+        background-color: #4CAF50;
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 2px 5px rgba(76, 175, 80, 0.3);
+    }
+
+/* Delete button styles */
+.delete {
+    color: #F44336;
+    background-color: #FFEBEE;
+}
+
+    .delete:hover {
+        background-color: #F44336;
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 2px 5px rgba(244, 67, 54, 0.3);
+    }
+
+/* Material icons adjustments */
+.material-icons {
+    font-size: 20px;
+}
+
+/* Tooltip enhancement */
+[data-bs-toggle="tooltip"] {
+    position: relative;
+}
+
+/* Dark mode styles */
+.bg-dark .view {
+    background-color: rgba(33, 150, 243, 0.2);
+}
+
+.bg-dark .edit {
+    background-color: rgba(76, 175, 80, 0.2);
+}
+
+.bg-dark .delete {
+    background-color: rgba(244, 67, 54, 0.2);
+}

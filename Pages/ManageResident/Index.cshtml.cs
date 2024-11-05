@@ -15,21 +15,34 @@ namespace BrgyLink.Pages.ManageResident
             _context = context;
         }
 
-        public IList<Resident> Resident { get;set; } = default!;
+        public PaginatedList<Resident> Resident { get; set; }
         [BindProperty(SupportsGet = true)]
         public string SearchString { get; set; }
 
+        public int PageIndex { get; set; }
+        public int TotalPages { get; set; }
+
         public async Task OnGetAsync(int? pageIndex)
         {
+            // Default to page 1 if no page index is provided
+            PageIndex = pageIndex ?? 1;
+
             var query = _context.Residents.AsQueryable();
 
+            // Apply search filter if provided
             if (!string.IsNullOrEmpty(SearchString))
             {
                 query = query.Where(r => r.FirstName.Contains(SearchString) || r.LastName.Contains(SearchString));
             }
 
-            int pageSize = 15;
-            Resident = await PaginatedList<Resident>.CreateAsync(query.AsNoTracking(), pageIndex ?? 1, pageSize);
+            // Set page size to 10
+            int pageSize = 10;  // Change this line to set the page size to 10
+            Resident = await PaginatedList<Resident>.CreateAsync(query.AsNoTracking(), PageIndex, pageSize);
+
+            // Calculate total pages
+            TotalPages = Resident.TotalPages;
         }
+
+
     }
 }
