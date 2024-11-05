@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BrgyLink.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241104133101_AddResidentTable")]
-    partial class AddResidentTable
+    [Migration("20241104162734_ImageData-missing-fixed")]
+    partial class ImageDatamissingfixed
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -67,6 +67,10 @@ namespace BrgyLink.Migrations
 
                     b.Property<string>("HealthConditions")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("ImageData")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<bool>("IsPWD")
                         .HasColumnType("bit");

@@ -1,0 +1,108 @@
+#chatbox {
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	width: 300px;
+	background-color: #f8f9fa;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+	display: none;
+	z-index: 1000;
+}
+
+#messagesContainer {
+	height: 300px;
+	overflow-y: auto;
+	display: flex;
+	flex-direction: column;
+	padding: 10px; /* Add padding for aesthetics */
+}
+
+.message {
+	margin: 5px 0;
+	display: flex; /* Use flexbox for alignment */
+}
+
+	.message.user {
+		justify-content: flex-end; /* Align user's messages to the right */
+	}
+
+	.message.bot {
+		justify-content: flex-start; /* Align bot's messages to the left */
+	}
+
+.typing-indicator {
+	color: gray;
+	font-style: italic;
+}
+
+.profile-img {
+	width: 30px; /* Set profile image width */
+	height: 30px; /* Set profile image height */
+	border-radius: 50%; /* Make it circular */
+	margin-right: 5px; /* Space between image and text */
+	align-self: flex-start; /* Align profile image */
+}
+.chat-header {
+	display: flex;
+	justify-content: space-between; /* Space between title and close button */
+	align-items: center; /* Center vertically */
+}
+
+.btn-close {
+	border: none;
+	background: transparent;
+	font-size: 1.5em; /* Make the close button larger */
+}
+
+.fade-in {
+	animation: fadeIn 0.5s forwards; /* Fade-in animation */
+}
+
+.fade-out {
+	animation: fadeOut 0.5s forwards; /* Fade-out animation */
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(20px); /* Slide in from the bottom */
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes fadeOut {
+	from {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+	to {
+		opacity: 0;
+		transform: translateY(20px); /* Slide out to the bottom */
+	}
+}
+
+/* Pop effect for chatbox when new message arrives */
+@keyframes pop {
+	0% {
+		transform: scale(1);
+	}
+
+	50% {
+		transform: scale(1.05);
+	}
+
+	100% {
+		transform: scale(1);
+	}
+}
+
+.bounce {
+	animation: pop 0.3s; /* Change bounce to pop */
+}

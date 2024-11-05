@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BrgyLink.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241104144856_AddResidentManagement")]
-    partial class AddResidentManagement
+    [Migration("20241104161842_Residents-Fixing")]
+    partial class ResidentsFixing
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
