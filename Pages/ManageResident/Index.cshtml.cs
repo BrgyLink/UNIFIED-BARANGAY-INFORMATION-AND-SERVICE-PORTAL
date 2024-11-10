@@ -3,9 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using BrgyLink.Helpers;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BrgyLink.Pages.ManageResident
 {
+    [Authorize(Policy = "RequireAdminRole")]
     public class IndexModel : PageModel
     {
         private readonly ApplicationDbContext _context;

@@ -2,127 +2,157 @@
 @model BrgyLink.Pages.ManageResident.CreateModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create Resident";
     Layout = "~/Pages/Shared/_AdminLayout.cshtml";
 }
 
+<h2 class="text-center mb-4">Create Resident</h2>
 
-<h1 class="text-center mb-4">Create Resident</h1>
+<div class="container">
+    <div class="row justify-content-center">
+        <!-- Image Column -->
+        <div class="col-12 col-md-3 mb-4 mt-4 text-center">
+            <!-- Placeholder Image -->
+            <img id="placeholderImage" src="/images/avatarPlaceholder.jpg" alt="Placeholder Image" class="img-fluid mb-3" style="max-width: 120px; border-radius: 50%;" />
+            <!-- Image Upload Field -->
+            <input type="file" class="form-control" asp-for="Resident.ImageFile" />
+            <span asp-validation-for="Resident.ImageFile" class="text-danger"></span>
+        </div>
 
-<div class="row justify-content-center">
-    <div class="col-md-8">
-        <form method="post" enctype="multipart/form-data">
-            <div asp-validation-summary="All" class="text-danger"></div>
+        <!-- Form Fields Column -->
+        <div class="col-12 col-md-9">
+            <form method="post" enctype="multipart/form-data">
+                <div class="text-danger"></div>
 
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label asp-for="Resident.FirstName" class="control-label">First Name</label>
-                        <input asp-for="Resident.FirstName" class="form-control" />
+                <!-- First Name and Last Name -->
+                <div class="row mb-3">
+                    <div class="col-6">
+                        <input type="text" class="form-control form-control-sm" placeholder="Enter Firstname" asp-for="Resident.FirstName" required />
                         <span asp-validation-for="Resident.FirstName" class="text-danger"></span>
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label asp-for="Resident.LastName" class="control-label">Last Name</label>
-                        <input asp-for="Resident.LastName" class="form-control" />
+                    <div class="col-6">
+                        <input type="text" class="form-control form-control-sm" placeholder="Enter Lastname" asp-for="Resident.LastName" required />
                         <span asp-validation-for="Resident.LastName" class="text-danger"></span>
                     </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <label asp-for="Resident.MiddleName" class="control-label">Middle Name</label>
-                <input asp-for="Resident.MiddleName" class="form-control" placeholder="Optional" />
-                <span asp-validation-for="Resident.MiddleName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Resident.ResidencyStatus"></label>
-                <input asp-for="Resident.ResidencyStatus" class="form-control" />
-                <span asp-validation-for="Resident.ResidencyStatus" class="text-danger"></span>
-            </div>
+                <!-- Middle Name -->
+                <div class="form-group mb-3">
+                    <input type="text" class="form-control form-control-sm" placeholder="Enter Middlename" asp-for="Resident.MiddleName" />
+                    <span asp-validation-for="Resident.MiddleName" class="text-danger"></span>
+                </div>
 
-            <div class="form-group">
-                <label asp-for="Resident.Nationality"></label>
-                <input asp-for="Resident.Nationality" class="form-control" />
-                <span asp-validation-for="Resident.Nationality" class="text-danger"></span>
-            </div>
+                <!-- Address -->
+                <div class="form-group mb-3">
+                    <textarea class="form-control form-control-sm" placeholder="Enter Address" rows="1" asp-for="Resident.Address" required></textarea>
+                    <span asp-validation-for="Resident.Address" class="text-danger"></span>
+                </div>
 
-            <div class="form-group">
-                <label asp-for="Resident.CivilStatus"></label>
-                <input asp-for="Resident.CivilStatus" class="form-control" />
-                <span asp-validation-for="Resident.CivilStatus" class="text-danger"></span>
-            </div>
+                <!-- Contact Number and Email -->
+                <div class="row mb-3">
+                    <div class="col-6">
+                        <input type="tel" class="form-control form-control-sm" placeholder="Enter Contact Number" asp-for="Resident.ContactNumber" required />
+                        <span asp-validation-for="Resident.ContactNumber" class="text-danger"></span>
+                    </div>
+                    <div class="col-6">
+                        <input type="email" class="form-control form-control-sm" placeholder="Enter Email" asp-for="Resident.Email" />
+                        <span asp-validation-for="Resident.Email" class="text-danger"></span>
+                    </div>
+                </div>
 
-            <div class="form-group">
-                <label asp-for="Resident.VoterStatus"></label>
-                <input asp-for="Resident.VoterStatus" class="form-control" />
-                <span asp-validation-for="Resident.VoterStatus" class="text-danger"></span>
-            </div>
+                <!-- Birthdate, Gender, Civil Status -->
+                <div class="row mb-3">
+                    <div class="col-4">
+                        <input type="date" class="form-control form-control-sm" asp-for="Resident.BirthDate" required />
+                        <span asp-validation-for="Resident.BirthDate" class="text-danger"></span>
+                    </div>
+                    <div class="col-4">
+                        <select class="form-select form-select-sm" asp-for="Resident.Gender" required>
+                            <option value="">Select Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <span asp-validation-for="Resident.Gender" class="text-danger"></span>
+                    </div>
+                    <div class="col-4">
+                        <select class="form-select form-select-sm" asp-for="Resident.CivilStatus" required>
+                            <option value="Single">Single</option>
+                            <option value="Married">Married</option>
+                            <option value="Divorced">Divorced</option>
+                            <option value="Widowed">Widowed</option>
+                        </select>
+                        <span asp-validation-for="Resident.CivilStatus" class="text-danger"></span>
+                    </div>
+                </div>
 
-            <div class="form-group">
-                <label asp-for="Resident.EmergencyContact"></label>
-                <input asp-for="Resident.EmergencyContact" class="form-control" />
-                <span asp-validation-for="Resident.EmergencyContact" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Resident.Address" class="control-label">Address</label>
-                <input asp-for="Resident.Address" class="form-control" />
-                <span asp-validation-for="Resident.Address" class="text-danger"></span>
-            </div>
+                <!-- Nationality and Residency Status -->
+                <div class="row mb-3">
+                    <div class="col-6">
+                        <input type="text" class="form-control form-control-sm" placeholder="Enter Nationality" asp-for="Resident.Nationality" required />
+                        <span asp-validation-for="Resident.Nationality" class="text-danger"></span>
+                    </div>
+                    <div class="col-6">
+                        <select class="form-select form-select-sm" asp-for="Resident.ResidencyStatus" disabled>
+                            <option value="Resident">Resident</option>
+                        </select>
+                        <span asp-validation-for="Resident.ResidencyStatus" class="text-danger"></span>
+                    </div>
+                </div>
 
-            <div class="form-group">
-                <label asp-for="Resident.ContactNumber" class="control-label">Contact Number</label>
-                <input asp-for="Resident.ContactNumber" class="form-control" />
-                <span asp-validation-for="Resident.ContactNumber" class="text-danger"></span>
-            </div>
+                <!-- Senior Citizen Checkbox -->
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <div class="form-check form-check-sm">
+                            <input class="form-check-input" type="checkbox" asp-for="Resident.IsSeniorCitizen" />
+                            <label class="form-check-label">Senior Citizen</label>
+                        </div>
+                        <span asp-validation-for="Resident.IsSeniorCitizen" class="text-danger"></span>
+                    </div>
+                </div>
 
-            <div class="form-group">
-                <label asp-for="Resident.Email" class="control-label">Email</label>
-                <input asp-for="Resident.Email" type="email" class="form-control" />
-                <span asp-validation-for="Resident.Email" class="text-danger"></span>
-            </div>
+                <!-- PWD, Voter Status and Occupation -->
+                <div class="row mb-3">
+                    <div class="col-4">
+                        <div class="form-check form-check-sm">
+                            <input class="form-check-input" type="checkbox" asp-for="Resident.IsPWD" />
+                            <label class="form-check-label">Person with Disability (PWD)</label>
+                        </div>
+                        <span asp-validation-for="Resident.IsPWD" class="text-danger"></span>
+                    </div>
+                    <div class="col-4">
+                        <select class="form-select form-select-sm" asp-for="Resident.VoterStatus" required>
+                            <option value="Non-voter">Non-voter</option>
+                            <option value="Voter">Voter</option>
+                        </select>
+                        <span asp-validation-for="Resident.VoterStatus" class="text-danger"></span>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" class="form-control form-control-sm" placeholder="Enter Occupation" asp-for="Resident.Occupation" />
+                        <span asp-validation-for="Resident.Occupation" class="text-danger"></span>
+                    </div>
+                </div>
 
-            <div class="form-group">
-                <label asp-for="Resident.BirthDate" class="control-label">Birth Date</label>
-                <input asp-for="Resident.BirthDate" type="date" class="form-control" />
-                <span asp-validation-for="Resident.BirthDate" class="text-danger"></span>
-            </div>
+                <!-- Emergency Contact and Health Conditions -->
+                <div class="row mb-3">
+                    <div class="col-6">
+                        <input type="text" class="form-control form-control-sm" placeholder="Enter Emergency Contact" asp-for="Resident.EmergencyContact" required />
+                        <span asp-validation-for="Resident.EmergencyContact" class="text-danger"></span>
+                    </div>
+                    <div class="col-6">
+                        <textarea class="form-control form-control-sm" placeholder="Enter Health Conditions (if any)" rows="1" asp-for="Resident.HealthConditions"></textarea>
+                        <span asp-validation-for="Resident.HealthConditions" class="text-danger"></span>
+                    </div>
+                </div>
 
-            <div class="form-group">
-                <label asp-for="Resident.Gender" class="control-label">Gender</label>
-                <select asp-for="Resident.Gender" class="form-control">
-                    <option value="">Select Gender</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                </select>
-                <span asp-validation-for="Resident.Gender" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Resident.IsSeniorCitizen" class="form-check-label">Senior Citizen</label>
-                <input asp-for="Resident.IsSeniorCitizen" type="checkbox" class="form-check-input" />
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Resident.IsPWD" class="form-check-label">Is a PWD?</label>
-                <input asp-for="Resident.IsPWD" type="checkbox" class="form-check-input" />
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Resident.ImageFile" class="control-label">Profile Picture</label>
-                <input asp-for="Resident.ImageFile" class="form-control" type="file" />
-                <span asp-validation-for="Resident.ImageFile" class="text-danger"></span>
-            </div>
-
-            <div class="text-center">
-                <button type="submit" class="btn btn-primary mt-3">Create Resident</button>
-            </div>
-        </form>
+                <!-- Submit Button -->
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary btn-lg mt-3 btn-sm">Save Resident</button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
-
-
 
 <!-- Success Modal -->
 <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
@@ -141,11 +171,6 @@
         </div>
     </div>
 </div>
-
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
 
 @section Scripts {
     @{

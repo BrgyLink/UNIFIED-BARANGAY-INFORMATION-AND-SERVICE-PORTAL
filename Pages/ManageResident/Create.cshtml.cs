@@ -6,11 +6,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using BrgyLink.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BrgyLink.Pages.ManageResident
 {
+    [Authorize(Policy = "RequireAdminRole")]
     public class CreateModel : PageModel
     {
+
         private readonly ApplicationDbContext _context;
         private readonly ILogger<CreateModel> _logger;
         public bool Success { get; set; }
@@ -31,6 +34,10 @@ namespace BrgyLink.Pages.ManageResident
 
         public async Task<IActionResult> OnPostAsync()
         {
+            foreach (var modelStateEntry in ModelState.Values)
+            {
+                modelStateEntry.Errors.Clear();
+            }
             if (!ModelState.IsValid)
             {
                 return Page();

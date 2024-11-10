@@ -205,3 +205,54 @@ li {
 .bg-dark .delete {
     background-color: rgba(244, 67, 54, 0.2);
 }
+
+
+/*Modal CSS*/
+.profile-placeholder {
+    width: 200px;
+    height: 200px;
+    background-color: #e9ecef;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.camera-btn {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background-color: #ff4d4d;
+    border: none;
+    padding: 8px;
+    border-radius: 5px;
+}
+
+.plus-btn {
+    position: absolute;
+    bottom: 10px;
+    left: 55px;
+    background-color: #6c757d;
+    border: none;
+    padding: 8px;
+    border-radius: 5px;
+}
+
+    .camera-btn i, .plus-btn i {
+        color: white;
+    }
+
+.form-container {
+    padding: 20px;
+}
+
+.modal-title {
+    font-weight: 500;
+}
+
+.form-control, .form-select {
+    margin-bottom: 15px;
+}
+
+.file-upload {
+    margin-top: 10px;
+}

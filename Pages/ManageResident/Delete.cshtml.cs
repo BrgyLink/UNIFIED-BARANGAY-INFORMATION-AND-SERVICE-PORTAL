@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using BrgyLink.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BrgyLink.Pages.ManageResident
 {
+    [Authorize(Policy = "RequireAdminRole")]
     public class DeleteModel : PageModel
     {
         private readonly ApplicationDbContext _context;

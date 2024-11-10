@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BrgyLink.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BrgyLink.Pages.ManageResident
 {
+    [Authorize(Policy = "RequireAdminRole")]
     public class EditModel : PageModel
     {
         private readonly ApplicationDbContext _context;

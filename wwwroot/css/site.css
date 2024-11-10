@@ -1,22 +1,95 @@
-html {
-  font-size: 14px;
+/* Base fade-in animation */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+/* Apply fade-in effect */
+.fade-in {
+    opacity: 0;
+    animation: fadeIn 1s ease-out forwards; /* Shortened duration */
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+/* Slide-in from bottom */
+@keyframes slideInBottom {
+    0% {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
-html {
-  position: relative;
-  min-height: 100%;
+/* Apply slide-in from bottom effect */
+.fade-in-bottom {
+    opacity: 0;
+    transform: translateY(50px);
+    animation: slideInBottom 1s ease-out forwards; /* Shortened duration */
 }
 
-body {
-  margin-bottom: 60px;
+/* Slide-in from left */
+@keyframes slideInLeft {
+    0% {
+        transform: translateX(-50px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }
+
+/* Apply slide-in from left effect */
+.fade-in-left {
+    opacity: 0;
+    transform: translateX(-50px);
+    animation: slideInLeft 1s ease-out forwards; /* Shortened duration */
+}
+
+/* Apply staggered fade-in for elements */
+.hero-section, .logo-img, .welcome-text, p, .about-btn, .Service-btn, .text-center {
+    opacity: 0;
+    animation: fadeIn 1s ease-out forwards;
+}
+
+/* Adding delay for elements to stagger appearance */
+.hero-section {
+    animation-delay: 0.1s; /* Faster delay */
+}
+
+.logo-img {
+    animation-delay: 0.2s; /* Faster delay */
+}
+
+.welcome-text {
+    animation-delay: 0.3s; /* Faster delay */
+}
+
+p {
+    animation-delay: 0.4s; /* Faster delay */
+}
+
+.about-btn, .Service-btn {
+    animation-delay: 0.5s; /* Faster delay */
+}
+
+.text-center {
+    animation-delay: 0.4s; /* Faster delay */
+}
+
+
+
+/*MAPS*/
+/* Make sure the map container takes full width and height */
+#map {
+    height: 100vh; /* Full viewport height */
+    width: 100%; /* Full width */

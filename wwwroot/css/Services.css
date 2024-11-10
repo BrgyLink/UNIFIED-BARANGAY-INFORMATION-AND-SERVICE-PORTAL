@@ -1,0 +1,149 @@
+﻿/* Custom Styles for h1 and h2 */
+h1, h2 {
+    color: white; /* Ensure text is white for contrast */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Optional: Adds shadow for better readability */
+    font-weight: bold; /* Make titles bold */
+}
+
+h1 {
+    font-size: 3rem; /* Make h1 large */
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+h2 {
+    font-size: 2rem; /* Slightly smaller than h1 */
+    text-align: center;
+    margin-bottom: 40px; /* Add space below the subtitle */
+}
+
+/* Apply Horizontal Split Background Behind Entire Section */
+.services-section {
+    background: linear-gradient(to bottom, #1a237e 50%, #f1f1f1 50%);
+    padding: 0px 0; /* Add some padding to give the section breathing room */
+    width: 2000px;
+    margin: 0;
+}
+
+/* Custom Styles for Service Containers (cards) */
+.service-container {
+    background-color: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 30px; /* Spacing between cards */
+}
+
+    .service-container:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    }
+
+.service-card img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin-top: 20px;
+}
+
+.service-card h3 {
+    margin-top: 15px;
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.service-card p {
+    font-size: 1rem;
+    color: #555;
+    padding: 0 15px;
+    margin-bottom: 20px;
+}
+
+.service-card .btn {
+    background-color: #1a237e;
+    color: white;
+    border-radius: 25px;
+    padding: 10px 25px;
+    text-transform: uppercase;
+    font-weight: bold;
+    border: none;
+    transition: background-color 0.3s;
+}
+
+    .service-card .btn:hover {
+        background-color: #3949ab;
+    }
+
+
+/* Base styles for fade-in animation */
+.fade-in {
+    opacity: 0;
+    animation: fadeInAnimation 2s ease-out forwards;
+}
+
+/* Fade-in animation definition */
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Fade-in animation for the service cards */
+.service-card {
+    opacity: 0;
+    transform: translateY(50px);
+    animation: fadeInFromBottom 1.5s ease-out forwards;
+}
+
+/* Keyframes for sliding up effect */
+@keyframes fadeInFromBottom {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Fade-in animation for the main title */
+h1, h2 {
+    opacity: 0;
+    animation: fadeInAnimation 2s ease-out forwards;
+}
+
+/* Delay the title animation to start after page load */
+h1 {
+    animation-delay: 0.5s;
+}
+
+h2 {
+    animation-delay: 1s;
+}
+
+/* Fade-in effect for the whole services section */
+.services-section {
+    opacity: 0;
+    animation: fadeInAnimation 2s ease-out forwards;
+    animation-delay: 0.2s; /* Delay to make sure everything else loads first */
+}
+
+/* Add a slight delay to the service cards for a staggered effect */
+.service-container:nth-child(1) .service-card {
+    animation-delay: 1s; /* First card with 1s delay */
+}
+
+.service-container:nth-child(2) .service-card {
+    animation-delay: 1.2s; /* Second card with 1.2s delay */
+}
+
+.service-container:nth-child(3) .service-card {
+    animation-delay: 1.4s; /* Third card with 1.4s delay */
+}

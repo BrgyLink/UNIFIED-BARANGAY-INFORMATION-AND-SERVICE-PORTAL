@@ -1,16 +1,15 @@
 
 body {
 	display: flex; /* Use flex to arrange sidebar and main content */
-	background-color: #f8f9fa; /* Light background for the body */
 	font-family: 'Candara', sans-serif; /* Use Candara font */
 	height: 100vh; /* Full height for the body */
 	transition: background-color 0.3s, color 0.3s; /* Smooth transition for background */
 }
 
 .sidebar {
-	height:170vh;
-	width: 250px; /* Fixed width for the sidebar */
-	background-color: white; /* White background for the sidebar */
+	height: 170vh;
+	width: 255px; /* Fixed width for the sidebar */
+	background-color: #1d1f2b; /* Darker background */
 	display: flex; /* Flex to arrange the sidebar header and buttons vertically */
 	flex-direction: column; /* Arrange sidebar elements vertically */
 	border-right: 1px solid #ddd; /* Optional: Add border for better separation */
@@ -27,13 +26,15 @@ body {
 	flex: 0 0 70px; /* Height for the sidebar header set to 70px */
 	padding: 10px; /* Padding for the header */
 	text-align: center;
-	background-color: #f8f9fa; /* Match the sidebar background color */
-	color: black; /* Change header text color to black */
+	background-color: #A594F9;
+	color: #fff;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	border-bottom: 1px solid #ddd; /* Add bottom border */
 	transition: background-color 0.3s, color 0.3s, border-color 0.3s; /* Smooth transition */
+	font-weight: bold;
+	border-bottom: 1px solid #444;
 }
 
 .header-content {
@@ -71,7 +72,6 @@ header {
 	display: flex; /* Flex to align icon and text */
 	align-items: center; /* Center icon vertically */
 	color: gray; /* Default text color set to gray */
-	background-color: white; /* Button background color */
 	height: 50px; /* Set a fixed height for buttons */
 	border: none; /* Remove border */
 	transition: background-color 0.3s, color 0.3s, border-color 0.3s, transform 0.2s;
@@ -88,10 +88,11 @@ header {
 	margin-left: 10px; /* Add margin to the left of the text */
 }
 
-.nav-link:hover {
-	color: #333; /* Darker text color on hover */
-	transform: scale(1.05); /* Slightly increase size on hover */
-}
+	.nav-link:hover {
+		color: #fafafa; /* Lighter text color */
+		background-color: #333; /* Darker hover background */
+		transform: scale(1.05); /* Keep subtle size increase */
+	}
 
 .nav-link:hover i {
 	transform: scale(1.2); /* Slightly increase icon size on hover */
@@ -105,15 +106,27 @@ header {
 }
 
 .nav-link:nth-child(1) {
-	animation-delay: 0.2s;
+	animation-delay: 0.1s;
 }
 
 .nav-link:nth-child(2) {
-	animation-delay: 0.4s;
+	animation-delay: 0.2s;
 }
 
 .nav-link:nth-child(3) {
+	animation-delay: 0.3s;
+}
+.nav-link:nth-child(4) {
+	animation-delay: 0.4s;
+}
+.nav-link:nth-child(5) {
+	animation-delay: 0.5s;
+}
+.nav-link:nth-child(6) {
 	animation-delay: 0.6s;
+}
+.nav-link:nth-child(7) {
+	animation-delay: 0.7s;
 }
 
 .content {
@@ -154,6 +167,11 @@ header.bg-dark {
 
 .nav-link.bg-dark:hover {
 	color: #ddd; /* Lighter text color on hover */
+}
+
+.nav-link.active {
+	background-color: #fa5252; /* Accent color for active link */
+	color: white;
 }
 
 /* Toggler styles */
@@ -213,3 +231,5 @@ header.bg-dark {
 .btn-profile.bg-dark:hover {
 	color: #ddd; /* Lighter text color on hover */
 }
+
+

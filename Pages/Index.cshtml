@@ -3,23 +3,27 @@
 @{
 }
 
-<!-- Hero Section -->
-<section class="hero-section">
+<<!-- Hero Section with Top Margin -->
+<section class="hero-section mt-5 mb-3">
     <div class="container">
         <div class="row align-items-center">
-            <div class="col-md-4 text-center">
-                <img src="/images/logoBrgySeal.png" alt="Barangay Cabadiangan Seal" class="logo-img">
+            <!-- Logo Column -->
+            <div class="col-12 col-md-4 text-center mb-4 mb-md-0">
+                <img src="/images/logoBrgySeal.png" alt="Barangay Cabadiangan Seal" class="logo-img img-fluid fade-in">
             </div>
-            <div class="col-md-8">
-                <h1 class="welcome-text">WELCOME TO</h1>
-                <h1 class="welcome-text">BARANGAY CABADIANGAN</h1>
-                <p class="mb-4">Purok 5, Cabadiangan, Compostela, Cebu</p>
-                <p class="mb-4">Open Hours of Barangay: Monday to Friday (8AM - 5PM)</p>
-                <p class="mb-4">brgycabadiangay@gmail.com / 90900</p>
-                <button class="about-btn">ABOUT US</button>
+
+            <!-- Text and Button Column -->
+            <div class="col-12 col-md-8 fade-in">
+                <h1 class="welcome-text text-center text-md-start">WELCOME TO</h1>
+                <h1 class="welcome-text text-center text-md-start">BARANGAY CABADIANGAN</h1>
+                <p class="mb-4 text-center text-md-start">Purok 5, Cabadiangan, Compostela, Cebu</p>
+                <p class="mb-4 text-center text-md-start">Open Hours of Barangay: Monday to Friday (8AM - 5PM)</p>
+                <p class="mb-4 text-center text-md-start">brgycabadiangay@gmail.com / 90900</p>
+                <div class="text-center text-md-start">
+                    <a class="btn about-btn mx-2">ABOUT US</a>
+                    <a class="btn Service-btn mx-2" asp-area="" asp-page="/Services">SERVICES</a>
+                </div>
             </div>
         </div>
     </div>
 </section>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
