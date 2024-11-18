@@ -1,0 +1,114 @@
+﻿@page
+@model BrgyLink.Pages.ManageBarangayOfficials.IndexModel
+
+@{
+    ViewData["Title"] = "Barangay Officials";
+    Layout = "_AdminLayout";
+}
+
+<link rel="stylesheet" href="/css/BarangayOfficialsPage/BarangayOfficialManage.css" asp-append-version="true" />
+
+<div class="table-title">
+    <div class="row">
+        <div class="col-sm-5">
+            <h2>Barangay Officials <b>Management</b></h2>
+        </div>
+        <div class="col-sm-7">
+            <a asp-page="/ManageBarangayOfficials/Create" class="btn btn-secondary">
+                <i class="material-icons"></i> <span>Add New Official</span>
+            </a>
+            <a asp-page="/ManageBarangayOfficials/Index" asp-handler="ExportToExcel" class="btn btn-secondary">
+                <i class="material-icons"></i> <span>Export to Excel</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Search Form -->
+<form method="get">
+    <div class="input-group mb-3">
+        <input type="text" name="SearchString" value="@Model.SearchString" class="form-control" placeholder="Search Barangay Officials...">
+        <button class="btn btn-primary" type="submit">Search</button>
+    </div>
+</form>
+
+<!-- Barangay Officials Table -->
+<table class="table table-striped table-hover table-bordered">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Name <i class="fa fa-sort"></i></th>
+            <th>Barangay Position</th>
+            <th>Term Duration <i class="fa fa-sort"></i></th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (var i = 0; i < Model.BarangayOfficial.Count; i++)
+        {
+            var official = Model.BarangayOfficial[i];
+            <tr>
+                <td>@((Model.PageIndex - 1) * 10 + i + 1)</td>
+                <td>@official.FirstName @official.MiddleName @official.LastName</td>
+                <td>@official.BarangayPosition</td>
+                <td>
+                    @official.TermStart?.ToString("MM/dd/yyyy") ?? "N/A"
+                </td>
+                <td>@official.Status</td>
+                <td>
+                    <div class="action-buttons d-flex justify-content-center">
+                        <a asp-page="./Details" asp-route-id="@official.Id" class="view" title="View" data-bs-toggle="tooltip"><i class="material-icons">visibility</i></a>
+                        <a asp-page="./Edit" asp-route-id="@official.Id" class="edit" title="Edit"><i class="material-icons">edit</i></a>
+                        <a asp-page="./Delete" asp-route-id="@official.Id" class="delete" title="Delete"><i class="material-icons">delete</i></a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Pagination Controls -->
+<div class="clearfix">
+    <div class="hint-text">
+        Showing <b>@Model.BarangayOfficial.Count</b> out of <b>@Model.BarangayOfficial.TotalItems</b> entries
+    </div>
+
+    <ul class="pagination">
+        <!-- Previous Page Link -->
+        @if (Model.BarangayOfficial.HasPreviousPage)
+        {
+            <li class="page-item">
+                <a asp-page="./Index" asp-route-pageIndex="@(Model.PageIndex - 1)" asp-route-searchString="@Model.SearchString" class="page-link">Previous</a>
+            </li>
+        }
+        else
+        {
+            <li class="page-item disabled">
+                <a href="#" class="page-link">Previous</a>
+            </li>
+        }
+
+        <!-- Page Number Links -->
+        @for (int i = 1; i <= Model.BarangayOfficial.TotalPages; i++)
+        {
+            <li class="page-item @(i == Model.PageIndex ? "active" : "")">
+                <a asp-page="./Index" asp-route-pageIndex="@i" asp-route-searchString="@Model.SearchString" class="page-link">@i</a>
+            </li>
+        }
+
+        <!-- Next Page Link -->
+        @if (Model.BarangayOfficial.HasNextPage)
+        {
+            <li class="page-item">
+                <a asp-page="./Index" asp-route-pageIndex="@(Model.PageIndex + 1)" asp-route-searchString="@Model.SearchString" class="page-link">Next</a>
+            </li>
+        }
+        else
+        {
+            <li class="page-item disabled">
+                <a href="#" class="page-link">Next</a>
+            </li>
+        }
+    </ul>
+</div>

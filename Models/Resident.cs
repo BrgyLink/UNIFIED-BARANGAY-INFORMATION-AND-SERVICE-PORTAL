@@ -80,5 +80,8 @@ namespace BrgyLink.Models
 
         [Range(0, 150)]
         public int Age => DateTime.Today.Year - BirthDate.Year;
+
+        // Navigation property to BarangayOfficial (one-to-many relationship)
+        public ICollection<BarangayOfficial> BarangayOfficials { get; set; }
     }
 }
