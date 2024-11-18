@@ -34,7 +34,7 @@ A **simple** information and service portal designed for barangays, built using 
 
 **In Progress 2% Done**
 - [Design Figma Preview](https://www.figma.com/design/YlCFxMn6JjdnLNJZDtsBIR/Untitled?node-id=0-1&t=gMvCCkNUz1iYTphq-1)
-- [Base Design](https://colorlib.com/polygon/adminator/signin.html) ***CTTO***
+- [Base Design](https://colorlib.com/polygon/adminator/) ***CTTO***
   
 **FIGMA UI KIT**
 - [Bootstrap 5](https://www.figma.com/design/lCZbrjorAYSOZDnw6WugEO/Bootstrap-5-Design-System---UI-Kit-(Community)?node-id=3-193136&node-type=canvas&t=PKYyhlf7yGxRhZPM-0)
