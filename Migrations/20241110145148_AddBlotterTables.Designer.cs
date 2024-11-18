@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BrgyLink.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241105090518_UpdateResidents")]
-    partial class UpdateResidents
+    [Migration("20241110145148_AddBlotterTables")]
+    partial class AddBlotterTables
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,6 +23,77 @@ namespace BrgyLink.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("BrgyLink.Models.Blotter", b =>
+                {
+                    b.Property<int>("BlotterID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BlotterID"));
+
+                    b.Property<int>("ComplainantID")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateFiled")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<string>("Location")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<int>("RespondentID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Time")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
+                    b.HasKey("BlotterID");
+
+                    b.HasIndex("ComplainantID");
+
+                    b.HasIndex("RespondentID");
+
+                    b.ToTable("Blotter");
+                });
+
+            modelBuilder.Entity("BrgyLink.Models.BlotterVictim", b =>
+                {
+                    b.Property<int>("BlotterVictimID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BlotterVictimID"));
+
+                    b.Property<int>("BlotterID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ResidentID")
+                        .HasColumnType("int");
+
+                    b.HasKey("BlotterVictimID");
+
+                    b.HasIndex("BlotterID");
+
+                    b.HasIndex("ResidentID");
+
+                    b.ToTable("BlotterVictims");
+                });
 
             modelBuilder.Entity("BrgyLink.Models.Resident", b =>
                 {
@@ -77,7 +148,6 @@ namespace BrgyLink.Migrations
                         .HasColumnType("nvarchar(500)");
 
                     b.Property<byte[]>("ImageData")
-                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<bool>("IsPWD")
@@ -317,6 +387,44 @@ namespace BrgyLink.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("BrgyLink.Models.Blotter", b =>
+                {
+                    b.HasOne("BrgyLink.Models.Resident", "Complainant")
+                        .WithMany()
+                        .HasForeignKey("ComplainantID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BrgyLink.Models.Resident", "Respondent")
+                        .WithMany()
+                        .HasForeignKey("RespondentID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Complainant");
+
+                    b.Navigation("Respondent");
+                });
+
+            modelBuilder.Entity("BrgyLink.Models.BlotterVictim", b =>
+                {
+                    b.HasOne("BrgyLink.Models.Blotter", "Blotter")
+                        .WithMany("Victims")
+                        .HasForeignKey("BlotterID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BrgyLink.Models.Resident", "Victim")
+                        .WithMany()
+                        .HasForeignKey("ResidentID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Blotter");
+
+                    b.Navigation("Victim");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -366,6 +474,11 @@ namespace BrgyLink.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("BrgyLink.Models.Blotter", b =>
+                {
+                    b.Navigation("Victims");
                 });
 #pragma warning restore 612, 618
         }

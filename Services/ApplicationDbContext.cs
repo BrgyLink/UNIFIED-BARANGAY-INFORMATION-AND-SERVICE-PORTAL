@@ -12,5 +12,8 @@ public class ApplicationDbContext : IdentityDbContext
     }
 
     public DbSet<Resident> Residents { get; set; }
+
+    public DbSet<BrgyLink.Models.Blotter> Blotter { get; set; } = default!;
+    public DbSet<BlotterVictim> BlotterVictims { get; set; }  // Add this
     // public DbSet<CertificateRequest> CertificateRequests { get; set; }
 }
