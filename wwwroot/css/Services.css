@@ -1,27 +1,27 @@
 ﻿/* Custom Styles for h1 and h2 */
 h1, h2 {
-    color: white; /* Ensure text is white for contrast */
+    color: white; /* White text color for contrast */
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Optional: Adds shadow for better readability */
     font-weight: bold; /* Make titles bold */
+    text-align: center; /* Center text */
 }
 
 h1 {
     font-size: 3rem; /* Make h1 large */
     margin-bottom: 20px;
-    text-align: center;
 }
 
 h2 {
     font-size: 2rem; /* Slightly smaller than h1 */
-    text-align: center;
     margin-bottom: 40px; /* Add space below the subtitle */
 }
 
 /* Apply Horizontal Split Background Behind Entire Section */
 .services-section {
-    background: linear-gradient(to bottom, #1a237e 50%, #f1f1f1 50%);
     padding: 0px 0; /* Add some padding to give the section breathing room */
-    width: 2000px;
+    width: 100%; /* Set the section width to full screen */
+    min-height: 60vh;
+    height: 100%;
     margin: 0;
 }
 
@@ -33,74 +33,16 @@ h2 {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     margin-bottom: 30px; /* Spacing between cards */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%; /* Ensure all cards take equal height */
+    opacity: 0; /* Make cards initially invisible */
+    transform: translateY(50px); /* Move cards down */
+    animation: fadeInFromBottom 0.8s ease-out forwards; /* Add animation for fade and slide up */
 }
 
-    .service-container:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
-    }
-
-.service-card img {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    margin-top: 20px;
-}
-
-.service-card h3 {
-    margin-top: 15px;
-    font-size: 1.25rem;
-    font-weight: bold;
-}
-
-.service-card p {
-    font-size: 1rem;
-    color: #555;
-    padding: 0 15px;
-    margin-bottom: 20px;
-}
-
-.service-card .btn {
-    background-color: #1a237e;
-    color: white;
-    border-radius: 25px;
-    padding: 10px 25px;
-    text-transform: uppercase;
-    font-weight: bold;
-    border: none;
-    transition: background-color 0.3s;
-}
-
-    .service-card .btn:hover {
-        background-color: #3949ab;
-    }
-
-
-/* Base styles for fade-in animation */
-.fade-in {
-    opacity: 0;
-    animation: fadeInAnimation 2s ease-out forwards;
-}
-
-/* Fade-in animation definition */
-@keyframes fadeInAnimation {
-    0% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 1;
-    }
-}
-
-/* Fade-in animation for the service cards */
-.service-card {
-    opacity: 0;
-    transform: translateY(50px);
-    animation: fadeInFromBottom 1.5s ease-out forwards;
-}
-
-/* Keyframes for sliding up effect */
+/* Animation for sliding up and fading in the cards */
 @keyframes fadeInFromBottom {
     0% {
         opacity: 0;
@@ -113,37 +55,93 @@ h2 {
     }
 }
 
-/* Fade-in animation for the main title */
-h1, h2 {
-    opacity: 0;
-    animation: fadeInAnimation 2s ease-out forwards;
+/* Service card body with content flex-grow to ensure it stretches */
+.service-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Ensure button stays at the bottom */
+    height: 100%;
+    text-align: center; /* Center the content inside the card */
+    transition: transform 0.3s ease; /* Smooth transition for the card's transform */
 }
 
-/* Delay the title animation to start after page load */
-h1 {
-    animation-delay: 0.5s;
+    /* Service card image */
+    .service-card img {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        margin-top: 20px;
+        margin-left: auto;
+        margin-right: auto; /* Horizontally center the image */
+        transition: transform 0.3s ease; /* Add transition for scaling */
+    }
+
+    /* Service card title */
+    .service-card h3 {
+        margin-top: 15px;
+        font-size: 1.25rem;
+        font-weight: bold;
+        color: var(--main-color); /* Title color */
+    }
+
+    /* Service card description */
+    .service-card p {
+        font-size: 1rem;
+        color: #555;
+        padding: 0 15px;
+        margin-bottom: 20px;
+        flex-grow: 1; /* Allow the description area to take available space */
+    }
+
+    /* Button styles */
+    .service-card .btn-main {
+        background-color: var(--main-color);
+        color: white;
+        border-radius: 25px;
+        padding: 10px 25px;
+        text-transform: uppercase;
+        font-weight: bold;
+        border: none;
+        transition: background-color 0.3s;
+        align-self: center; /* Center the button horizontally */
+        margin-top: auto; /* Push the button to the bottom */
+    }
+
+        .service-card .btn-main:hover {
+            background-color: var(--hover-color);
+        }
+
+/* Hover effects for service card */
+.service-container:hover {
+    transform: translateY(-10px); /* Lift card on hover */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
 }
 
-h2 {
-    animation-delay: 1s;
+/* Hover effects for the image (scale up the image) */
+.service-card img:hover {
+    transform: scale(1.2); /* Scale the image up when hovered */
 }
 
-/* Fade-in effect for the whole services section */
-.services-section {
-    opacity: 0;
-    animation: fadeInAnimation 2s ease-out forwards;
-    animation-delay: 0.2s; /* Delay to make sure everything else loads first */
-}
+/* Media Query for responsiveness */
+@media (max-width: 767px) {
+    .service-container {
+        margin-bottom: 20px;
+    }
 
-/* Add a slight delay to the service cards for a staggered effect */
-.service-container:nth-child(1) .service-card {
-    animation-delay: 1s; /* First card with 1s delay */
-}
+    .service-card img {
+        width: 100px;
+        height: 100px;
+    }
 
-.service-container:nth-child(2) .service-card {
-    animation-delay: 1.2s; /* Second card with 1.2s delay */
-}
+    .service-card h3 {
+        font-size: 1.1rem;
+    }
 
-.service-container:nth-child(3) .service-card {
-    animation-delay: 1.4s; /* Third card with 1.4s delay */
+    h1 {
+        font-size: 2.5rem; /* Adjust title size for smaller screens */
+    }
+
+    h2 {
+        font-size: 1.8rem; /* Adjust subtitle size */
+    }
 }

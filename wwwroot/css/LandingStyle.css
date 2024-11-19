@@ -1,0 +1,124 @@
+﻿/* Global Theme Color */
+:root {
+    --main-color: #1a237e;
+    --accent-color: #ffca28;
+    --hover-color: #ffc107;
+}
+
+body {
+    background-color: var(--main-color);
+    color: #ffffff;
+    font-family: Candara !important; /* 'Candara' as the primary font */
+    height: 100%;
+    width: 100%;
+}
+
+/* Animation for dropdown menu opening */
+@keyframes dropdownIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Animation for dropdown menu closing */
+@keyframes dropdownOut {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}
+
+/* Navbar styling */
+.navbar {
+    background-color: var(--main-color);
+    padding: 0.5rem 1rem; /* Restored top and bottom padding, removed left and right */
+    width: 100%; /* Ensure navbar spans the full width of the screen */
+    transition: background-color 0.5s ease;
+}
+
+.navbar-nav {
+    margin-left: auto;
+    display: flex;
+    gap: 0.5rem;
+}
+
+/* Navbar brand text */
+.brand-text {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ffffff;
+    transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+    .brand-text:hover {
+        color: var(--hover-color); /* Accent color on hover */
+        transform: scale(1.1); /* Scale up the brand name on hover */
+    }
+
+/* Dropdown styling */
+.navbar-nav .dropdown-menu {
+    background-color: var(--main-color); /* Match the navbar background */
+    border-radius: 0.25rem; /* Rounded corners */
+    border: none; /* Remove default border */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    min-width: 200px; /* Set a minimum width for the dropdown */
+    display: none; /* Hidden by default */
+    animation: dropdownIn 0.3s ease-in-out; /* Apply dropdownIn animation */
+}
+
+/* Show dropdown when active */
+.navbar-nav .dropdown.show .dropdown-menu {
+    display: block; /* Show the dropdown menu */
+    animation: dropdownIn 0.3s ease-in-out; /* Animation for dropdown opening */
+}
+
+/* Dropdown items styling */
+.navbar-nav .dropdown-item {
+    color: #ffffff; /* Dropdown item text color */
+    font-weight: 600; /* Bold text */
+    padding: 0.5rem 1rem; /* Padding to make the items more clickable */
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+    /* Hover effect for dropdown items */
+    .navbar-nav .dropdown-item:hover {
+        background-color: var(--main-color); /* Accent color on hover */
+        color: var(--hover-color); /* Keep the text white */
+        transform: scale(1.1); /* Scale up the item on hover */
+    }
+
+/* Navbar links styling */
+.navbar-nav .nav-link {
+    font-size: 1rem;
+    font-weight: 800;
+    color: #ffffff;
+    transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+    .navbar-nav .nav-link:hover {
+        color: var(--hover-color); /* Accent color on hover */
+        transform: scale(1.1); /* Scale up the link on hover */
+    }
+
+/* Navbar responsive design */
+.navbar-dark .navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+/*MAPS*/
+/* Make sure the map container takes full width and height */
+#map {
+    height: 80vh; /* Full viewport height */
+    width: 100%; /* Full width */
+}

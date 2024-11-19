@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BrgyLink.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241119083258_UpdateResidentModel")]
-    partial class UpdateResidentModel
+    [Migration("20241119133117_New")]
+    partial class New
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

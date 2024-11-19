@@ -1,14 +1,13 @@
-﻿
-.about-container {
+﻿.about-container {
     text-align: center;
     padding: 40px 20px;
     opacity: 0; /* Initially hide the content */
     animation: fadeIn 2s forwards; /* Fade-in effect for the whole container */
 }
 
-    .about-container h2 {
-        font-weight: bold;
-        font-size: 1.8rem;
+    .about-container h2,
+    .about-container p {
+        color: black; /* Ensure all text in About Us section is white */
     }
 
 .info-section {
@@ -20,18 +19,30 @@
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    background-color: #f8f9fa;
-    opacity: 0.10;
+    background-color: #e0e0e0; /* Neutral background color */
+    opacity: 1; /* Ensure opacity is 1 for visibility */
     transform: translateY(20px); /* Start position for slide effect */
     animation: slideUp 0.5s ease-out forwards; /* Slide-up effect with delay */
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Hover effect */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, background-color 0.3s ease-in-out, transform 0.3s ease-in-out; /* Hover effect */
 }
+
+    .info-box h5 {
+        font-weight: bold;
+        margin-bottom: 10px;
+        font-size: 1.2rem;
+        color: var(--main-color); /* Darker color for the title */
+    }
+
+    .info-box p {
+        font-size: 0.9rem;
+        color: black; /* Set text color to black */
+    }
 
     /* Hover effect for info boxes */
     .info-box:hover {
-        transform: translateY(-5px);
-        box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2); /* Adds a deeper shadow effect */
-        background-color: #e9ecef; /* Lightly changes background color */
+        transform: translateY(-10px) scale(1.05); /* Scale up and slightly lift on hover */
+        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* Deeper shadow effect */
+        background-color: var(--hover-color); /* Change background color on hover */
     }
 
     /* Delay each info-box animation */
@@ -59,22 +70,6 @@
         animation-delay: 1.2s;
     }
 
-    /* Hover effect */
-    .info-box:hover {
-        transform: translateY(-5px);
-        box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.2);
-    }
-
-    .info-box h5 {
-        font-weight: bold;
-        margin-bottom: 10px;
-        font-size: 1.2rem;
-    }
-
-    .info-box p {
-        font-size: 0.9rem;
-    }
-
 /* Fade-in effect */
 @keyframes fadeIn {
     to {
@@ -90,6 +85,7 @@
     }
 }
 
+/* Media Query for responsiveness */
 @media (max-width: 768px) {
     .about-container h2 {
         font-size: 1.5rem;
