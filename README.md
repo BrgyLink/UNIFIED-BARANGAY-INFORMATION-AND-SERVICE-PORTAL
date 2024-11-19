@@ -118,16 +118,30 @@ Made with ❤️ using **ASP.NET Core** and **Bootstrap 5**.
 ## 📸 Screenshots
 
 Login Page
+[Desktop]
 ![image](https://github.com/user-attachments/assets/3c845123-000a-4c55-8641-169d9e32a768)
+[Mobile]
+![image](https://github.com/user-attachments/assets/d1ee1fbb-b83c-4e38-b220-7455e57b034c)
 
-UI
-![image](https://github.com/user-attachments/assets/a9d6ab32-a9f9-49c2-b36f-faf23aa0ce89)
+Landing UI [Desktop]
 
-![image](https://github.com/user-attachments/assets/62704771-159f-4d6e-be07-de89f3cbf878)
+![image](https://github.com/user-attachments/assets/affaeecf-3bab-4691-9b5f-ac3276bf7445)
 
-![image](https://github.com/user-attachments/assets/3d26269e-22c2-4cdd-a9cd-19621aa9318e)
+![image](https://github.com/user-attachments/assets/1db7612b-39fa-4116-b68f-5075c3235bac)
 
-![image](https://github.com/user-attachments/assets/675bdca9-5884-4b4c-8a8d-316bb921b6d1)
+![image](https://github.com/user-attachments/assets/5c973114-200b-4e1c-ae40-9df14731797d)
+
+![image](https://github.com/user-attachments/assets/2882faff-4b39-49ea-8c14-4a30acbf2f59)
+
+Landing UI [Mobile]
+![image](https://github.com/user-attachments/assets/89e2e1a3-26e5-4c8a-b02a-374a3c2453af)
+
+![image](https://github.com/user-attachments/assets/4a418517-7c6f-47bf-ac11-5a8c49962cbf)
+
+![image](https://github.com/user-attachments/assets/5311a61a-dd75-4049-a7c3-df435013f3bb)
+
+![image](https://github.com/user-attachments/assets/4d65b6df-ebc4-4fc9-a410-9545a9c64772)
+
 
 ADMIN Dashboard
 ![image](https://github.com/user-attachments/assets/17d5a7aa-753c-4fa4-848d-23136acb7ee9)
