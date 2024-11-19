@@ -120,3 +120,27 @@ Made with ❤️ using **ASP.NET Core** and **Bootstrap 5**.
 Login Page
 ![image](https://github.com/user-attachments/assets/3c845123-000a-4c55-8641-169d9e32a768)
 
+UI
+![image](https://github.com/user-attachments/assets/a9d6ab32-a9f9-49c2-b36f-faf23aa0ce89)
+
+![image](https://github.com/user-attachments/assets/62704771-159f-4d6e-be07-de89f3cbf878)
+
+![image](https://github.com/user-attachments/assets/3d26269e-22c2-4cdd-a9cd-19621aa9318e)
+
+![image](https://github.com/user-attachments/assets/675bdca9-5884-4b4c-8a8d-316bb921b6d1)
+
+ADMIN Dashboard
+![image](https://github.com/user-attachments/assets/17d5a7aa-753c-4fa4-848d-23136acb7ee9)
+
+![image](https://github.com/user-attachments/assets/b40660bf-2fdd-4040-9112-7211dd0a476a)
+
+![image](https://github.com/user-attachments/assets/74ec725c-9663-45e8-b866-85803a9ba450)
+
+
+
+
+
+
+
+
+
