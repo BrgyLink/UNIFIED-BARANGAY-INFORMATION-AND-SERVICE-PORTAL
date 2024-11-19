@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BrgyLink.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class UpdateOfficials : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -206,7 +206,7 @@ namespace BrgyLink.Migrations
                     RankNo = table.Column<int>(type: "int", nullable: true),
                     Status = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     Photo = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
-                    ResidentID = table.Column<int>(type: "int", nullable: false)
+                    ResidentID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -215,8 +215,7 @@ namespace BrgyLink.Migrations
                         name: "FK_BarangayOfficials_Residents_ResidentID",
                         column: x => x.ResidentID,
                         principalTable: "Residents",
-                        principalColumn: "ResidentID",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "ResidentID");
                 });
 
             migrationBuilder.CreateIndex(

@@ -1,12 +1,11 @@
 ﻿@page
 @model BrgyLink.Pages.ManageBarangayOfficials.IndexModel
-
 @{
     ViewData["Title"] = "Barangay Officials";
     Layout = "_AdminLayout";
 }
 
-<link rel="stylesheet" href="/css/BarangayOfficialsPage/BarangayOfficialManage.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/BarangayOfficialsPage/BarangayOfficialManage.css"/>
 
 <div class="table-title">
     <div class="row">
@@ -27,7 +26,7 @@
 <!-- Search Form -->
 <form method="get">
     <div class="input-group mb-3">
-        <input type="text" name="SearchString" value="@Model.SearchString" class="form-control" placeholder="Search Barangay Officials...">
+        <input type="text" name="SearchString" value="@Model.SearchString" class="form-control" placeholder="Search barangay officials...">
         <button class="btn btn-primary" type="submit">Search</button>
     </div>
 </form>
@@ -37,9 +36,9 @@
     <thead>
         <tr>
             <th>#</th>
+            <th>Photo</th>
             <th>Name <i class="fa fa-sort"></i></th>
-            <th>Barangay Position</th>
-            <th>Term Duration <i class="fa fa-sort"></i></th>
+            <th>Position</th>
             <th>Status</th>
             <th>Actions</th>
         </tr>
@@ -50,11 +49,21 @@
             var official = Model.BarangayOfficial[i];
             <tr>
                 <td>@((Model.PageIndex - 1) * 10 + i + 1)</td>
-                <td>@official.FirstName @official.MiddleName @official.LastName</td>
-                <td>@official.BarangayPosition</td>
                 <td>
-                    @official.TermStart?.ToString("MM/dd/yyyy") ?? "N/A"
+                    @if (official.Photo != null && official.Photo.Length > 0)
+                    {
+                        <img src="data:image/jpeg;base64,@Convert.ToBase64String(official.Photo)" class="img-fluid rounded" alt="BarangayOfficial Image" height="75" width="75" />
+                    }
+                    else
+                    {
+                        <img src="/images/avatarPlaceholder.jpg" class="img-fluid rounded" alt="BarangayOfficial Image" height="40" width="40" />
+                    }
                 </td>
+
+       
+         
+                <td>@official.FirstName @official.LastName</td>
+                <td>@official.BarangayPosition</td>
                 <td>@official.Status</td>
                 <td>
                     <div class="action-buttons d-flex justify-content-center">

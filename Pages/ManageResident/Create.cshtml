@@ -10,31 +10,34 @@
 
 <div class="container">
     <div class="row justify-content-center">
-        <!-- Image Column -->
-        <div class="col-12 col-md-3 mb-4 mt-4 text-center">
-            <!-- Placeholder Image -->
-            <img id="placeholderImage" src="/images/avatarPlaceholder.jpg" alt="Placeholder Image" class="img-fluid mb-3" style="max-width: 120px; border-radius: 50%;" />
-            <!-- Image Upload Field -->
-            <input type="file" class="form-control" asp-for="Resident.ImageFile" />
-            <span asp-validation-for="Resident.ImageFile" class="text-danger"></span>
-        </div>
+        <div class="col-12 col-md-8">
+            <form method="post" enctype="multipart/form-data" id="createResidentForm">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-        <!-- Form Fields Column -->
-        <div class="col-12 col-md-9">
-            <form method="post" enctype="multipart/form-data">
-                <div class="text-danger"></div>
-
-                <!-- First Name and Last Name -->
-                <div class="row mb-3">
-                    <div class="col-6">
-                        <input type="text" class="form-control form-control-sm" placeholder="Enter Firstname" asp-for="Resident.FirstName" required />
-                        <span asp-validation-for="Resident.FirstName" class="text-danger"></span>
-                    </div>
-                    <div class="col-6">
-                        <input type="text" class="form-control form-control-sm" placeholder="Enter Lastname" asp-for="Resident.LastName" required />
-                        <span asp-validation-for="Resident.LastName" class="text-danger"></span>
+                <!-- Image Column -->
+                <div class="text-center mb-4">
+                    <img id="imagePreview" src="/images/avatarPlaceholder.jpg" alt="Resident Image Preview" 
+                         class="img-fluid mb-3" style="max-width: 150px; max-height: 150px; border-radius: 50%; object-fit: cover;" />
+                    <div class="mb-3">
+                        <input type="file" class="form-control" asp-for="Resident.ImageFile" 
+                               accept=".jpg,.jpeg,.png" onchange="previewImage(this)" />
+                        <span asp-validation-for="Resident.ImageFile" class="text-danger"></span>
+                        <small class="form-text text-muted">Maximum file size: 5MB. Allowed formats: JPG, JPEG, PNG</small>
                     </div>
                 </div>
+
+            <!-- Form Fields (e.g. First Name, Last Name, Address, etc.) -->
+            <!-- Your other form fields go here -->
+            <div class="row mb-3">
+                <div class="col-6">
+                    <input type="text" class="form-control form-control-sm" placeholder="Enter Firstname" asp-for="Resident.FirstName" required />
+                    <span asp-validation-for="Resident.FirstName" class="text-danger"></span>
+                </div>
+                <div class="col-6">
+                    <input type="text" class="form-control form-control-sm" placeholder="Enter Lastname" asp-for="Resident.LastName" required />
+                    <span asp-validation-for="Resident.LastName" class="text-danger"></span>
+                </div>
+            </div>
 
                 <!-- Middle Name -->
                 <div class="form-group mb-3">
@@ -147,12 +150,13 @@
 
                 <!-- Submit Button -->
                 <div class="text-center">
-                    <button type="submit" class="btn btn-primary btn-lg mt-3 btn-sm">Save Resident</button>
+                    <button type="submit" class="btn btn-primary btn-lg mt-3">Save Resident</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
+
 
 <!-- Success Modal -->
 <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
@@ -176,10 +180,35 @@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
-    @if (TempData["SuccessMessage"] != null)
-    {
-        <div class="alert alert-success">
-            @TempData["SuccessMessage"]
-        </div>
-    }
+    <script>
+        function previewImage(input) {
+            if (input.files && input.files[0]) {
+                const file = input.files[0];
+
+                // Validate file size (5MB)
+                if (file.size > 5 * 1024 * 1024) {
+                    alert('File size cannot exceed 5MB');
+                    input.value = '';
+                    return;
+                }
+
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    document.getElementById('imagePreview').src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Show success message using bootstrap modal if TempData contains success message
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <text>
+                $(document).ready(function () {
+                    $('#successModal').modal('show');
+                });
+            </text>
+        }
+    </script>
+}
 }

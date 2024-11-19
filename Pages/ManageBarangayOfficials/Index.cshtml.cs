@@ -1,9 +1,11 @@
 ﻿using BrgyLink.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using BrgyLink.Helpers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
+using System.Linq;
+using System.Threading.Tasks;
+using BrgyLink.Helpers;
 
 namespace BrgyLink.Pages.ManageBarangayOfficials
 {
@@ -18,7 +20,6 @@ namespace BrgyLink.Pages.ManageBarangayOfficials
         }
 
         public PaginatedList<BarangayOfficial> BarangayOfficial { get; set; }
-
         [BindProperty(SupportsGet = true)]
         public string SearchString { get; set; }
 
@@ -35,14 +36,11 @@ namespace BrgyLink.Pages.ManageBarangayOfficials
             // Apply search filter if provided
             if (!string.IsNullOrEmpty(SearchString))
             {
-                query = query.Where(b => b.FirstName.Contains(SearchString) ||
-                                          b.MiddleName.Contains(SearchString) ||
-                                          b.LastName.Contains(SearchString) ||
-                                          b.BarangayPosition.Contains(SearchString));
+                query = query.Where(o => o.FirstName.Contains(SearchString) || o.LastName.Contains(SearchString));
             }
 
             // Set page size to 10
-            int pageSize = 10;  // You can adjust this value if you need a different page size
+            int pageSize = 10;  // Change this line to set the page size to 10
             BarangayOfficial = await PaginatedList<BarangayOfficial>.CreateAsync(query.AsNoTracking(), PageIndex, pageSize);
 
             // Calculate total pages

@@ -1,27 +1,33 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using BrgyLink.Models;
 using Microsoft.AspNetCore.Authorization;
+using BrgyLink.Models;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Processing;
 
 namespace BrgyLink.Pages.ManageResident
 {
     [Authorize(Policy = "RequireAdminRole")]
     public class CreateModel : PageModel
     {
-
         private readonly ApplicationDbContext _context;
         private readonly ILogger<CreateModel> _logger;
-        public bool Success { get; set; }
+        private readonly IWebHostEnvironment _environment;
 
-        public CreateModel(ApplicationDbContext context, ILogger<CreateModel> logger)
+        [BindProperty]
+        public Resident Resident { get; set; } = default!;
+
+        public CreateModel(
+            ApplicationDbContext context,
+            ILogger<CreateModel> logger,
+            IWebHostEnvironment environment)
         {
             _context = context;
             _logger = logger;
+            _environment = environment;
         }
 
         public IActionResult OnGet()
@@ -29,43 +35,87 @@ namespace BrgyLink.Pages.ManageResident
             return Page();
         }
 
-        [BindProperty]
-        public Resident Resident { get; set; } = default!;
-
         public async Task<IActionResult> OnPostAsync()
         {
-            foreach (var modelStateEntry in ModelState.Values)
-            {
-                modelStateEntry.Errors.Clear();
-            }
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            // Check if an image file is uploaded
-            if (Resident.ImageFile != null && Resident.ImageFile.Length > 0)
+            try
             {
-                using (var memoryStream = new MemoryStream())
+                // Handle image upload
+                if (Resident.ImageFile != null && Resident.ImageFile.Length > 0)
                 {
-                    await Resident.ImageFile.CopyToAsync(memoryStream);
-                    Resident.ImageData = memoryStream.ToArray(); // Set ImageData only if an image is uploaded
+                    // Validate file type
+                    var allowedExtensions = new[] { ".jpg", ".jpeg", ".png" };
+                    var extension = Path.GetExtension(Resident.ImageFile.FileName).ToLowerInvariant();
+
+                    if (!allowedExtensions.Contains(extension))
+                    {
+                        ModelState.AddModelError("Resident.ImageFile", "Only .jpg, .jpeg and .png files are allowed.");
+                        return Page();
+                    }
+
+                    // Validate file size (e.g., max 5MB)
+                    if (Resident.ImageFile.Length > 5 * 1024 * 1024)
+                    {
+                        ModelState.AddModelError("Resident.ImageFile", "File size cannot exceed 5MB.");
+                        return Page();
+                    }
+
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        await Resident.ImageFile.CopyToAsync(memoryStream);
+
+                        // Reset stream position
+                        memoryStream.Position = 0;
+
+                        // Resize image if needed
+                        using (var image = await Image.LoadAsync(memoryStream))
+                        {
+                            // Define maximum dimensions
+                            int maxWidth = 800;
+                            int maxHeight = 800;
+
+                            // Resize if image is larger than maximum dimensions
+                            if (image.Width > maxWidth || image.Height > maxHeight)
+                            {
+                                image.Mutate(x => x.Resize(new ResizeOptions
+                                {
+                                    Size = new Size(maxWidth, maxHeight),
+                                    Mode = ResizeMode.Max
+                                }));
+                            }
+
+                            // Save resized image to memory stream
+                            using (var outputStream = new MemoryStream())
+                            {
+                                await image.SaveAsJpegAsync(outputStream);
+                                Resident.ImageData = outputStream.ToArray();
+                            }
+                        }
+                    }
                 }
+
+                // Set required fields
+                Resident.DateRegistered = DateTime.Now;
+
+                // Add to database
+                _context.Residents.Add(Resident);
+                await _context.SaveChangesAsync();
+
+                // Set success message
+                TempData["SuccessMessage"] = "Resident created successfully!";
+
+                return RedirectToPage("./Index");
             }
-            else
+            catch (Exception ex)
             {
-                // If no image is uploaded, ImageData remains null (no need to assign null explicitly)
-                // Resident.ImageData = null; // This line can be removed
+                _logger.LogError(ex, "Error creating resident");
+                ModelState.AddModelError(string.Empty, "An error occurred while saving the resident. Please try again.");
+                return Page();
             }
-
-            // Set other required fields to default values if necessary
-            Resident.DateRegistered = DateTime.Now;
-
-            // Add the resident to the context and save changes
-            _context.Residents.Add(Resident);
-            await _context.SaveChangesAsync();
-
-            return RedirectToPage("./Index");
         }
     }
 }
