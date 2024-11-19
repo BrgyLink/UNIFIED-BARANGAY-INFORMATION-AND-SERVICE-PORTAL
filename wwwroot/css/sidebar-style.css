@@ -1,235 +1,212 @@
-
+/* Main Layout */
 body {
-	display: flex; /* Use flex to arrange sidebar and main content */
-	font-family: 'Candara', sans-serif; /* Use Candara font */
-	height: 100vh; /* Full height for the body */
-	transition: background-color 0.3s, color 0.3s; /* Smooth transition for background */
+	display: flex;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+	font-size: 14px;
+	height: 100vh;
+	margin: 0;
+	background-color: #1a237e;
+	
 }
 
+/* Sidebar Styles */
 .sidebar {
+	width: 260px;
 	height: 170vh;
-	width: 255px; /* Fixed width for the sidebar */
-	background-color: #1d1f2b; /* Darker background */
-	display: flex; /* Flex to arrange the sidebar header and buttons vertically */
-	flex-direction: column; /* Arrange sidebar elements vertically */
-	border-right: 1px solid #ddd; /* Optional: Add border for better separation */
-	transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s, color 0.3s, border-color 0.3s; /* Smooth transition */
-	opacity: 1; /* Initial opacity */
-}
-
-.sidebar.hidden {
-	transform: translateX(-100%); /* Move sidebar out of view */
-	opacity: 0; /* Fade out */
+	background-color: white;
+	border-right: 1px solid #edf2f9;
+	display: flex;
+	flex-direction: column;
+	transition: all 0.3s ease;
 }
 
 .sidebar-header {
-	flex: 0 0 70px; /* Height for the sidebar header set to 70px */
-	padding: 10px; /* Padding for the header */
-	text-align: center;
-	background-color: #A594F9;
-	color: #fff;
+	padding: 20px;
 	display: flex;
 	align-items: center;
-	justify-content: center;
-	border-bottom: 1px solid #ddd; /* Add bottom border */
-	transition: background-color 0.3s, color 0.3s, border-color 0.3s; /* Smooth transition */
-	font-weight: bold;
-	border-bottom: 1px solid #444;
+	height: 60px;
+	background-color: #1a237e;
+	border-bottom: 1px solid #edf2f9;
 }
 
+
+
+.logo-text {
+	color: white;
+	font-weight: 700;
+	font-size: 20px;
+	margin: 0;
+}
+
+/* Navigation Links */
+.nav-buttons {
+	padding: 15px 0;
+	display: flex;
+	flex-direction: column;
+}
+
+.nav-link {
+	padding: 12px 12px;
+	color: #5e6e82;
+	display: flex;
+	align-items: center;
+	text-decoration: none;
+	transition: all 0.2s ease;
+	border-left: 3px solid transparent;
+}
+
+	.nav-link i {
+		font-size: 18px;
+		margin-right: 10px;
+		width: 20px;
+		text-align: center;
+	}
+
+	.nav-link span {
+		font-weight: 500;
+	}
+
+	.nav-link:hover {
+		background-color: #edf2f9;
+		color: #2c7be5;
+		border-left-color: #2c7be5;
+	}
+
+	.nav-link.active {
+		background-color: #edf2f9;
+		color: #2c7be5;
+		border-left-color: #2c7be5;
+	}
+
+/* Header Content */
 .header-content {
 	width: 100%; /* Full width for the header */
 	transition: margin-left 0.3s ease; /* Smooth transition for content */
 }
 
 header {
-	width: 100%; /* Full width for the header */
-	height: 70px; /* Height for the content header set to 70px */
+	height: 60px;
+	background-color: #1a237e;
+	border-bottom: 1px solid #edf2f9;
 	display: flex;
-	align-items: center; /* Center content vertically */
-	justify-content: space-between; /* Space between items */
-	padding: 0 15px; /* Add horizontal padding */
-	background-color: white; /* Background color for the header */
-	border-bottom: 1px solid #ddd; /* Add border for separation */
-	position: relative; /* For positioning */
-	z-index: 1; /* Ensure the header is above other elements */
-	transition: background-color 0.3s, color 0.3s, border-color 0.3s; /* Smooth transition */
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 20px;
 }
 
-.nav-buttons {
-	flex-grow: 1; /* Take up remaining space */
-	margin-top: 20px; /* Space below the header */
+/* Profile and Dark Mode Toggle */
+.btn-profile {
+	display: flex;
+	align-items: center;
+	padding: 8px 15px;
+	background: transparent;
+	border: 1px solid #edf2f9;
+	border-radius: 5px;
+	color: white;
+	font-weight: 500;
 }
 
-.nav-link {
-	opacity: 0;
-	transform: translateY(10px);
-	animation: fadeInUp 0.5s forwards;
-	border-radius: 0; /* Remove rounded corners */
-	margin: 0; /* No margin between buttons */
-	padding: 15px 15px; /* Added padding for bigger buttons */
-	text-decoration: none; /* Remove underline */
-	display: flex; /* Flex to align icon and text */
-	align-items: center; /* Center icon vertically */
-	color: gray; /* Default text color set to gray */
-	height: 50px; /* Set a fixed height for buttons */
-	border: none; /* Remove border */
-	transition: background-color 0.3s, color 0.3s, border-color 0.3s, transform 0.2s;
+.toggler-button {
+	background: transparent;
+	border: none;
+	color: white;
+	font-size: 20px;
+	cursor: pointer;
+	padding: 8px;
+	border-radius: 5px;
 }
 
-.nav-link i {
-	margin-right: 10px; /* Space between icon and text */
-	margin-left: 20px; /* Add left padding to the icon */
-	flex-shrink: 0; /* Prevent icon from shrinking */
-	transition: transform 0.2s; /* Transition for icon animation */
-}
-
-.nav-link span {
-	margin-left: 10px; /* Add margin to the left of the text */
-}
-
-	.nav-link:hover {
-		color: #fafafa; /* Lighter text color */
-		background-color: #333; /* Darker hover background */
-		transform: scale(1.05); /* Keep subtle size increase */
+	.toggler-button:hover {
+		background-color: #edf2f9;
 	}
 
-.nav-link:hover i {
-	transform: scale(1.2); /* Slightly increase icon size on hover */
+/* Dropdown Menu */
+.dropdown-menu {
+	background-color: white;
+	border: 1px solid #edf2f9;
+	border-radius: 5px;
+	box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
 }
 
-@keyframes fadeInUp {
-	to {
-		opacity: 1;
-		transform: translateY(0);
+
+
+.dropdown-item {
+	color: #5e6e82;
+	padding: 8px 20px;
+}
+
+	.dropdown-item:hover {
+		background-color: balc;
+		color: #2c7be5;
 	}
-}
 
-.nav-link:nth-child(1) {
-	animation-delay: 0.1s;
-}
-
-.nav-link:nth-child(2) {
-	animation-delay: 0.2s;
-}
-
-.nav-link:nth-child(3) {
-	animation-delay: 0.3s;
-}
-.nav-link:nth-child(4) {
-	animation-delay: 0.4s;
-}
-.nav-link:nth-child(5) {
-	animation-delay: 0.5s;
-}
-.nav-link:nth-child(6) {
-	animation-delay: 0.6s;
-}
-.nav-link:nth-child(7) {
-	animation-delay: 0.7s;
-}
-
+/* Content Area */
 .content {
+	background-color: #f8f9fa;
 	padding: 20px; /* Padding for content area */
 	transition: background-color 0.3s, color 0.3s, border-color 0.3s; /* Smooth transition */
 	flex-grow: 1; /* Allow content to take up available space */
 	margin-left: 0; /* Reset margin */
+	height: 160vh;
 }
 
-/* Dark mode styles */
+/* Dark Mode Styles */
 body.bg-dark {
-	background-color: #343a40; /* Dark background */
-	color: white; /* Light text color */
+	background-color: #0b1727;
+	color: #9da9bb;
 }
 
-.sidebar.bg-dark {
-	background-color: #212529; /* Dark sidebar */
-	border-right: 1px solid #444; /* Dark border */
+.bg-dark .sidebar,
+.bg-dark header {
+	background-color: #0b1727;
+	border-color: #1e2e4a;
+}
+/* When hovering over the button */
+.btn-profile:hover .nav-link {
+	color: black; /* Change color on hover */
+	text-decoration: underline; /* Optional: underline text on hover */
 }
 
-.sidebar-header.bg-dark {
-	background-color: #212529; /* Dark header */
-	color: white; /* Light text color */
-	border-bottom: 1px solid #444; /* Dark border */
+/* Optional: change the button background color */
+.btn-profile:hover {
+	background-color: #333333; /* Dark background on hover */
 }
 
-header.bg-dark {
-	background-color: #212529; /* Dark header */
-	color: white; /* Light text color */
-	border-bottom: 1px solid #444; /* Dark border */
+/* Hover effect for the <a> tag */
+#manage:hover {
+	color: black; /* Change color to yellow when hovered */
+	text-decoration: underline; /* Optionally underline text */
+	background-color: rgba(0, 0, 0, 0.2); /* Optional: Change background color */
 }
 
-.nav-link.bg-dark {
-	background-color: #212529; /* Dark button background */
-	color: gray; /* Default text color set to gray */
-	border: none; /* Remove border */
+
+.bg-dark .nav-link {
+	color: #9da9bb;
 }
 
-.nav-link.bg-dark:hover {
-	color: #ddd; /* Lighter text color on hover */
+	.bg-dark .nav-link:hover,
+	.bg-dark .nav-link.active {
+		background-color: #1e2e4a;
+		color: #2c7be5;
+	}
+
+.bg-dark .btn-profile,
+.bg-dark .toggler-button {
+	color: #9da9bb;
+	border-color: #1e2e4a;
 }
 
-.nav-link.active {
-	background-color: #fa5252; /* Accent color for active link */
-	color: white;
+.bg-dark .dropdown-menu {
+	background-color: white;
+	border-color: #1e2e4a;
 }
 
-/* Toggler styles */
-.toggler-button {
-	border: none; /* Remove border */
-	background: none; /* Remove background */
-	color: inherit; /* Inherit color */
-	cursor: pointer; /* Change cursor to pointer */
-	transition: transform 0.2s; /* Add animation */
-	font-size: 1.5rem; /* Increased size for toggler icons */
+.bg-dark .dropdown-item {
+	color: #9da9bb;
 }
 
-.toggler-button:hover {
-	transform: scale(1.1); /* Scale up on hover */
-}
-
-.dropdown-menu {
-	transition: all 0.5s ease;
-}
-
-.dropdown-menu.show {
-	opacity: 1;
-	transform: translateY(0);
-}
-
-.dropdown-menu.hide {
-	opacity: 0;
-	transform: translateY(-10px);
-}
-
-.dropdown-menu.bg-dark {
-	background-color: #212529; /* Dark button background */
-	color: gray; /* Default text color set to gray */
-	border: 1px solid #444;
-}
-
-.dropdown-menu.bg-dark:hover {
-	color: #ddd; /* Lighter text color on hover */
-}
-
-.dropdown-item.bg-dark {
-	background-color: #212529; /* Dark button background */
-	color: gray; /* Default text color set to gray */
-	border: none;
-}
-
-.dropdown-item.bg-dark:hover {
-	color: #ddd; /* Lighter text color on hover */
-}
-
-.btn-profile.bg-dark {
-	background-color: #212529; /* Dark button background */
-	color: gray; /* Default text color set to gray */
-	border: none;
-}
-
-.btn-profile.bg-dark:hover {
-	color: #ddd; /* Lighter text color on hover */
-}
-
+	.bg-dark .dropdown-item:hover {
+		background-color: #1e2e4a;
+		color: #2c7be5;
+	}
 

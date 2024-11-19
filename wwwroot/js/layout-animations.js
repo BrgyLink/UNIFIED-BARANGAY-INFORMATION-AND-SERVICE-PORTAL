@@ -38,7 +38,8 @@ sidebarToggler.addEventListener('click', function () {
 
 	// Check if the sidebar is hidden
 	if (sidebar.classList.contains('hidden')) {
-		headerContent.style.marginLeft = '-250px'; // Move content left when sidebar is hidden
+		headerContent.style.marginLeft = '-209px'; // Move content left when sidebar is hidden
+
 	} else {
 		headerContent.style.marginLeft = '0'; // Reset margin when sidebar is visible
 	}

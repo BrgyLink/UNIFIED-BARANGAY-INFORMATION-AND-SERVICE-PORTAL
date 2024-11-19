@@ -21,11 +21,11 @@
 </head>
 <body>
     <nav class="sidebar">
-        <div class="sidebar-header ms-1">
-            <a class="btn" asp-area="" asp-page="/Index"><h5>BrgyLink</h5></a>
+        <div class="sidebar-header ms-0 me-0">
+            <a class="btn" asp-area="" asp-page="/Index"><h5 class="lh-1 ms-3 mB-0 logo-text">BrgyLink</h5></a>
         </div>
-        <div class="nav-buttons d-flex flex-column">
-            <a asp-area="" asp-page="/AdminDashboard" class="nav-link mb-0">
+        <div class="nav-buttons d-flex flex-column mt-1">
+            <a asp-area="" asp-page="/AdminDashboard" class="nav-link mb-0 mt-1">
                 <i class="bi bi-house-door"></i><span>Home</span>
             </a>
             <a asp-area="" asp-page="/ManageResident/Index" class="nav-link mb-0">
@@ -62,7 +62,7 @@
                 <div class="dropdown me-3">
                     <!-- Dropdown for profile -->
                     <button class="btn btn-profile dropdown-toggle" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="border: none;">
-                        <a id="manage" class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+                        <a style="color: white;" id="manage" class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
                     </button>
 
                     <ul class="dropdown-menu" aria-labelledby="profileDropdown">
