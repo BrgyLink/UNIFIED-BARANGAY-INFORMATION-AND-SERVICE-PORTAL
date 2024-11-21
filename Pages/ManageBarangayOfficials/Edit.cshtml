@@ -6,115 +6,173 @@
     Layout = "~/Pages/Shared/_AdminLayout.cshtml";
 }
 
-<h1>Edit Barangay Official</h1>
+<h2 class="text-center mb-5 text-primary">Edit Barangay Official</h2>
 
-<h4>Barangay Official</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post" enctype="multipart/form-data">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="BarangayOfficial.Id" />
-
-            <div class="form-group">
-                <label asp-for="BarangayOfficial.FirstName" class="control-label"></label>
-                <input asp-for="BarangayOfficial.FirstName" class="form-control" />
-                <span asp-validation-for="BarangayOfficial.FirstName" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="BarangayOfficial.MiddleName" class="control-label"></label>
-                <input asp-for="BarangayOfficial.MiddleName" class="form-control" />
-                <span asp-validation-for="BarangayOfficial.MiddleName" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="BarangayOfficial.LastName" class="control-label"></label>
-                <input asp-for="BarangayOfficial.LastName" class="form-control" />
-                <span asp-validation-for="BarangayOfficial.LastName" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="BarangayOfficial.Birthdate" class="control-label"></label>
-                <input asp-for="BarangayOfficial.Birthdate" class="form-control" type="date" />
-                <span asp-validation-for="BarangayOfficial.Birthdate" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="BarangayOfficial.Gender" class="control-label"></label>
-                <input asp-for="BarangayOfficial.Gender" class="form-control" />
-                <span asp-validation-for="BarangayOfficial.Gender" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="BarangayOfficial.MaritalStatus" class="control-label"></label>
-                <input asp-for="BarangayOfficial.MaritalStatus" class="form-control" />
-                <span asp-validation-for="BarangayOfficial.MaritalStatus" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="BarangayOfficial.BarangayPosition" class="control-label"></label>
-                <input asp-for="BarangayOfficial.BarangayPosition" class="form-control" />
-                <span asp-validation-for="BarangayOfficial.BarangayPosition" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="BarangayOfficial.Committee" class="control-label"></label>
-                <input asp-for="BarangayOfficial.Committee" class="form-control" />
-                <span asp-validation-for="BarangayOfficial.Committee" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="BarangayOfficial.TermStart" class="control-label"></label>
-                <input asp-for="BarangayOfficial.TermStart" class="form-control" type="date" />
-                <span asp-validation-for="BarangayOfficial.TermStart" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="BarangayOfficial.TermEnd" class="control-label"></label>
-                <input asp-for="BarangayOfficial.TermEnd" class="form-control" type="date" />
-                <span asp-validation-for="BarangayOfficial.TermEnd" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="BarangayOfficial.RankNo" class="control-label"></label>
-                <input asp-for="BarangayOfficial.RankNo" class="form-control" />
-                <span asp-validation-for="BarangayOfficial.RankNo" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="BarangayOfficial.Status" class="control-label"></label>
-                <input asp-for="BarangayOfficial.Status" class="form-control" />
-                <span asp-validation-for="BarangayOfficial.Status" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="BarangayOfficial.Photo" class="control-label"></label>
-                <input type="file" class="form-control" asp-for="ImageFile"
-                       accept=".jpg,.jpeg,.png" onchange="previewImage(this)" />
-                <span asp-validation-for="BarangayOfficial.ImageFile" class="text-danger"></span>
-                <small class="form-text text-muted">Maximum file size: 5MB. Allowed formats: JPG, JPEG, PNG</small>
-                @if (Model.BarangayOfficial.Photo != null)
-                {
-                    <div class="mt-2">
-                        <img src="data:image/jpeg;base64,@Convert.ToBase64String(Model.BarangayOfficial.Photo)" alt="Current Photo" class="img-thumbnail" width="150" />
+<div class="container">
+    <div class="row justify-content-center">
+        <!-- Image Upload Column (Left) -->
+        <div class="col-12 col-md-4 mb-4">
+            <div class="card shadow-sm border-light rounded-3">
+                <div class="card-header bg-primary text-white text-center">Image Upload</div>
+                <div class="card-body text-center">
+                    @if (Model.BarangayOfficial.Photo != null)
+                    {
+                        <img src="data:image/jpeg;base64,@Convert.ToBase64String(Model.BarangayOfficial.Photo)" alt="Current Photo"
+                        class="img-fluid mb-3" style="max-width: 180px; max-height: 180px; border-radius: 50%; object-fit: cover;" />
+                    }
+                    else
+                    {
+                        <img id="imagePreview" src="/images/avatarPlaceholder.jpg" alt="Barangay Official Image Preview"
+                        class="img-fluid mb-3" style="max-width: 180px; max-height: 180px; border-radius: 50%; object-fit: cover;" />
+                    }
+                    <div class="mb-3">
+                        <label for="ImageFile" class="form-label">Upload Image</label>
+                        <input type="file" class="form-control form-control-lg" asp-for="ImageFile"
+                        accept=".jpg,.jpeg,.png" onchange="previewImage(this)" />
+                        <span asp-validation-for="BarangayOfficial.ImageFile" class="text-danger"></span>
+                        <small class="form-text text-muted">Maximum file size: 5MB. Allowed formats: JPG, JPEG, PNG</small>
                     </div>
-                }
+                </div>
             </div>
+        </div>
 
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+        <!-- Form Cards Column (Right) -->
+        <div class="col-12 col-md-8">
+            <form method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-4"></div>
+                <input type="hidden" asp-for="BarangayOfficial.Id" />
+
+                <!-- Name Section -->
+                <div class="card mb-4 shadow-sm border-light rounded-3">
+                    <div class="card-header bg-secondary text-white">Name</div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-6">
+                                <label for="FirstName" class="form-label">First Name</label>
+                                <input asp-for="BarangayOfficial.FirstName" class="form-control form-control-lg" required id="FirstName" />
+                                <span asp-validation-for="BarangayOfficial.FirstName" class="text-danger"></span>
+                            </div>
+                            <div class="col-6">
+                                <label for="LastName" class="form-label">Last Name</label>
+                                <input asp-for="BarangayOfficial.LastName" class="form-control form-control-lg" required id="LastName" />
+                                <span asp-validation-for="BarangayOfficial.LastName" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="MiddleName" class="form-label">Middle Name</label>
+                            <input asp-for="BarangayOfficial.MiddleName" class="form-control form-control-lg" id="MiddleName" />
+                            <span asp-validation-for="BarangayOfficial.MiddleName" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Personal Information Section -->
+                <div class="card mb-4 shadow-sm border-light rounded-3">
+                    <div class="card-header bg-secondary text-white">Personal Information</div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-4">
+                                <label for="Birthdate" class="form-label">Birthdate</label>
+                                <input asp-for="BarangayOfficial.Birthdate" class="form-control form-control-lg" type="date" required id="Birthdate" />
+                                <span asp-validation-for="BarangayOfficial.Birthdate" class="text-danger"></span>
+                            </div>
+                            <div class="col-4">
+                                <label for="Gender" class="form-label">Gender</label>
+                                <input asp-for="BarangayOfficial.Gender" class="form-control form-control-lg" required id="Gender" />
+                                <span asp-validation-for="BarangayOfficial.Gender" class="text-danger"></span>
+                            </div>
+                            <div class="col-4">
+                                <label for="MaritalStatus" class="form-label">Marital Status</label>
+                                <input asp-for="BarangayOfficial.MaritalStatus" class="form-control form-control-lg" required id="MaritalStatus" />
+                                <span asp-validation-for="BarangayOfficial.MaritalStatus" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Position and Term Information Section -->
+                <div class="card mb-4 shadow-sm border-light rounded-3">
+                    <div class="card-header bg-secondary text-white">Position and Term</div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-4">
+                                <label for="BarangayPosition" class="form-label">Barangay Position</label>
+                                <input asp-for="BarangayOfficial.BarangayPosition" class="form-control form-control-lg" required id="BarangayPosition" />
+                                <span asp-validation-for="BarangayOfficial.BarangayPosition" class="text-danger"></span>
+                            </div>
+                            <div class="col-4">
+                                <label for="Committee" class="form-label">Committee</label>
+                                <input asp-for="BarangayOfficial.Committee" class="form-control form-control-lg" id="Committee" />
+                                <span asp-validation-for="BarangayOfficial.Committee" class="text-danger"></span>
+                            </div>
+                            <div class="col-4">
+                                <label for="RankNo" class="form-label">Rank Number</label>
+                                <input asp-for="BarangayOfficial.RankNo" class="form-control form-control-lg" required id="RankNo" />
+                                <span asp-validation-for="BarangayOfficial.RankNo" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Term End and Status Section -->
+                <div class="card mb-4 shadow-sm border-light rounded-3">
+                    <div class="card-header bg-secondary text-white">Term End and Status</div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-4">
+                                <label for="TermStart" class="form-label">Term Start</label>
+                                <input asp-for="BarangayOfficial.TermStart" class="form-control form-control-lg" type="date" required id="TermStart" />
+                                <span asp-validation-for="BarangayOfficial.TermStart" class="text-danger"></span>
+                            </div>
+                            <div class="col-4">
+                                <label for="TermEnd" class="form-label">Term End</label>
+                                <input asp-for="BarangayOfficial.TermEnd" class="form-control form-control-lg" type="date" required id="TermEnd" />
+                                <span asp-validation-for="BarangayOfficial.TermEnd" class="text-danger"></span>
+                            </div>
+                            <div class="col-4">
+                                <label for="Status" class="form-label">Status</label>
+                                <input asp-for="BarangayOfficial.Status" class="form-control form-control-lg" required id="Status" />
+                                <span asp-validation-for="BarangayOfficial.Status" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="text-end mb-5">
+                    <button type="submit" class="btn btn-primary btn-lg">Save Changes</button>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-page="./Index">Back to List</a>
+    <div>
+        <a asp-page="./Index" class="btn btn-outline-secondary">Back to List</a>
+    </div>
 </div>
 
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+
+    }    <script>
+        function previewImage(input) {
+            if (input.files && input.files[0]) {
+                const file = input.files[0];
+
+                // Validate file size (5MB)
+                if (file.size > 5 * 1024 * 1024) {
+                    alert('File size cannot exceed 5MB');
+                    input.value = '';
+                    return;
+                }
+
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    document.getElementById('imagePreview').src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
 }

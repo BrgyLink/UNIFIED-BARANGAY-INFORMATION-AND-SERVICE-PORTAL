@@ -16,28 +16,28 @@
 
                 <!-- Image Column -->
                 <div class="text-center mb-4">
-                    <img id="imagePreview" src="/images/avatarPlaceholder.jpg" alt="Resident Image Preview" 
+                    <img id="imagePreview" src="/images/avatarPlaceholder.jpg" alt="Resident Image Preview"
                          class="img-fluid mb-3" style="max-width: 150px; max-height: 150px; border-radius: 50%; object-fit: cover;" />
                     <div class="mb-3">
-                        <input type="file" class="form-control" asp-for="Resident.ImageFile" 
+                        <input type="file" class="form-control" asp-for="Resident.ImageFile"
                                accept=".jpg,.jpeg,.png" onchange="previewImage(this)" />
                         <span asp-validation-for="Resident.ImageFile" class="text-danger"></span>
                         <small class="form-text text-muted">Maximum file size: 5MB. Allowed formats: JPG, JPEG, PNG</small>
                     </div>
                 </div>
 
-            <!-- Form Fields (e.g. First Name, Last Name, Address, etc.) -->
-            <!-- Your other form fields go here -->
-            <div class="row mb-3">
-                <div class="col-6">
-                    <input type="text" class="form-control form-control-sm" placeholder="Enter Firstname" asp-for="Resident.FirstName" required />
-                    <span asp-validation-for="Resident.FirstName" class="text-danger"></span>
+                <!-- Form Fields (e.g. First Name, Last Name, Address, etc.) -->
+                <!-- Your other form fields go here -->
+                <div class="row mb-3">
+                    <div class="col-6">
+                        <input type="text" class="form-control form-control-sm" placeholder="Enter Firstname" asp-for="Resident.FirstName" required />
+                        <span asp-validation-for="Resident.FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="col-6">
+                        <input type="text" class="form-control form-control-sm" placeholder="Enter Lastname" asp-for="Resident.LastName" required />
+                        <span asp-validation-for="Resident.LastName" class="text-danger"></span>
+                    </div>
                 </div>
-                <div class="col-6">
-                    <input type="text" class="form-control form-control-sm" placeholder="Enter Lastname" asp-for="Resident.LastName" required />
-                    <span asp-validation-for="Resident.LastName" class="text-danger"></span>
-                </div>
-            </div>
 
                 <!-- Middle Name -->
                 <div class="form-group mb-3">
@@ -204,9 +204,9 @@
         @if (TempData["SuccessMessage"] != null)
         {
             <text>
-                $(document).ready(function () {
-                    $('#successModal').modal('show');
-                });
+                    $(document).ready(function () {
+                        $('#successModal').modal('show');
+                    });
             </text>
         }
     </script>

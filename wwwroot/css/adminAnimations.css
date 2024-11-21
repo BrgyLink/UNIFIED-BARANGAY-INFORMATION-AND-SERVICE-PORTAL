@@ -1,0 +1,96 @@
+﻿/* Smooth Input Focus and Hover Animations */
+@keyframes inputFocus {
+    0% {
+        transform: scale(1);
+        border-color: #ccc;
+    }
+
+    50% {
+        transform: scale(1.05);
+        border-color: #007bff;
+    }
+
+    100% {
+        transform: scale(1);
+        border-color: #007bff;
+    }
+}
+
+/* Input fields - smooth transition and hover effect */
+.form-control, .form-select {
+    transition: all 0.4s ease-in-out;
+    box-shadow: none;
+}
+
+    /* Input Fields Hover Effect */
+    .form-control:hover, .form-select:hover {
+        background-color: #f7f7f7;
+        border-color: #007bff;
+        cursor: pointer;
+    }
+
+    /* Input Focus Effect */
+    .form-control:focus, .form-select:focus {
+        animation: inputFocus 0.4s ease forwards;
+        background-color: #fff;
+        border-color: #007bff;
+        box-shadow: 0 0 6px rgba(0, 123, 255, 0.5);
+    }
+
+/* Button Hover and Click Effects */
+@keyframes buttonHover {
+    0% {
+        transform: scale(1);
+        background-color: #007bff;
+    }
+
+    50% {
+        transform: scale(1.1);
+        background-color: #0056b3;
+    }
+
+    100% {
+        transform: scale(1);
+        background-color: #007bff;
+    }
+}
+
+/* Button Hover Animation */
+.btn:hover {
+    animation: buttonHover 0.3s ease forwards;
+    background-color: #0069d9;
+    border-color: #0062cc;
+}
+
+/* Button Active State Animation */
+.btn:active {
+    transform: scale(0.98);
+    background-color: #0056b3;
+}
+
+/* Card Hover Effects */
+.card {
+    transition: all 0.3s ease-in-out;
+}
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+
+/* Smooth animation for form container */
+.form-container {
+    animation: formSlideIn 0.5s ease-out;
+}
+
+@keyframes formSlideIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
