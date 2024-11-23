@@ -68,10 +68,12 @@
 
                     <ul class="dropdown-menu" aria-labelledby="profileDropdown">
                         <li><a class="dropdown-item" href="#">Manage Account</a></li>
+                        
                         <li class="nav-item">
                             <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="/">
                                 <button type="submit" class="btn">Logout</button>
                             </form>
+                            <a class="btn btn" asp-page="/Index">Landing Page</a>
                         </li>
                     </ul>
                 </div>

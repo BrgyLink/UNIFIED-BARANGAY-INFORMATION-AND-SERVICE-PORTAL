@@ -49,20 +49,20 @@
             var official = Model.BarangayOfficial[i];
             <tr>
                 <td>@((Model.PageIndex - 1) * 10 + i + 1)</td>
-                <td>
+                <td class="d-flex justify-content-center align-items-center">
                     @if (official.Photo != null && official.Photo.Length > 0)
                     {
-                        <img src="data:image/jpeg;base64,@Convert.ToBase64String(official.Photo)" class="img-fluid rounded" alt="BarangayOfficial Image" height="75" width="75" />
+                        <img src="data:image/jpeg;base64,@Convert.ToBase64String(official.Photo)" class="img-fluid rounded-circle" alt="BarangayOfficial Image" height="75" width="75" />
                     }
                     else
                     {
-                        <img src="/images/avatarPlaceholder.jpg" class="img-fluid rounded" alt="BarangayOfficial Image" height="40" width="40" />
+                        <img src="/images/avatarPlaceholder.jpg" class="img-fluid rounded" alt="BarangayOfficial Image" height="75" width="75" />
                     }
                 </td>
 
-       
-         
-                <td>@official.FirstName @official.LastName</td>
+
+
+                <td class="fs-5 fw-bold">@official.FirstName @official.LastName</td>
                 <td>@official.BarangayPosition</td>
                 <td>@official.Status</td>
                 <td>

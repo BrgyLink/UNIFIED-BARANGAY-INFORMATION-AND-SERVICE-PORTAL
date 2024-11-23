@@ -6,191 +6,163 @@
     Layout = "~/Pages/Shared/_AdminLayout.cshtml";
 }
 
-<h2 class="text-center mb-5 text-primary">Create Resident</h2>
+<h4 class="text-center mb-3 text-primary">Edit Resident</h4>
 <form method="post" enctype="multipart/form-data" id="createResidentForm">
-    <div asp-validation-summary="ModelOnly" class="text-danger mb-4"></div>
+    <div asp-validation-summary="ModelOnly" class="text-danger mb-2"></div>
     <input type="hidden" asp-for="Resident.ResidentID" />
     <div class="container">
         <div class="row justify-content-center">
-            <!-- Image Upload Column (Left) -->
-            <div class="col-12 col-md-4 mb-4">
-                <div class="card shadow-sm border-light rounded-3">
-                    <div class="card-header bg-primary text-white text-center">Image Upload</div>
-                    <div class="card-body text-center">
-                        <!-- Image Preview -->
+            <!-- Image Upload Column -->
+            <div class="col-12 col-md-4 mb-3">
+                <div class="card shadow-sm">
+                    <div class="card-header py-2 bg-primary text-white">Image Upload</div>
+                    <div class="card-body p-2">
                         @if (Model.Resident.ImageData != null)
                         {
-                            <img id="imagePreview" src="data:image/jpeg;base64,@Convert.ToBase64String(@Model.Resident.ImageData)" class="img-fluid rounded-circle shadow-lg" alt="Resident Photo" style="width: 180px; height: 180px; object-fit: cover;" />
+                            <img id="imagePreview" src="data:image/jpeg;base64,@Convert.ToBase64String(@Model.Resident.ImageData)" class="img-fluid rounded-circle mx-auto d-block" style="width: 150px; height: 150px; object-fit: cover;" />
                         }
                         else
                         {
-                            <img id="imagePreview" src="/images/avatarPlaceholder.jpg" class="img-fluid rounded-circle shadow-lg" alt="Resident Photo" style="width: 180px; height: 180px;" />
+                            <img id="imagePreview" src="/images/avatarPlaceholder.jpg" class="img-fluid rounded-circle mx-auto d-block" style="width: 150px; height: 150px;" />
                         }
-                        <!-- Image Upload Field -->
-                        <div class="mb-3">
-                            <label for="ImageFile" class="form-label">Upload Image</label>
-                            <input type="file" class="form-control form-control-lg" asp-for="Resident.ImageFile"
-                                   accept=".jpg,.jpeg,.png" onchange="previewImage(this)" id="ImageFile" />
-                            <span asp-validation-for="Resident.ImageFile" class="text-danger"></span>
-                            <small class="form-text text-muted">Maximum file size: 5MB. Allowed formats: JPG, JPEG, PNG</small>
+                        <div class="mt-2">
+                            <input type="file" class="form-control form-control-sm" asp-for="Resident.ImageFile" accept=".jpg,.jpeg,.png" onchange="previewImage(this)" />
+                            <small class="text-muted">Max: 5MB (JPG, JPEG, PNG)</small>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Form Cards Column (Right) -->
+            <!-- Form Cards Column -->
             <div class="col-12 col-md-8">
                 <!-- Name Section -->
-                <div class="card mb-4 shadow-sm border-light rounded-3">
-                    <div class="card-header bg-secondary text-white">Name</div>
-                    <div class="card-body">
-                        <div class="row mb-3">
-                            <div class="col-6">
-                                <label for="FirstName" class="form-label">First Name</label>
-                                <input type="text" class="form-control form-control-lg" placeholder="Enter First Name" asp-for="Resident.FirstName" required id="FirstName" />
-                                <span asp-validation-for="Resident.FirstName" class="text-danger"></span>
+                <div class="card mb-3 shadow-sm">
+                    <div class="card-header py-1 bg-secondary text-white">Name</div>
+                    <div class="card-body p-2">
+                        <div class="row g-2">
+                            <div class="col-sm-6">
+                                <label class="form-label mb-1">First Name</label>
+                                <input type="text" class="form-control form-control-sm" placeholder="First Name" asp-for="Resident.FirstName" required />
                             </div>
-                            <div class="col-6">
-                                <label for="LastName" class="form-label">Last Name</label>
-                                <input type="text" class="form-control form-control-lg" placeholder="Enter Last Name" asp-for="Resident.LastName" required id="LastName" />
-                                <span asp-validation-for="Resident.LastName" class="text-danger"></span>
+                            <div class="col-sm-6">
+                                <label class="form-label mb-1">Last Name</label>
+                                <input type="text" class="form-control form-control-sm" placeholder="Last Name" asp-for="Resident.LastName" required />
                             </div>
-                        </div>
-                        <div class="form-group mb-3">
-                            <label for="MiddleName" class="form-label">Middle Name</label>
-                            <input type="text" class="form-control form-control-lg" placeholder="Enter Middle Name" asp-for="Resident.MiddleName" id="MiddleName" />
-                            <span asp-validation-for="Resident.MiddleName" class="text-danger"></span>
-                            <small class="form-text text-muted">If no Middle Name, put "None"</small>
+                            <div class="col-12">
+                                <label class="form-label mb-1">Middle Name</label>
+                                <input type="text" class="form-control form-control-sm" placeholder="Middle Name" asp-for="Resident.MiddleName" />
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Personal Information Section -->
-                <div class="card mb-4 shadow-sm border-light rounded-3">
-                    <div class="card-header bg-secondary text-white">Personal Information</div>
-                    <div class="card-body">
-                        <div class="row mb-3">
-                            <div class="col-4">
-                                <label for="BirthDate" class="form-label">Birthdate</label>
-                                <input type="date" class="form-control form-control-lg" asp-for="Resident.BirthDate" required id="BirthDate" />
-                                <span asp-validation-for="Resident.BirthDate" class="text-danger"></span>
+                <!-- Personal Information -->
+                <div class="card mb-3 shadow-sm">
+                    <div class="card-header py-1 bg-secondary text-white">Personal Information</div>
+                    <div class="card-body p-2">
+                        <div class="row g-2">
+                            <div class="col-sm-4">
+                                <label class="form-label mb-1">Birthdate</label>
+                                <input type="date" class="form-control form-control-sm" asp-for="Resident.BirthDate" required />
                             </div>
-                            <div class="col-4">
-                                <label for="Gender" class="form-label">Gender</label>
-                                <select class="form-select form-select-lg" asp-for="Resident.Gender" required id="Gender">
-                                    <option value="">Select Gender</option>
+                            <div class="col-sm-4">
+                                <label class="form-label mb-1">Gender</label>
+                                <select class="form-select form-select-sm" asp-for="Resident.Gender" required>
+                                    <option value="">Select</option>
                                     <option value="Male">Male</option>
                                     <option value="Female">Female</option>
                                     <option value="Other">Other</option>
                                 </select>
-                                <span asp-validation-for="Resident.Gender" class="text-danger"></span>
                             </div>
-                            <div class="col-4">
-                                <label for="CivilStatus" class="form-label">Civil Status</label>
-                                <select class="form-select form-select-lg" asp-for="Resident.CivilStatus" required id="CivilStatus">
+                            <div class="col-sm-4">
+                                <label class="form-label mb-1">Civil Status</label>
+                                <select class="form-select form-select-sm" asp-for="Resident.CivilStatus" required>
                                     <option value="Single">Single</option>
                                     <option value="Married">Married</option>
                                     <option value="Divorced">Divorced</option>
                                     <option value="Widowed">Widowed</option>
                                 </select>
-                                <span asp-validation-for="Resident.CivilStatus" class="text-danger"></span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Address and Contact Information Section -->
-                <div class="card mb-4 shadow-sm border-light rounded-3">
-                    <div class="card-header bg-secondary text-white">Address and Contact Information</div>
-                    <div class="card-body">
-                        <div class="row mb-3">
+                <!-- Contact Information -->
+                <div class="card mb-3 shadow-sm">
+                    <div class="card-header py-1 bg-secondary text-white">Contact Information</div>
+                    <div class="card-body p-2">
+                        <div class="row g-2">
                             <div class="col-12">
-                                <label for="Address" class="form-label">Address</label>
-                                <textarea class="form-control form-control-lg" placeholder="Enter Address" rows="1" asp-for="Resident.Address" required id="Address"></textarea>
-                                <span asp-validation-for="Resident.Address" class="text-danger"></span>
+                                <label class="form-label mb-1">Address</label>
+                                <textarea class="form-control form-control-sm" rows="1" asp-for="Resident.Address" required></textarea>
                             </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-6">
-                                <label for="ContactNumber" class="form-label">Contact Number</label>
-                                <input type="tel" class="form-control form-control-lg" placeholder="Enter Contact Number" asp-for="Resident.ContactNumber" required id="ContactNumber" />
-                                <span asp-validation-for="Resident.ContactNumber" class="text-danger"></span>
+                            <div class="col-sm-6">
+                                <label class="form-label mb-1">Contact Number</label>
+                                <input type="tel" class="form-control form-control-sm" asp-for="Resident.ContactNumber" required />
                             </div>
-                            <div class="col-6">
-                                <label for="Email" class="form-label">Email</label>
-                                <input type="email" class="form-control form-control-lg" placeholder="Enter Email" asp-for="Resident.Email" id="Email" />
-                                <span asp-validation-for="Resident.Email" class="text-danger"></span>
+                            <div class="col-sm-6">
+                                <label class="form-label mb-1">Email</label>
+                                <input type="email" class="form-control form-control-sm" asp-for="Resident.Email" />
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Special Information Section -->
-                <div class="card mb-4 shadow-sm border-light rounded-3">
-                    <div class="card-header bg-secondary text-white">Special Information</div>
-                    <div class="card-body">
-                        <div class="row mb-3">
-                            <div class="col-12">
-                                <div class="form-check form-check-lg">
-                                    <input class="form-check-input" type="checkbox" asp-for="Resident.IsSeniorCitizen" id="IsSeniorCitizen" />
-                                    <label class="form-check-label" for="IsSeniorCitizen">Senior Citizen</label>
+                <!-- Special Information -->
+                <div class="card mb-3 shadow-sm">
+                    <div class="card-header py-1 bg-secondary text-white">Special Information</div>
+                    <div class="card-body p-2">
+                        <div class="row g-2">
+                            <div class="col-sm-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" asp-for="Resident.IsSeniorCitizen" />
+                                    <label class="form-check-label">Senior Citizen</label>
                                 </div>
-                                <span asp-validation-for="Resident.IsSeniorCitizen" class="text-danger"></span>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-4">
-                                <div class="form-check form-check-lg">
-                                    <input class="form-check-input" type="checkbox" asp-for="Resident.IsPWD" id="IsPWD" />
-                                    <label class="form-check-label" for="IsPWD">Person with Disability (PWD)</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" asp-for="Resident.IsPWD" />
+                                    <label class="form-check-label">PWD</label>
                                 </div>
-                                <span asp-validation-for="Resident.IsPWD" class="text-danger"></span>
                             </div>
-                            <div class="col-4">
-                                <label for="VoterStatus" class="form-label">Voter Status</label>
-                                <select class="form-select form-select-lg" asp-for="Resident.VoterStatus" required id="VoterStatus">
+                            <div class="col-sm-4">
+                                <label class="form-label mb-1">Voter Status</label>
+                                <select class="form-select form-select-sm" asp-for="Resident.VoterStatus" required>
                                     <option value="Non-voter">Non-voter</option>
                                     <option value="Voter">Voter</option>
                                 </select>
-                                <span asp-validation-for="Resident.VoterStatus" class="text-danger"></span>
                             </div>
-                            <div class="col-4">
-                                <label for="Occupation" class="form-label">Occupation</label>
-                                <input type="text" class="form-control form-control-lg" placeholder="Enter Occupation" asp-for="Resident.Occupation" id="Occupation" />
-                                <span asp-validation-for="Resident.Occupation" class="text-danger"></span>
+                            <div class="col-sm-4">
+                                <label class="form-label mb-1">Occupation</label>
+                                <input type="text" class="form-control form-control-sm" asp-for="Resident.Occupation" />
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Emergency Contact Section -->
-                <div class="card mb-4 shadow-sm border-light rounded-3">
-                    <div class="card-header bg-secondary text-white">Emergency Contact</div>
-                    <div class="card-body">
-                        <div class="row mb-3">
-                            <div class="col-6">
-                                <label for="EmergencyContact" class="form-label">Emergency Contact</label>
-                                <input type="text" class="form-control form-control-lg" placeholder="Enter Emergency Contact" asp-for="Resident.EmergencyContact" required id="EmergencyContact" />
-                                <span asp-validation-for="Resident.EmergencyContact" class="text-danger"></span>
+                <!-- Emergency Contact -->
+                <div class="card mb-3 shadow-sm">
+                    <div class="card-header py-1 bg-secondary text-white">Emergency Contact</div>
+                    <div class="card-body p-2">
+                        <div class="row g-2">
+                            <div class="col-sm-6">
+                                <label class="form-label mb-1">Emergency Contact</label>
+                                <input type="text" class="form-control form-control-sm" asp-for="Resident.EmergencyContact" required />
                             </div>
-                            <div class="col-6">
-                                <label for="HealthConditions" class="form-label">Health Conditions</label>
-                                <textarea class="form-control form-control-lg" placeholder="Enter Health Conditions (if any)" rows="1" asp-for="Resident.HealthConditions" id="HealthConditions"></textarea>
-                                <span asp-validation-for="Resident.HealthConditions" class="text-danger"></span>
+                            <div class="col-sm-6">
+                                <label class="form-label mb-1">Health Conditions</label>
+                                <textarea class="form-control form-control-sm" rows="1" asp-for="Resident.HealthConditions"></textarea>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Submit Button -->
-                <div class="text-end mb-5">
-                    <button type="submit" class="btn btn-primary btn-lg">Save Resident</button>
+                <div class="text-end mb-3">
+                    <button type="submit" class="btn btn-primary">Save Resident</button>
                 </div>
             </div>
         </div>
     </div>
 </form>
-
 
 @section Scripts {
     @{
@@ -201,14 +173,11 @@
         function previewImage(input) {
             if (input.files && input.files[0]) {
                 const file = input.files[0];
-
-                // Validate file size (5MB)
                 if (file.size > 5 * 1024 * 1024) {
                     alert('File size cannot exceed 5MB');
                     input.value = '';
                     return;
                 }
-
                 const reader = new FileReader();
                 reader.onload = function (e) {
                     document.getElementById('imagePreview').src = e.target.result;
@@ -217,7 +186,6 @@
             }
         }
 
-        // Show SweetAlert on success after form submission
         @if (TempData["SuccessMessage"] != null)
         {
             <text>
@@ -229,7 +197,6 @@
                         confirmButtonText: 'OK'
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            // Reset the image preview
                             $('#imagePreview').attr('src', '/images/avatarPlaceholder.jpg');
                         }
                     });

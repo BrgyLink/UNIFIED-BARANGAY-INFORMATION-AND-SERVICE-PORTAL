@@ -5,7 +5,6 @@
     ViewData["Title"] = "About";
 }
 
-
 <div class="container about-container">
     <img src="/images/logoBrgySeal.png" alt="Barangay Logo" class="img-fluid mb-4" style="max-width: 150px;">
     <h2 class="text-white">About Us</h2>
@@ -45,5 +44,31 @@
                 <p>Our officials work to maintain peace and order within the barangay. We collaborate with local enforcement to ensure the safety and security of our residents.</p>
             </div>
         </div>
+    </div>
+
+    <!-- Barangay Officials Section -->
+    <h2 class="text-white mt-5 mb-4">Barangay Officials</h2>
+    <div class="row">
+        @foreach (var official in Model.BarangayOfficials)
+        {
+            <div class="col-sm-12 col-md-4 col-lg-3 mb-4">
+                <div class="card" style="background-color: #F8F9FA; border: 1px solid #ddd;">
+                    @if (official.Photo != null && official.Photo.Length > 0)
+                    {
+                        <img src="data:image/jpeg;base64,@Convert.ToBase64String(official.Photo)" class="card-img-top d-block mx-auto mt-2" alt="@official.FirstName @official.LastName" style="max-height: 200px; object-fit: cover;">
+
+                    }
+                    else
+                    {
+                        <img src="/images/avatarPlaceholder.jpg" class="card-img-top d-block mx-auto" alt="Default Image" style="max-height: 200px; object-fit: cover;">
+
+                    }
+                    <div class="card-body text-center">
+                        <h5 class="card-title">@official.FirstName @official.LastName</h5>
+                        <p class="card-text">@official.BarangayPosition</p>
+                    </div>
+                </div>
+            </div>
+        }
     </div>
 </div>

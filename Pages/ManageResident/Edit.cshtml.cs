@@ -91,8 +91,8 @@ namespace BrgyLink.Pages.ManageResident
                 }
             }
 
-            //return RedirectToPage("./Index");
-            return Page();
+            return RedirectToPage("/ManageResident/Index");
+
         }
 
         private bool ResidentExists(int id)

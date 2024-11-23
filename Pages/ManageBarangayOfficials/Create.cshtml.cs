@@ -84,8 +84,6 @@ namespace BrgyLink.Pages.ManageBarangayOfficials
                             int maxHeight = 800;
 
                             // Resize the image if it exceeds the max dimensions
-
-                            // Resize if image is larger than maximum dimensions
                             if (image.Width > maxWidth || image.Height > maxHeight)
                             {
                                 image.Mutate(x => x.Resize(new ResizeOptions
@@ -111,8 +109,8 @@ namespace BrgyLink.Pages.ManageBarangayOfficials
 
                 // Set success message and redirect
                 TempData["SuccessMessage"] = "Barangay Official created successfully!";
-                //return RedirectToPage("./Index");
-                return Page();
+                // Redirect to the Index page after successful creation
+                return RedirectToPage("/ManageBarangayOfficials/Index");
             }
             catch (Exception ex)
             {
@@ -121,5 +119,6 @@ namespace BrgyLink.Pages.ManageBarangayOfficials
                 return Page();
             }
         }
+
     }
 }

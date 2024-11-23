@@ -148,10 +148,11 @@
                     <button type="submit" class="btn btn-primary btn-lg">Save Barangay Official</button>
                 </div>
           
-        </div>
-    </div>
-      </form>
+             </div>
+         </div>
+     </form>
 </div>
+
 
 @section Scripts {
     @{
@@ -162,43 +163,24 @@
 
     <script>
         function previewImage(input) {
-            if (input.files && input.files[0]) {
-                const file = input.files[0];
-
-                // Validate file size (5MB)
-                if (file.size > 5 * 1024 * 1024) {
-                    alert('File size cannot exceed 5MB');
-                    input.value = '';
-                    return;
-                }
-
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    document.getElementById('imagePreview').src = e.target.result;
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-
-        // Show SweetAlert on success after form submission
         @if (TempData["SuccessMessage"] != null)
         {
             <text>
-                $(document).ready(function () {
-                    Swal.fire({
-                        title: 'Success',
-                        text: 'Barangay Official created successfully!',
-                        icon: 'success',
-                        confirmButtonText: 'OK'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            // Reset all form inputs
-                            $('#createBarangayOfficialForm')[0].reset();
-                            // Reset the image preview
-                            $('#imagePreview').attr('src', '/images/avatarPlaceholder.jpg');
-                        }
+                    $(document).ready(function () {
+                        Swal.fire({
+                            title: 'Success',
+                            text: '@TempData["SuccessMessage"]',
+                            icon: 'success',
+                            confirmButtonText: 'OK'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                // Reset all form inputs
+                                $('#createBarangayOfficialForm')[0].reset();
+                                // Reset the image preview
+                                $('#imagePreview').attr('src', '/images/avatarPlaceholder.jpg');
+                            }
+                        });
                     });
-                });
             </text>
         }
     </script>

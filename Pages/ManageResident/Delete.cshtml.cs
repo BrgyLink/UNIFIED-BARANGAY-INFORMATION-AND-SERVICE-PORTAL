@@ -58,7 +58,7 @@ namespace BrgyLink.Pages.ManageResident
                 await _context.SaveChangesAsync();
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("/ManageResident/Index");
         }
     }
 }
