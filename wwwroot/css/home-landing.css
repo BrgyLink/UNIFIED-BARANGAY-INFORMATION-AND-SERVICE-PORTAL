@@ -1,0 +1,160 @@
+﻿/* Global Theme Color */
+:root {
+    --main-color: #1a237e;
+    --accent-color: #ffca28;
+    --hover-color: #ffc107;
+}
+
+body {
+    background-color: var(--main-color);
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+}
+
+/* Base fade-in animation */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Apply fade-in effect */
+.fade-in {
+    opacity: 0;
+    animation: fadeIn 1s ease-out forwards;
+}
+
+/* Slide-in from bottom */
+@keyframes slideInBottom {
+    0% {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Apply slide-in from bottom effect */
+.fade-in-bottom {
+    opacity: 0;
+    transform: translateY(50px);
+    animation: slideInBottom 1s ease-out forwards;
+}
+
+/* Slide-in from left */
+@keyframes slideInLeft {
+    0% {
+        transform: translateX(-50px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Apply slide-in from left effect */
+.fade-in-left {
+    opacity: 0;
+    transform: translateX(-50px);
+    animation: slideInLeft 1s ease-out forwards;
+}
+
+/* Apply staggered fade-in for elements */
+.hero-section, .logo-img, .welcome-text, p, .about-btn, .service-btn {
+    opacity: 0;
+    animation: fadeIn 1s ease-out forwards;
+}
+
+/* Adding delay for elements to stagger appearance */
+.hero-section {
+    animation-delay: 0.1s;
+}
+
+.logo-img {
+    animation-delay: 0.2s;
+}
+
+.welcome-text {
+    animation-delay: 0.3s;
+}
+
+p {
+    animation-delay: 0.4s;
+}
+
+.about-btn, .service-btn {
+    animation-delay: 0.5s;
+}
+
+/* Ensure that the hero section takes up the full height of the viewport */
+.hero-section {
+    background-color: var(--main-color);
+    color: white;
+    min-height: 60vh;
+    padding: 50px 0;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+}
+
+/* Logo Image */
+.logo-img {
+    width: 300px;
+    height: 300px;
+    object-fit: contain;
+}
+
+/* Text styling */
+.welcome-text {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Button Styling */
+.about-btn, .service-btn {
+    background-color: white;
+    color: var(--main-color);
+    padding: 10px 30px;
+    border-radius: 25px;
+    text-transform: uppercase;
+    font-weight: bold;
+    border: none;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+    /* Hover effect for About Us button */
+    .about-btn:hover {
+        background-color: white;
+        color: var(--hover-color);
+        transform: translateY(-2px);
+    }
+
+    /* Hover effect for Service button */
+    .service-btn:hover {
+        background-color: white;
+        color: var(--hover-color);
+        transform: translateY(-2px);
+    }
+
+/* Ensure buttons are aligned side by side */
+.text-center.text-md-start {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+/* Container padding reset */
+.container {
+    padding-left: 0;
+    padding-right: 0;
+}

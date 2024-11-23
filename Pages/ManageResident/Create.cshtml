@@ -6,180 +6,180 @@
     Layout = "~/Pages/Shared/_AdminLayout.cshtml";
 }
 
-<h2 class="text-center mb-4">Create Resident</h2>
+<h2 class="text-center mb-5 text-primary">Create Resident</h2>
 
 <div class="container">
     <div class="row justify-content-center">
+        <!-- Form Column (Right) -->
         <div class="col-12 col-md-8">
             <form method="post" enctype="multipart/form-data" id="createResidentForm">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-4"></div>
 
-                <!-- Image Column -->
+                <!-- Image Column (Left) -->
                 <div class="text-center mb-4">
-                    <img id="imagePreview" src="/images/avatarPlaceholder.jpg" alt="Resident Image Preview" 
-                         class="img-fluid mb-3" style="max-width: 150px; max-height: 150px; border-radius: 50%; object-fit: cover;" />
+                    <img id="imagePreview" src="/images/avatarPlaceholder.jpg" alt="Resident Image Preview"
+                         class="img-fluid mb-3" style="max-width: 180px; max-height: 180px; border-radius: 50%; object-fit: cover;" />
                     <div class="mb-3">
-                        <input type="file" class="form-control" asp-for="Resident.ImageFile" 
+                        <input type="file" class="form-control form-control-lg" asp-for="Resident.ImageFile"
                                accept=".jpg,.jpeg,.png" onchange="previewImage(this)" />
                         <span asp-validation-for="Resident.ImageFile" class="text-danger"></span>
                         <small class="form-text text-muted">Maximum file size: 5MB. Allowed formats: JPG, JPEG, PNG</small>
                     </div>
                 </div>
 
-            <!-- Form Fields (e.g. First Name, Last Name, Address, etc.) -->
-            <!-- Your other form fields go here -->
-            <div class="row mb-3">
-                <div class="col-6">
-                    <input type="text" class="form-control form-control-sm" placeholder="Enter Firstname" asp-for="Resident.FirstName" required />
-                    <span asp-validation-for="Resident.FirstName" class="text-danger"></span>
-                </div>
-                <div class="col-6">
-                    <input type="text" class="form-control form-control-sm" placeholder="Enter Lastname" asp-for="Resident.LastName" required />
-                    <span asp-validation-for="Resident.LastName" class="text-danger"></span>
-                </div>
-            </div>
-
-                <!-- Middle Name -->
-                <div class="form-group mb-3">
-                    <input type="text" class="form-control form-control-sm" placeholder="Enter Middlename" asp-for="Resident.MiddleName" />
-                    <span asp-validation-for="Resident.MiddleName" class="text-danger"></span>
-                </div>
-
-                <!-- Address -->
-                <div class="form-group mb-3">
-                    <textarea class="form-control form-control-sm" placeholder="Enter Address" rows="1" asp-for="Resident.Address" required></textarea>
-                    <span asp-validation-for="Resident.Address" class="text-danger"></span>
-                </div>
-
-                <!-- Contact Number and Email -->
-                <div class="row mb-3">
-                    <div class="col-6">
-                        <input type="tel" class="form-control form-control-sm" placeholder="Enter Contact Number" asp-for="Resident.ContactNumber" required />
-                        <span asp-validation-for="Resident.ContactNumber" class="text-danger"></span>
-                    </div>
-                    <div class="col-6">
-                        <input type="email" class="form-control form-control-sm" placeholder="Enter Email" asp-for="Resident.Email" />
-                        <span asp-validation-for="Resident.Email" class="text-danger"></span>
-                    </div>
-                </div>
-
-                <!-- Birthdate, Gender, Civil Status -->
-                <div class="row mb-3">
-                    <div class="col-4">
-                        <input type="date" class="form-control form-control-sm" asp-for="Resident.BirthDate" required />
-                        <span asp-validation-for="Resident.BirthDate" class="text-danger"></span>
-                    </div>
-                    <div class="col-4">
-                        <select class="form-select form-select-sm" asp-for="Resident.Gender" required>
-                            <option value="">Select Gender</option>
-                            <option value="Male">Male</option>
-                            <option value="Female">Female</option>
-                            <option value="Other">Other</option>
-                        </select>
-                        <span asp-validation-for="Resident.Gender" class="text-danger"></span>
-                    </div>
-                    <div class="col-4">
-                        <select class="form-select form-select-sm" asp-for="Resident.CivilStatus" required>
-                            <option value="Single">Single</option>
-                            <option value="Married">Married</option>
-                            <option value="Divorced">Divorced</option>
-                            <option value="Widowed">Widowed</option>
-                        </select>
-                        <span asp-validation-for="Resident.CivilStatus" class="text-danger"></span>
-                    </div>
-                </div>
-
-                <!-- Nationality and Residency Status -->
-                <div class="row mb-3">
-                    <div class="col-6">
-                        <input type="text" class="form-control form-control-sm" placeholder="Enter Nationality" asp-for="Resident.Nationality" required />
-                        <span asp-validation-for="Resident.Nationality" class="text-danger"></span>
-                    </div>
-                    <div class="col-6">
-                        <select class="form-select form-select-sm" asp-for="Resident.ResidencyStatus" disabled>
-                            <option value="Resident">Resident</option>
-                        </select>
-                        <span asp-validation-for="Resident.ResidencyStatus" class="text-danger"></span>
-                    </div>
-                </div>
-
-                <!-- Senior Citizen Checkbox -->
-                <div class="row mb-3">
-                    <div class="col-12">
-                        <div class="form-check form-check-sm">
-                            <input class="form-check-input" type="checkbox" asp-for="Resident.IsSeniorCitizen" />
-                            <label class="form-check-label">Senior Citizen</label>
+                <!-- Form Fields Section (Right) -->
+                <div class="card mb-4 shadow-sm border-light rounded-3">
+                    <div class="card-header bg-secondary text-white">Name</div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-6">
+                                <label for="FirstName" class="form-label">First Name</label>
+                                <input type="text" class="form-control form-control-lg" placeholder="Enter First Name" asp-for="Resident.FirstName" required />
+                                <span asp-validation-for="Resident.FirstName" class="text-danger"></span>
+                            </div>
+                            <div class="col-6">
+                                <label for="LastName" class="form-label">Last Name</label>
+                                <input type="text" class="form-control form-control-lg" placeholder="Enter Last Name" asp-for="Resident.LastName" required />
+                                <span asp-validation-for="Resident.LastName" class="text-danger"></span>
+                            </div>
                         </div>
-                        <span asp-validation-for="Resident.IsSeniorCitizen" class="text-danger"></span>
-                    </div>
-                </div>
-
-                <!-- PWD, Voter Status and Occupation -->
-                <div class="row mb-3">
-                    <div class="col-4">
-                        <div class="form-check form-check-sm">
-                            <input class="form-check-input" type="checkbox" asp-for="Resident.IsPWD" />
-                            <label class="form-check-label">Person with Disability (PWD)</label>
+                        <div class="form-group mb-3">
+                            <label for="MiddleName" class="form-label">Middle Name</label>
+                            <input type="text" class="form-control form-control-lg" placeholder="Enter Middle Name" asp-for="Resident.MiddleName" />
+                            <span asp-validation-for="Resident.MiddleName" class="text-danger"></span>
+                            <small class="form-text text-muted">If no Middle Name put "None"</small>
                         </div>
-                        <span asp-validation-for="Resident.IsPWD" class="text-danger"></span>
-                    </div>
-                    <div class="col-4">
-                        <select class="form-select form-select-sm" asp-for="Resident.VoterStatus" required>
-                            <option value="Non-voter">Non-voter</option>
-                            <option value="Voter">Voter</option>
-                        </select>
-                        <span asp-validation-for="Resident.VoterStatus" class="text-danger"></span>
-                    </div>
-                    <div class="col-4">
-                        <input type="text" class="form-control form-control-sm" placeholder="Enter Occupation" asp-for="Resident.Occupation" />
-                        <span asp-validation-for="Resident.Occupation" class="text-danger"></span>
                     </div>
                 </div>
 
-                <!-- Emergency Contact and Health Conditions -->
-                <div class="row mb-3">
-                    <div class="col-6">
-                        <input type="text" class="form-control form-control-sm" placeholder="Enter Emergency Contact" asp-for="Resident.EmergencyContact" required />
-                        <span asp-validation-for="Resident.EmergencyContact" class="text-danger"></span>
+                <!-- Personal Information Section -->
+                <div class="card mb-4 shadow-sm border-light rounded-3">
+                    <div class="card-header bg-secondary text-white">Personal Information</div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-4">
+                                <label for="BirthDate" class="form-label">Birthdate</label>
+                                <input type="date" class="form-control form-control-lg" asp-for="Resident.BirthDate" required />
+                                <span asp-validation-for="Resident.BirthDate" class="text-danger"></span>
+                            </div>
+                            <div class="col-4">
+                                <label for="Gender" class="form-label">Gender</label>
+                                <select class="form-select form-select-lg" asp-for="Resident.Gender" required>
+                                    <option value="">Select Gender</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                <span asp-validation-for="Resident.Gender" class="text-danger"></span>
+                            </div>
+                            <div class="col-4">
+                                <label for="CivilStatus" class="form-label">Civil Status</label>
+                                <select class="form-select form-select-lg" asp-for="Resident.CivilStatus" required>
+                                    <option value="Single">Single</option>
+                                    <option value="Married">Married</option>
+                                    <option value="Divorced">Divorced</option>
+                                    <option value="Widowed">Widowed</option>
+                                </select>
+                                <span asp-validation-for="Resident.CivilStatus" class="text-danger"></span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-6">
-                        <textarea class="form-control form-control-sm" placeholder="Enter Health Conditions (if any)" rows="1" asp-for="Resident.HealthConditions"></textarea>
-                        <span asp-validation-for="Resident.HealthConditions" class="text-danger"></span>
+                </div>
+
+                <!-- Address and Contact Information Section -->
+                <div class="card mb-4 shadow-sm border-light rounded-3">
+                    <div class="card-header bg-secondary text-white">Address and Contact Information</div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <label for="Address" class="form-label">Address</label>
+                                <textarea class="form-control form-control-lg" placeholder="Enter Address" rows="1" asp-for="Resident.Address" required></textarea>
+                                <span asp-validation-for="Resident.Address" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-6">
+                                <label for="ContactNumber" class="form-label">Contact Number</label>
+                                <input type="tel" class="form-control form-control-lg" placeholder="Enter Contact Number" asp-for="Resident.ContactNumber" required />
+                                <span asp-validation-for="Resident.ContactNumber" class="text-danger"></span>
+                            </div>
+                            <div class="col-6">
+                                <label for="Email" class="form-label">Email</label>
+                                <input type="email" class="form-control form-control-lg" placeholder="Enter Email" asp-for="Resident.Email" />
+                                <span asp-validation-for="Resident.Email" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Special Information Section -->
+                <div class="card mb-4 shadow-sm border-light rounded-3">
+                    <div class="card-header bg-secondary text-white">Special Information</div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <div class="form-check form-check-lg">
+                                    <input class="form-check-input" type="checkbox" asp-for="Resident.IsSeniorCitizen" />
+                                    <label class="form-check-label" for="IsSeniorCitizen">Senior Citizen</label>
+                                </div>
+                                <span asp-validation-for="Resident.IsSeniorCitizen" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-4">
+                                <div class="form-check form-check-lg">
+                                    <input class="form-check-input" type="checkbox" asp-for="Resident.IsPWD" />
+                                    <label class="form-check-label" for="IsPWD">Person with Disability (PWD)</label>
+                                </div>
+                                <span asp-validation-for="Resident.IsPWD" class="text-danger"></span>
+                            </div>
+                            <div class="col-4">
+                                <label for="VoterStatus" class="form-label">Voter Status</label>
+                                <select class="form-select form-select-lg" asp-for="Resident.VoterStatus" required>
+                                    <option value="Non-voter">Non-voter</option>
+                                    <option value="Voter">Voter</option>
+                                </select>
+                                <span asp-validation-for="Resident.VoterStatus" class="text-danger"></span>
+                            </div>
+                            <div class="col-4">
+                                <label for="Occupation" class="form-label">Occupation</label>
+                                <input type="text" class="form-control form-control-lg" placeholder="Enter Occupation" asp-for="Resident.Occupation" />
+                                <span asp-validation-for="Resident.Occupation" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Emergency Contact Section -->
+                <div class="card mb-4 shadow-sm border-light rounded-3">
+                    <div class="card-header bg-secondary text-white">Emergency Contact</div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-6">
+                                <label for="EmergencyContact" class="form-label">Emergency Contact</label>
+                                <input type="text" class="form-control form-control-lg" placeholder="Enter Emergency Contact" asp-for="Resident.EmergencyContact" required />
+                                <span asp-validation-for="Resident.EmergencyContact" class="text-danger"></span>
+                            </div>
+                            <div class="col-6">
+                                <label for="HealthConditions" class="form-label">Health Conditions</label>
+                                <textarea class="form-control form-control-lg" placeholder="Enter Health Conditions (if any)" rows="1" asp-for="Resident.HealthConditions"></textarea>
+                                <span asp-validation-for="Resident.HealthConditions" class="text-danger"></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Submit Button -->
-                <div class="text-center">
-                    <button type="submit" class="btn btn-primary btn-lg mt-3">Save Resident</button>
+                <div class="text-center mb-5">
+                    <button type="submit" class="btn btn-primary btn-lg">Save Resident</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
 
-
-<!-- Success Modal -->
-<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="successModalLabel">Success</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                Data submitted successfully!
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         function previewImage(input) {
             if (input.files && input.files[0]) {
@@ -200,15 +200,26 @@
             }
         }
 
-        // Show success message using bootstrap modal if TempData contains success message
+        // Show SweetAlert on success after form submission
         @if (TempData["SuccessMessage"] != null)
         {
             <text>
                 $(document).ready(function () {
-                    $('#successModal').modal('show');
+                    Swal.fire({
+                        title: 'Success',
+                        text: 'Resident created successfully!',
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Reset all form inputs
+                            $('#createResidentForm')[0].reset();
+                            // Reset the image preview
+                            $('#imagePreview').attr('src', '/images/avatarPlaceholder.jpg');
+                        }
+                    });
                 });
             </text>
         }
     </script>
-}
 }

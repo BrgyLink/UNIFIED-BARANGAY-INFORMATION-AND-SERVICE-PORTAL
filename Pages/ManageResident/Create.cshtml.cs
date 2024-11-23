@@ -108,7 +108,8 @@ namespace BrgyLink.Pages.ManageResident
                 // Set success message
                 TempData["SuccessMessage"] = "Resident created successfully!";
 
-                return RedirectToPage("./Index");
+                //return RedirectToPage("./Index");
+                return Page();
             }
             catch (Exception ex)
             {

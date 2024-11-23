@@ -6,135 +6,160 @@
     Layout = "~/Pages/Shared/_AdminLayout.cshtml";
 }
 
-<h2 class="text-center mb-4">Create Barangay Official</h2>
-
+<h2 class="text-center mb-5 text-primary">Create Barangay Official</h2>
+<form method="post" enctype="multipart/form-data" id="createBarangayOfficialForm">
+    <div asp-validation-summary="ModelOnly" class="text-danger mb-4"></div>
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-12 col-md-8">
-            <form method="post" enctype="multipart/form-data" id="createBarangayOfficialForm">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-                <!-- Image Upload -->
-                <div class="text-center mb-4">
+        <!-- Image Upload Column (Left) -->
+        <div class="col-12 col-md-4 mb-4">
+            <div class="card shadow-sm border-light rounded-3">
+                <div class="card-header bg-primary text-white text-center">Image Upload</div>
+                <div class="card-body text-center">
                     <img id="imagePreview" src="/images/avatarPlaceholder.jpg" alt="Barangay Official Image Preview"
-                         class="img-fluid mb-3" style="max-width: 150px; max-height: 150px; border-radius: 50%; object-fit: cover;" />
+                         class="img-fluid mb-3" style="max-width: 180px; max-height: 180px; border-radius: 50%; object-fit: cover;" />
                     <div class="mb-3">
-                        <input type="file" class="form-control" asp-for="BarangayOfficial.ImageFile"
-                               accept=".jpg,.jpeg,.png" onchange="previewImage(this)" />
+                        <label for="ImageFile" class="form-label">Upload Image</label>
+                        <input type="file" class="form-control form-control-lg" asp-for="BarangayOfficial.ImageFile"
+                               accept=".jpg,.jpeg,.png" onchange="previewImage(this)" id="ImageFile" />
                         <span asp-validation-for="BarangayOfficial.ImageFile" class="text-danger"></span>
                         <small class="form-text text-muted">Maximum file size: 5MB. Allowed formats: JPG, JPEG, PNG</small>
                     </div>
                 </div>
+            </div>
+        </div>
 
-                <!-- Form Fields (e.g. First Name, Last Name, etc.) -->
-                <div class="row mb-3">
-                    <div class="col-6">
-                        <input type="text" class="form-control form-control-sm" placeholder="Enter Firstname" asp-for="BarangayOfficial.FirstName" required />
-                        <span asp-validation-for="BarangayOfficial.FirstName" class="text-danger"></span>
-                    </div>
-                    <div class="col-6">
-                        <input type="text" class="form-control form-control-sm" placeholder="Enter Lastname" asp-for="BarangayOfficial.LastName" required />
-                        <span asp-validation-for="BarangayOfficial.LastName" class="text-danger"></span>
+        <!-- Form Cards Column (Right) -->
+        <div class="col-12 col-md-8">
+           
+
+                <!-- Name Section -->
+                <div class="card mb-4 shadow-sm border-light rounded-3">
+                    <div class="card-header bg-secondary text-white">Name</div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-6">
+                                <label for="FirstName" class="form-label">First Name</label>
+                                <input type="text" class="form-control form-control-lg" placeholder="Enter First Name" asp-for="BarangayOfficial.FirstName" required id="FirstName" />
+                                <span asp-validation-for="BarangayOfficial.FirstName" class="text-danger"></span>
+                            </div>
+                            <div class="col-6">
+                                <label for="LastName" class="form-label">Last Name</label>
+                                <input type="text" class="form-control form-control-lg" placeholder="Enter Last Name" asp-for="BarangayOfficial.LastName" required id="LastName" />
+                                <span asp-validation-for="BarangayOfficial.LastName" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="MiddleName" class="form-label">Middle Name</label>
+                            <input type="text" class="form-control form-control-lg" placeholder="Enter Middle Name" asp-for="BarangayOfficial.MiddleName" id="MiddleName" />
+                            <span asp-validation-for="BarangayOfficial.MiddleName" class="text-danger"></span>
+                            <small class="form-text text-muted">If no Middle Name put "None"</small>
+                        </div>
                     </div>
                 </div>
 
-                <div class="form-group mb-3">
-                    <input type="text" class="form-control form-control-sm" placeholder="Enter Middlename" asp-for="BarangayOfficial.MiddleName" />
-                    <span asp-validation-for="BarangayOfficial.MiddleName" class="text-danger"></span>
-                </div>
-
-                <!-- Birthdate, Gender, Marital Status -->
-                <div class="row mb-3">
-                    <div class="col-4">
-                        <input type="date" class="form-control form-control-sm" asp-for="BarangayOfficial.Birthdate" required />
-                        <span asp-validation-for="BarangayOfficial.Birthdate" class="text-danger"></span>
-                    </div>
-                    <div class="col-4">
-                        <select class="form-select form-select-sm" asp-for="BarangayOfficial.Gender" required>
-                            <option value="">Select Gender</option>
-                            <option value="Male">Male</option>
-                            <option value="Female">Female</option>
-                            <option value="Other">Other</option>
-                        </select>
-                        <span asp-validation-for="BarangayOfficial.Gender" class="text-danger"></span>
-                    </div>
-                    <div class="col-4">
-                        <select class="form-select form-select-sm" asp-for="BarangayOfficial.MaritalStatus" required>
-                            <option value="Single">Single</option>
-                            <option value="Married">Married</option>
-                            <option value="Divorced">Divorced</option>
-                            <option value="Widowed">Widowed</option>
-                        </select>
-                        <span asp-validation-for="BarangayOfficial.MaritalStatus" class="text-danger"></span>
-                    </div>
-                </div>
-
-                <!-- Barangay Position, Committee, Term -->
-                <div class="row mb-3">
-                    <div class="col-4">
-                        <input type="text" class="form-control form-control-sm" placeholder="Enter Barangay Position" asp-for="BarangayOfficial.BarangayPosition" required />
-                        <span asp-validation-for="BarangayOfficial.BarangayPosition" class="text-danger"></span>
-                    </div>
-                    <div class="col-4">
-                        <input type="text" class="form-control form-control-sm" placeholder="Enter Committee" asp-for="BarangayOfficial.Committee" />
-                        <span asp-validation-for="BarangayOfficial.Committee" class="text-danger"></span>
-                    </div>
-                    <div class="col-4">
-                        <input type="date" class="form-control form-control-sm" asp-for="BarangayOfficial.TermStart" required />
-                        <span asp-validation-for="BarangayOfficial.TermStart" class="text-danger"></span>
+                <!-- Personal Information Section -->
+                <div class="card mb-4 shadow-sm border-light rounded-3">
+                    <div class="card-header bg-secondary text-white">Personal Information</div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-4">
+                                <label for="Birthdate" class="form-label">Birthdate</label>
+                                <input type="date" class="form-control form-control-lg" asp-for="BarangayOfficial.Birthdate" required id="Birthdate" />
+                                <span asp-validation-for="BarangayOfficial.Birthdate" class="text-danger"></span>
+                            </div>
+                            <div class="col-4">
+                                <label for="Gender" class="form-label">Gender</label>
+                                <select class="form-select form-select-lg" asp-for="BarangayOfficial.Gender" required id="Gender">
+                                    <option value="">Select Gender</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                <span asp-validation-for="BarangayOfficial.Gender" class="text-danger"></span>
+                            </div>
+                            <div class="col-4">
+                                <label for="MaritalStatus" class="form-label">Marital Status</label>
+                                <select class="form-select form-select-lg" asp-for="BarangayOfficial.MaritalStatus" required id="MaritalStatus">
+                                    <option value="Single">Single</option>
+                                    <option value="Married">Married</option>
+                                    <option value="Divorced">Divorced</option>
+                                    <option value="Widowed">Widowed</option>
+                                </select>
+                                <span asp-validation-for="BarangayOfficial.MaritalStatus" class="text-danger"></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Term End and Rank Number -->
-                <div class="row mb-3">
-                    <div class="col-4">
-                        <input type="date" class="form-control form-control-sm" asp-for="BarangayOfficial.TermEnd" required />
-                        <span asp-validation-for="BarangayOfficial.TermEnd" class="text-danger"></span>
+                <!-- Position and Term Information Section -->
+                <div class="card mb-4 shadow-sm border-light rounded-3">
+                    <div class="card-header bg-secondary text-white">Position and Term</div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-4">
+                                <label for="BarangayPosition" class="form-label">Barangay Position</label>
+                                <input type="text" class="form-control form-control-lg" placeholder="Enter Barangay Position" asp-for="BarangayOfficial.BarangayPosition" required id="BarangayPosition" />
+                                <span asp-validation-for="BarangayOfficial.BarangayPosition" class="text-danger"></span>
+                            </div>
+                            <div class="col-4">
+                                <label for="Committee" class="form-label">Committee</label>
+                                <input type="text" class="form-control form-control-lg" placeholder="Enter Committee" asp-for="BarangayOfficial.Committee" id="Committee" />
+                                <span asp-validation-for="BarangayOfficial.Committee" class="text-danger"></span>
+                            </div>
+                            <div class="col-4">
+                                <label for="RankNo" class="form-label">Rank Number</label>
+                                <input type="number" class="form-control form-control-lg" placeholder="Enter Rank Number" asp-for="BarangayOfficial.RankNo" required id="RankNo" />
+                                <span asp-validation-for="BarangayOfficial.RankNo" class="text-danger"></span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-4">
-                        <input type="number" class="form-control form-control-sm" placeholder="Enter Rank Number" asp-for="BarangayOfficial.RankNo" required />
-                        <span asp-validation-for="BarangayOfficial.RankNo" class="text-danger"></span>
-                    </div>
-                    <div class="col-4">
-                        <select class="form-select form-select-sm" asp-for="BarangayOfficial.Status" required>
-                            <option value="Active">Active</option>
-                            <option value="Inactive">Inactive</option>
-                        </select>
-                        <span asp-validation-for="BarangayOfficial.Status" class="text-danger"></span>
+                </div>
+
+                <!-- Term End and Status Section -->
+                <div class="card mb-4 shadow-sm border-light rounded-3">
+                    <div class="card-header bg-secondary text-white">Term End and Status</div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-4">
+                                <label for="TermStart" class="form-label">Term Start</label>
+                                <input type="date" class="form-control form-control-lg" asp-for="BarangayOfficial.TermStart" required id="TermStart" />
+                                <span asp-validation-for="BarangayOfficial.TermStart" class="text-danger"></span>
+                            </div>
+                            <div class="col-4">
+                                <label for="TermEnd" class="form-label">Term End</label>
+                                <input type="date" class="form-control form-control-lg" asp-for="BarangayOfficial.TermEnd" required id="TermEnd" />
+                                <span asp-validation-for="BarangayOfficial.TermEnd" class="text-danger"></span>
+                            </div>
+                            <div class="col-4">
+                                <label for="Status" class="form-label">Status</label>
+                                <select class="form-select form-select-lg" asp-for="BarangayOfficial.Status" required id="Status">
+                                    <option value="Active">Active</option>
+                                    <option value="Inactive">Inactive</option>
+                                </select>
+                                <span asp-validation-for="BarangayOfficial.Status" class="text-danger"></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Submit Button -->
-                <div class="text-center">
-                    <button type="submit" class="btn btn-primary btn-lg mt-3">Save Barangay Official</button>
+                <div class="text-end mb-5">
+                    <button type="submit" class="btn btn-primary btn-lg">Save Barangay Official</button>
                 </div>
-            </form>
+          
         </div>
     </div>
-</div>
-
-<!-- Success Modal -->
-<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="successModalLabel">Success</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                Barangay Official created successfully!
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
-            </div>
-        </div>
-    </div>
+      </form>
 </div>
 
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script>
         function previewImage(input) {
             if (input.files && input.files[0]) {
@@ -155,12 +180,24 @@
             }
         }
 
-        // Show success message using bootstrap modal if TempData contains success message
+        // Show SweetAlert on success after form submission
         @if (TempData["SuccessMessage"] != null)
         {
             <text>
                 $(document).ready(function () {
-                    $('#successModal').modal('show');
+                    Swal.fire({
+                        title: 'Success',
+                        text: 'Barangay Official created successfully!',
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Reset all form inputs
+                            $('#createBarangayOfficialForm')[0].reset();
+                            // Reset the image preview
+                            $('#imagePreview').attr('src', '/images/avatarPlaceholder.jpg');
+                        }
+                    });
                 });
             </text>
         }

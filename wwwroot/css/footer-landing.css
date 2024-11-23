@@ -1,0 +1,120 @@
+﻿/* Footer Section */
+.footer {
+    background-color: #ffffff; /* White background */
+    padding: 50px 0;
+    opacity: 0;
+    animation: fadeInFooter 1s ease-out forwards; /* Fade-in animation */
+    text-align: center; /* Center the text for small screens */
+}
+
+/* Footer Logo */
+.footer-logo {
+    max-width: 150px;
+    margin-bottom: 20px;
+    animation: fadeIn 1s ease-out forwards;
+}
+
+/* Social Icons Styling */
+.social-icons a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: #e9ecef;
+    border-radius: 50%;
+    margin-right: 10px;
+    color: var(--main-color);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    animation: fadeIn 1s ease-out forwards;
+}
+
+    /* Hover effect for social icons */
+    .social-icons a:hover {
+        background-color: #dee2e6;
+        transform: translateY(-5px);
+        color: var(--hover-color);
+    }
+
+/* Contact Info */
+.contact-info {
+    margin-bottom: 20px;
+    animation: fadeIn 1s ease-out forwards;
+}
+
+    .contact-info h6 {
+        font-weight: 600;
+        margin-bottom: 5px;
+    }
+
+    .contact-info p {
+        color: #333; /* Dark text for better readability */
+        margin-bottom: 5px;
+    }
+
+/* Company Info Text */
+.footer p {
+    color: #333; /* Darker text for readability */
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+/* Section titles (e.g., Contact Us) */
+h5, h6 {
+    color: var(--main-color);
+    font-weight: 800;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 767px) {
+    .footer-logo {
+        max-width: 120px;
+    }
+
+    .social-icons {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+        .social-icons a {
+            margin-right: 8px;
+            margin-bottom: 8px; /* Stack the icons */
+        }
+
+    .contact-info {
+        text-align: center;
+    }
+
+        .contact-info h6 {
+            font-size: 1.1rem;
+        }
+
+    /* Reduce padding on mobile */
+    .footer {
+        padding: 30px 0;
+    }
+}
+
+/* Fade-in effect for footer */
+@keyframes fadeInFooter {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Fade-in effect for text */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}

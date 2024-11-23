@@ -3,175 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Barangay Cabadiangan</title>
+    <title>BrgyLink - @ViewData["Title"]</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    <link rel="stylesheet" href="/css/site.css" />
     <link rel="stylesheet" href="/css/Services.css" />
     <link rel="stylesheet" href="/css/About.css" />
-    <style>
-       /* Ensure the background color covers the entire page */
-
-html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    background-color: #1a237e; /* Background color for the whole page */
-    width: 100%;
-    	
-}
-
-.container {
-    padding-left: 0;
-    padding-right: 0;
-}
-
-/* Ensure that the hero section takes up the full height of the viewport */
-.hero-section {
-    background-color: #1a237e;
-    color: white;
-    min-height: 80vh; /* Ensure the hero section has a good height */
-    padding: 50px 0;
-    width: 100%;
-}
-
-.navbar-nav .nav-link {
-    color: white !important;
-    font-weight: 500;
-    margin: 0 10px;
-}
-
-.logo-img {
-    width: 300px;
-    height: 300px;
-    object-fit: contain;
-}
-
-.brand-text {
-    font-size: 24px;
-    font-weight: bold;
-    color: white;
-    text-decoration: none;
-}
-
-.welcome-text {
-    font-size: 2.5rem;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
-.about-btn, .Service-btn{
-    background-color: white;
-    color: #1a237e;
-    padding: 10px 30px;
-    border-radius: 25px;
-    text-transform: uppercase;
-    font-weight: bold;
-    border: none;
-    transition: all 0.3s;
-    cursor: pointer;
-}
-
-/* Hover effect for About Us button */
-.about-btn:hover {
-    background-color: #e0e0e0;
-    transform: translateY(-2px);
-}
-
-/* Hover effect for Contact Us button */
-.Service-btn:hover {
-    background-color: #e0e0e0;
-    transform: translateY(-2px);
-}
-
-/* Ensure buttons are aligned side by side */
-.text-center.text-md-start {
-    display: flex;
-    justify-content: center;
-    gap: 15px; /* Space between buttons */
-}
-
-        .footer {
-            background-color: #f8f9fa;
-            padding: 50px 0;
-        }
-
-        .footer-logo {
-            max-width: 120px;
-            margin-bottom: 20px;
-        }
-
-        .social-icons a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 35px;
-            height: 35px;
-            background-color: #e9ecef;
-            border-radius: 50%;
-            margin-right: 10px;
-            color: #495057;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-            .social-icons a:hover {
-                background-color: #dee2e6;
-                transform: translateY(-2px);
-            }
-
-        .contact-info {
-            margin-bottom: 10px;
-
-        }
-
-            .contact-info h6 {
-                font-weight: 600;
-                margin-bottom: 5px;
-            }
-
-            .contact-info p {
-                color: #6c757d;
-                margin-bottom: 5px;
-            }
-
-        /* New styles for contact section */
-        .contact-section {
-            padding-left: 120px; /* Added padding to move content right */
-
-
-        }
-
-/*Transtion Index*/
-  
-    </style>
+    <link rel="stylesheet" href="/css/LandingStyle.css" />
+    <link rel="stylesheet" href="/css/footer-landing.css" />
+    <link rel="stylesheet" href="/css/home-landing.css" />
+    <link rel="stylesheet" href="/css/Chatbot.css" asp-append-version="true" />
 </head>
 <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg" style="background-color: #1a237e;">
+
+    <nav class="navbar navbar-expand-lg animated-navbar navbar-dark">
         <div class="container">
             <a class="brand-text navbar-brand" href="#">BrgyLink</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav">
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-page="/Index">HOME</a>
+                        <a class="nav-link" asp-area="" asp-page="/Index"><i class="fas fa-home me-2"></i>Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-page="/AboutUs">ABOUT</a>
+                        <a class="nav-link" asp-area="" asp-page="/AboutUs"><i class="fas fa-info-circle me-2"></i>About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-page="/Services">SERVICES</a>
+                        <a class="nav-link" asp-area="" asp-page="/Services"><i class="fas fa-concierge-bell me-2"></i>Services</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" asp-area="" asp-page="/Maps">MAP</a>
+                        <a class="nav-link" asp-area="" asp-page="/Maps"><i class="fas fa-map-marker-alt me-2"></i>Map</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">TRACK MY REQUEST</a>
+                        <a class="nav-link" asp-area="" asp-page="/TrackRequest"><i class="fas fa-search me-2"></i>Track My Request</a>
                     </li>
                     <li class="nav-item">
                         @await Html.PartialAsync("_LoginPartial")
@@ -180,21 +49,24 @@ html, body {
             </div>
         </div>
     </nav>
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="footer">
+    <footer class="footer bg-light py-5">
         <div class="container">
-            <div class="row">
+            <div class="row justify-content-center">
                 <!-- Company Info Column -->
-                <div class="col-lg-5 mb-4 mb-lg-0">
-                    <img src="/images/brgylink.png" alt="Company Logo" class="footer-logo">
-                    <p class="mb-4">At Interactive Tech Solutions, we're not just crafting software solutions; we're architecting experiences. Our journey began with a simple yet profound vision: to empower businesses of all sizes with cutting-edge technology that simplifies complexities and enhances productivity.</p>
+                <div class="col-lg-5 mb-4 mb-lg-0 text-center">
+                    <img src="/images/brgylink.png" alt="Company Logo" class="footer-logo mb-3">
+                    <p class="mb-4">
+                        A simple information and service portal designed for barangays, built using Bootstrap 5 and ASP.NET Core Razor Pages with C#. The project provides a user-friendly interface for barangay management and services..
+                    </p>
 
-                    <div class="social-icons">
+                    <div class="social-icons text-center">
                         <a href="#" class="facebook"><i class="fab fa-facebook-f"></i></a>
                         <a href="#" class="twitter"><i class="fab fa-twitter"></i></a>
                         <a href="#" class="linkedin"><i class="fab fa-linkedin-in"></i></a>
@@ -203,38 +75,68 @@ html, body {
                 </div>
 
                 <!-- Contact Info Column -->
-                <div class="col-lg-6 offset-lg-1">
-                    <h5 class="mb-4">Contact Us</h5>
-
-                    <div class="contact-info">
-                        <h6>ADDRESS:</h6>
-                        <p>Johar Town,Lahore, 54000 Pakistan</p>
+                <div class="col-lg-5 text-center">
+                    <h5 class="mb-4 text-dark">Contact Us</h5>
+                    <div class="contact-info mb-3">
+                        <h6 class="text-dark">ADDRESS:</h6>
+                        <p>Purok 5, Cabadiangan, Compostela, Cebu</p>
                     </div>
 
-                    <div class="contact-info">
-                        <h6>WHATSAPP:</h6>
-                        <p>+92 316 5544991</p>
+                    <div class="contact-info mb-3">
+                        <h6 class="text-dark">OPEN HOURS OF BARANGAY:</h6>
+                        <p>Monday to Friday (8AM - 5PM)</p>
                     </div>
 
-                    <div class="contact-info">
-                        <h6>EMAIL:</h6>
-                        <p>info@itsolz.tech<br>amnakhank22@gmail.com</p>
+                    <div class="contact-info mb-3">
+                        <h6 class="text-dark">EMAIL:</h6>
+                        <p>brgycabadiangay@gmail.com</p>
                     </div>
 
-                    <div class="contact-info">
-                        <h6>PHONE:</h6>
-                        <p>+92 317 6063309</p>
+                    <div class="contact-info mb-3">
+                        <h6 class="text-dark">DEVELOPER CONTACT:</h6>
+                        <p>
+                            <strong>Email:</strong> pyanz.jheo123@gmail.com<br>
+                            <strong>GitHub:</strong> <a href="https://github.com/Kurowatoshi" target="_blank">Kurowatoshi</a>
+                        </p>
+                        <p>
+                            <strong>Email:</strong> edrianvisagas01@gmail.com<br>
+                            <strong>GitHub:</strong> <a href="https://github.com/Chocwasd" target="_blank">Chocwasd</a>
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
     </footer>
 
+    <!-- Chatbot HTML -->
+    <button id="toggleChat" class="btn btn-primary" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000;">
+        <i class="bi bi-chat-left-text"></i> 24/7 Assistant
+    </button>
+
+    <div id="chatbox" class="card shadow" style="display: none; position: fixed; bottom: 20px; right: 20px; width: 300px;">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">BrgyLink Assistant</h5>
+            <button id="closeChat" class="btn btn-close" aria-label="Close">
+                <i class="bi bi-x-lg"></i> <!-- Close icon -->
+            </button>
+        </div>
+        <div id="messagesContainer" class="card-body" style="height: 300px; overflow-y: auto;">
+            <!-- Messages will be displayed here -->
+        </div>
+        <div class="input-group mb-2">
+            <input id="userInput" type="text" class="form-control" placeholder="Type a message..." aria-label="User's message">
+            <button class="btn btn-primary" onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.10/signalr.js"></script>
+ 
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft.signalr/5.0.11/signalr.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-
+    <script src="/js/site.js" asp-append-version="true"></script>
+    <script src="/js/chatbot-function.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

@@ -2,100 +2,93 @@
 @model BrgyLink.Pages.ManageBarangayOfficials.DeleteModel
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Delete Barangay Official";
     Layout = "~/Pages/Shared/_AdminLayout.cshtml";
 }
 
-<h1>Delete</h1>
+<h2 class="text-center mb-5 text-danger">Delete Barangay Official</h2>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>BarangayOfficial</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.BarangayOfficial.FirstName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.BarangayOfficial.FirstName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.BarangayOfficial.MiddleName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.BarangayOfficial.MiddleName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.BarangayOfficial.LastName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.BarangayOfficial.LastName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.BarangayOfficial.Birthdate)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.BarangayOfficial.Birthdate)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.BarangayOfficial.Gender)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.BarangayOfficial.Gender)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.BarangayOfficial.MaritalStatus)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.BarangayOfficial.MaritalStatus)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.BarangayOfficial.BarangayPosition)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.BarangayOfficial.BarangayPosition)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.BarangayOfficial.Committee)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.BarangayOfficial.Committee)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.BarangayOfficial.TermStart)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.BarangayOfficial.TermStart)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.BarangayOfficial.TermEnd)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.BarangayOfficial.TermEnd)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.BarangayOfficial.RankNo)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.BarangayOfficial.RankNo)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.BarangayOfficial.Status)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.BarangayOfficial.Status)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.BarangayOfficial.Photo)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.BarangayOfficial.Photo)
-        </dd>
-    </dl>
-    
-    <form method="post">
-        <input type="hidden" asp-for="BarangayOfficial.Id" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-page="./Index">Back to List</a>
-    </form>
+<div class="container">
+    <div class="row justify-content-center">
+        <!-- Image Column (Left) -->
+        <div class="col-12 col-md-4 mb-4">
+            <div class="card shadow-sm border-light rounded-3">
+                <div class="card-header bg-danger text-white text-center">Barangay Official Photo</div>
+                <div class="card-body text-center">
+                    @if (Model.BarangayOfficial.Photo != null)
+                    {
+                        <img src="data:image/jpeg;base64,@Convert.ToBase64String(Model.BarangayOfficial.Photo)" alt="Barangay Official Photo"
+                             class="img-fluid mb-3" style="max-width: 180px; max-height: 180px; border-radius: 50%; object-fit: cover;" />
+                    }
+                    else
+                    {
+                        <img src="/images/avatarPlaceholder.jpg" alt="Barangay Official Image Placeholder"
+                             class="img-fluid mb-3" style="max-width: 180px; max-height: 180px; border-radius: 50%; object-fit: cover;" />
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Barangay Official Details Column (Right) -->
+        <div class="col-12 col-md-8">
+            <div class="card shadow-sm border-light rounded-3 mb-4">
+                <div class="card-header bg-danger text-white">Barangay Official Details</div>
+                <div class="card-body">
+                    <h4>Are you sure you want to delete this Barangay Official?</h4>
+                    <hr />
+                    <dl class="row">
+                        <dt class="col-sm-4">First Name:</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.BarangayOfficial.FirstName)</dd>
+
+                        <dt class="col-sm-4">Middle Name:</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.BarangayOfficial.MiddleName)</dd>
+
+                        <dt class="col-sm-4">Last Name:</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.BarangayOfficial.LastName)</dd>
+
+                        <dt class="col-sm-4">Birthdate:</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.BarangayOfficial.Birthdate)</dd>
+
+                        <dt class="col-sm-4">Gender:</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.BarangayOfficial.Gender)</dd>
+
+                        <dt class="col-sm-4">Marital Status:</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.BarangayOfficial.MaritalStatus)</dd>
+
+                        <dt class="col-sm-4">Barangay Position:</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.BarangayOfficial.BarangayPosition)</dd>
+
+                        <dt class="col-sm-4">Committee:</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.BarangayOfficial.Committee)</dd>
+
+                        <dt class="col-sm-4">Term Start:</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.BarangayOfficial.TermStart)</dd>
+
+                        <dt class="col-sm-4">Term End:</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.BarangayOfficial.TermEnd)</dd>
+
+                        <dt class="col-sm-4">Rank Number:</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.BarangayOfficial.RankNo)</dd>
+
+                        <dt class="col-sm-4">Status:</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.BarangayOfficial.Status)</dd>
+                    </dl>
+                </div>
+            </div>
+
+            <!-- Delete Confirmation Form -->
+            <div class="card shadow-sm border-light rounded-3">
+                <div class="card-header bg-danger text-white">Delete Confirmation</div>
+                <div class="card-body text-center">
+                    <form method="post">
+                        <input type="hidden" asp-for="BarangayOfficial.Id" />
+                        <button type="submit" class="btn btn-danger btn-lg mb-3">Delete</button>
+                        <div>
+                            <a asp-page="./Index" class="btn btn-outline-secondary btn-lg">Back to List</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

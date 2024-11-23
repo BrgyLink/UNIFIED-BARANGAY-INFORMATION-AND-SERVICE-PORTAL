@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BrgyLink.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241119071109_UpdateOfficials")]
-    partial class UpdateOfficials
+    [Migration("20241122012306_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -77,9 +77,6 @@ namespace BrgyLink.Migrations
                     b.Property<int?>("RankNo")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ResidentID")
-                        .HasColumnType("int");
-
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasMaxLength(20)
@@ -94,8 +91,6 @@ namespace BrgyLink.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ResidentID");
 
                     b.ToTable("BarangayOfficials");
                 });
@@ -118,8 +113,10 @@ namespace BrgyLink.Migrations
 
                     b.Property<string>("CivilStatus")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasColumnType("nvarchar(20)")
+                        .HasDefaultValue("Single");
 
                     b.Property<string>("ContactNumber")
                         .IsRequired()
@@ -127,7 +124,9 @@ namespace BrgyLink.Migrations
                         .HasColumnType("nvarchar(20)");
 
                     b.Property<DateTime>("DateRegistered")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETDATE()");
 
                     b.Property<string>("Email")
                         .HasMaxLength(100)
@@ -172,8 +171,10 @@ namespace BrgyLink.Migrations
 
                     b.Property<string>("Nationality")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasDefaultValue("Filipino");
 
                     b.Property<string>("Occupation")
                         .HasMaxLength(100)
@@ -181,13 +182,17 @@ namespace BrgyLink.Migrations
 
                     b.Property<string>("ResidencyStatus")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasColumnType("nvarchar(20)")
+                        .HasDefaultValue("Resident");
 
                     b.Property<string>("VoterStatus")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasColumnType("nvarchar(20)")
+                        .HasDefaultValue("Non-voter");
 
                     b.HasKey("ResidentID");
 
@@ -392,13 +397,6 @@ namespace BrgyLink.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("BarangayOfficial", b =>
-                {
-                    b.HasOne("BrgyLink.Models.Resident", null)
-                        .WithMany("BarangayOfficials")
-                        .HasForeignKey("ResidentID");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -448,11 +446,6 @@ namespace BrgyLink.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("BrgyLink.Models.Resident", b =>
-                {
-                    b.Navigation("BarangayOfficials");
                 });
 #pragma warning restore 612, 618
         }

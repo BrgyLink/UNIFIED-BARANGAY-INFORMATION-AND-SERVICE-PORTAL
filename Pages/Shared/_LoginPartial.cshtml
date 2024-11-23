@@ -6,32 +6,50 @@
 <ul class="navbar-nav">
     @if (SignInManager.IsSignedIn(User))
     {
-        @if (User.IsInRole("Admin"))
-        {
-            <li class="nav-item">
-                <a class="nav-link text-dark" asp-area="" asp-page="/AdminDashboard">DASHBOARD</a>
-            </li>
-  
-        }
-        @if (User.IsInRole("User"))
-        {
-            <li class="nav-item">
-                <a class="nav-link text-dark" asp-area="" asp-page="/Resident/RequestCertificate">Request Certificate</a>
-            </li>
-        }
+        <!-- Dropdown for logged-in users -->
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fas fa-user me-2"></i>@User.Identity.Name <!-- Display user name with user icon -->
+            </a>
 
-        <li class="nav-item">
-            <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="/">
-                <button type="submit" class="nav-link">LOGOUT</button>
-
-            </form>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                @if (User.IsInRole("Admin"))
+                {
+                    <li>
+                        <a class="dropdown-item" asp-area="" asp-page="/AdminDashboard">
+                            <i class="fas fa-tachometer-alt me-2"></i>Dashboard
+                        </a>
+                    </li>
+                }
+                @if (User.IsInRole("User"))
+                {
+                    <li>
+                        <a class="dropdown-item" asp-area="" asp-page="/Resident/RequestCertificate">
+                            <i class="fas fa-file-signature me-2"></i>Request Certificate
+                        </a>
+                    </li>
+                }
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
+                <li>
+                    <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="/">
+                        <button type="submit" class="dropdown-item">
+                            <i class="fas fa-sign-out-alt me-2"></i>Logout
+                        </button>
+                    </form>
+                </li>
+            </ul>
         </li>
     }
     else
     {
-       
+        <!-- Link for Login when user is not signed in -->
         <li class="nav-item">
-            <a class="nav-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login">LOGIN</a>
+            <a class="nav-link" id="login" asp-area="Identity" asp-page="/Account/Login">
+                <i class="fas fa-sign-in-alt me-2"></i>Login
+            </a>
         </li>
     }
 </ul>
+

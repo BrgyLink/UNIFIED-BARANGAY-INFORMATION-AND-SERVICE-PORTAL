@@ -118,7 +118,8 @@ namespace BrgyLink.Pages.ManageBarangayOfficials
 
                 // Set success message and redirect to the list page
                 TempData["SuccessMessage"] = "Barangay Official updated successfully!";
-                return RedirectToPage("./Index");
+                //return RedirectToPage("./Index");
+                return Page();
             }
             catch (Exception ex)
             {

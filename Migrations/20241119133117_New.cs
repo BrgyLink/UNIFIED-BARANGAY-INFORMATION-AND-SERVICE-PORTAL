@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BrgyLink.Migrations
 {
     /// <inheritdoc />
-    public partial class UpdateOfficials : Migration
+    public partial class New : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -51,6 +51,31 @@ namespace BrgyLink.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "BarangayOfficials",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FirstName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    MiddleName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Birthdate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Gender = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
+                    MaritalStatus = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    BarangayPosition = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Committee = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    TermStart = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    TermEnd = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    RankNo = table.Column<int>(type: "int", nullable: true),
+                    Status = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    Photo = table.Column<byte[]>(type: "varbinary(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BarangayOfficials", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Residents",
                 columns: table => new
                 {
@@ -64,14 +89,14 @@ namespace BrgyLink.Migrations
                     Email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     BirthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Gender = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
-                    ResidencyStatus = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    ResidencyStatus = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false, defaultValue: "Resident"),
                     IsSeniorCitizen = table.Column<bool>(type: "bit", nullable: false),
                     IsPWD = table.Column<bool>(type: "bit", nullable: false),
-                    Nationality = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    CivilStatus = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    Nationality = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false, defaultValue: "Filipino"),
+                    CivilStatus = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false, defaultValue: "Single"),
                     Occupation = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    VoterStatus = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    DateRegistered = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    VoterStatus = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false, defaultValue: "Non-voter"),
+                    DateRegistered = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETDATE()"),
                     EmergencyContact = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     ImageData = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     HealthConditions = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true)
@@ -187,37 +212,6 @@ namespace BrgyLink.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "BarangayOfficials",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    FirstName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    MiddleName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Birthdate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Gender = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
-                    MaritalStatus = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    BarangayPosition = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Committee = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    TermStart = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    TermEnd = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    RankNo = table.Column<int>(type: "int", nullable: true),
-                    Status = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    Photo = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
-                    ResidentID = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_BarangayOfficials", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_BarangayOfficials_Residents_ResidentID",
-                        column: x => x.ResidentID,
-                        principalTable: "Residents",
-                        principalColumn: "ResidentID");
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -256,11 +250,6 @@ namespace BrgyLink.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_BarangayOfficials_ResidentID",
-                table: "BarangayOfficials",
-                column: "ResidentID");
         }
 
         /// <inheritdoc />
@@ -285,13 +274,13 @@ namespace BrgyLink.Migrations
                 name: "BarangayOfficials");
 
             migrationBuilder.DropTable(
+                name: "Residents");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "Residents");
         }
     }
 }

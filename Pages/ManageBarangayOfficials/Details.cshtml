@@ -2,97 +2,113 @@
 @model BrgyLink.Pages.ManageBarangayOfficials.DetailsModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Barangay Official Details";
     Layout = "~/Pages/Shared/_AdminLayout.cshtml";
 }
 
-<h1>Details</h1>
+<div class="container mt-5">
 
-<div>
-    <h4>BarangayOfficial</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.BarangayOfficial.FirstName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.BarangayOfficial.FirstName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.BarangayOfficial.MiddleName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.BarangayOfficial.MiddleName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.BarangayOfficial.LastName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.BarangayOfficial.LastName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.BarangayOfficial.Birthdate)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.BarangayOfficial.Birthdate)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.BarangayOfficial.Gender)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.BarangayOfficial.Gender)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.BarangayOfficial.MaritalStatus)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.BarangayOfficial.MaritalStatus)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.BarangayOfficial.BarangayPosition)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.BarangayOfficial.BarangayPosition)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.BarangayOfficial.Committee)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.BarangayOfficial.Committee)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.BarangayOfficial.TermStart)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.BarangayOfficial.TermStart)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.BarangayOfficial.TermEnd)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.BarangayOfficial.TermEnd)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.BarangayOfficial.RankNo)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.BarangayOfficial.RankNo)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.BarangayOfficial.Status)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.BarangayOfficial.Status)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.BarangayOfficial.Photo)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.BarangayOfficial.Photo)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-page="./Edit" asp-route-id="@Model.BarangayOfficial?.Id">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
+    <!-- Barangay Official Info (Profile Image & Personal Information) -->
+    <div class="row mb-4">
+        <!-- Profile Image Card -->
+        <div class="col-md-3 text-center">
+            <div class="card shadow-sm border-light rounded-3">
+                <div class="card-body">
+                    <h5 class="card-title mb-3">Profile</h5>
+                    @if (Model.BarangayOfficial.Photo != null)
+                    {
+                        <img src="data:image/jpeg;base64,@Convert.ToBase64String(@Model.BarangayOfficial.Photo)" class="img-fluid rounded-circle shadow-lg" alt="Barangay Official Photo" style="width: 180px; height: 180px; object-fit: cover;" />
+                    }
+                    else
+                    {
+                        <img src="/images/avatarPlaceholder.jpg" class="img-fluid rounded-circle shadow-lg" alt="Barangay Official Photo" style="width: 180px; height: 180px;" />
+                    }
+                    <h5 class="mt-3 font-weight-bold">@Model.BarangayOfficial.FirstName @Model.BarangayOfficial.LastName</h5>
+                </div>
+            </div>
+        </div>
+
+        <!-- Personal Information Card -->
+        <div class="col-md-9">
+            <div class="card mb-4 shadow-sm border-light rounded-3">
+                <div class="card-body">
+                    <h5 class="card-title">Personal Information</h5>
+                    <dl class="row">
+                        <dt class="col-sm-4">First Name</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.BarangayOfficial.FirstName)</dd>
+
+                        <dt class="col-sm-4">Last Name</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.BarangayOfficial.LastName)</dd>
+
+                        <dt class="col-sm-4">Middle Name</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.BarangayOfficial.MiddleName)</dd>
+
+                        <dt class="col-sm-4">Birthdate</dt>
+                        <dd class="col-sm-8">@Model.BarangayOfficial.Birthdate?.ToString("MMMM dd, yyyy")</dd>
+
+                        <dt class="col-sm-4">Gender</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.BarangayOfficial.Gender)</dd>
+
+                        <dt class="col-sm-4">Marital Status</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.BarangayOfficial.MaritalStatus)</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Position and Term Information (Side-by-Side with Equal Height) -->
+    <div class="row mb-4">
+        <!-- Position Information Card -->
+        <div class="col-md-6">
+            <div class="card mb-4 shadow-sm border-light rounded-3">
+                <div class="card-body">
+                    <h5 class="card-title">Position Information</h5>
+                    <dl class="row">
+                        <dt class="col-sm-4">Position</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.BarangayOfficial.BarangayPosition)</dd>
+
+                        <dt class="col-sm-4">Committee</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.BarangayOfficial.Committee)</dd>
+
+                        <dt class="col-sm-4">Rank No</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.BarangayOfficial.RankNo)</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+
+        <!-- Term Information Card -->
+        <div class="col-md-6">
+            <div class="card mb-4 shadow-sm border-light rounded-3">
+                <div class="card-body">
+                    <h5 class="card-title">Term Information</h5>
+                    <dl class="row">
+                        <dt class="col-sm-4">Term Start</dt>
+                        <dd class="col-sm-8">@Model.BarangayOfficial.TermStart?.ToString("MMMM dd, yyyy")</dd>
+
+                        <dt class="col-sm-4">Term End</dt>
+                        <dd class="col-sm-8">@Model.BarangayOfficial.TermEnd?.ToString("MMMM dd, yyyy")</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Status Card -->
+    <div class="card mb-4 shadow-sm border-light rounded-3">
+        <div class="card-body">
+            <h5 class="card-title">Status</h5>
+            <dl class="row">
+                <dt class="col-sm-4">Status</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.BarangayOfficial.Status)</dd>
+            </dl>
+        </div>
+    </div>
+
+    <!-- Action Links -->
+    <div class="mt-4 text-center">
+        <a class="btn btn-warning btn-lg rounded-pill px-4" asp-page="./Edit" asp-route-id="@Model.BarangayOfficial?.Id">Edit</a>
+        <a class="btn btn-secondary btn-lg rounded-pill px-4" asp-page="./Index">Back to List</a>
+    </div>
 </div>
