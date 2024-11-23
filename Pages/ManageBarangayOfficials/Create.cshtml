@@ -7,7 +7,8 @@
 }
 
 <h2 class="text-center mb-5 text-primary">Create Barangay Official</h2>
-
+<form method="post" enctype="multipart/form-data" id="createBarangayOfficialForm">
+    <div asp-validation-summary="ModelOnly" class="text-danger mb-4"></div>
 <div class="container">
     <div class="row justify-content-center">
         <!-- Image Upload Column (Left) -->
@@ -16,11 +17,11 @@
                 <div class="card-header bg-primary text-white text-center">Image Upload</div>
                 <div class="card-body text-center">
                     <img id="imagePreview" src="/images/avatarPlaceholder.jpg" alt="Barangay Official Image Preview"
-                    class="img-fluid mb-3" style="max-width: 180px; max-height: 180px; border-radius: 50%; object-fit: cover;" />
+                         class="img-fluid mb-3" style="max-width: 180px; max-height: 180px; border-radius: 50%; object-fit: cover;" />
                     <div class="mb-3">
                         <label for="ImageFile" class="form-label">Upload Image</label>
                         <input type="file" class="form-control form-control-lg" asp-for="BarangayOfficial.ImageFile"
-                        accept=".jpg,.jpeg,.png" onchange="previewImage(this)" id="ImageFile" />
+                               accept=".jpg,.jpeg,.png" onchange="previewImage(this)" id="ImageFile" />
                         <span asp-validation-for="BarangayOfficial.ImageFile" class="text-danger"></span>
                         <small class="form-text text-muted">Maximum file size: 5MB. Allowed formats: JPG, JPEG, PNG</small>
                     </div>
@@ -30,8 +31,7 @@
 
         <!-- Form Cards Column (Right) -->
         <div class="col-12 col-md-8">
-            <form method="post" enctype="multipart/form-data" id="createBarangayOfficialForm">
-                <div asp-validation-summary="ModelOnly" class="text-danger mb-4"></div>
+           
 
                 <!-- Name Section -->
                 <div class="card mb-4 shadow-sm border-light rounded-3">
@@ -53,6 +53,7 @@
                             <label for="MiddleName" class="form-label">Middle Name</label>
                             <input type="text" class="form-control form-control-lg" placeholder="Enter Middle Name" asp-for="BarangayOfficial.MiddleName" id="MiddleName" />
                             <span asp-validation-for="BarangayOfficial.MiddleName" class="text-danger"></span>
+                            <small class="form-text text-muted">If no Middle Name put "None"</small>
                         </div>
                     </div>
                 </div>
@@ -146,16 +147,17 @@
                 <div class="text-end mb-5">
                     <button type="submit" class="btn btn-primary btn-lg">Save Barangay Official</button>
                 </div>
-            </form>
+          
         </div>
     </div>
+      </form>
 </div>
 
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
-    
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
@@ -182,21 +184,21 @@
         @if (TempData["SuccessMessage"] != null)
         {
             <text>
-                    $(document).ready(function () {
-                        Swal.fire({
-                            title: 'Success',
-                            text: 'Barangay Official created successfully!',
-                            icon: 'success',
-                            confirmButtonText: 'OK'
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                // Reset all form inputs
-                                $('#createBarangayOfficialForm')[0].reset();
-                                // Reset the image preview
-                                $('#imagePreview').attr('src', '/images/avatarPlaceholder.jpg');
-                            }
-                        });
+                $(document).ready(function () {
+                    Swal.fire({
+                        title: 'Success',
+                        text: 'Barangay Official created successfully!',
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Reset all form inputs
+                            $('#createBarangayOfficialForm')[0].reset();
+                            // Reset the image preview
+                            $('#imagePreview').attr('src', '/images/avatarPlaceholder.jpg');
+                        }
                     });
+                });
             </text>
         }
     </script>
