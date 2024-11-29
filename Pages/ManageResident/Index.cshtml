@@ -36,6 +36,7 @@
     <thead>
         <tr>
             <th>#</th>
+            <th>Profile</th>
             <th>Name <i class="fa fa-sort"></i></th>
             <th>Address</th>
             <th>Age <i class="fa fa-sort"></i></th>
@@ -50,6 +51,16 @@
             var resident = Model.Resident[i];
             <tr>
                 <td>@((Model.PageIndex - 1) * 10 + i + 1)</td>
+                <td class="d-flex justify-content-center align-items-center">
+                    @if (resident.ImageData != null && resident.ImageData.Length > 0)
+                    {
+                        <img src="data:image/jpeg;base64,@Convert.ToBase64String(resident.ImageData)" class="img-fluid rounded-circle" alt="BarangayOfficial Image" height="75" width="75" />
+                    }
+                    else
+                    {
+                        <img src="/images/avatarPlaceholder.jpg" class="img-fluid rounded-circle" alt="BarangayOfficial Image" height="75" width="75" />
+                    }
+                </td>
                 <td>@resident.FirstName @resident.LastName</td>
                 <td>@resident.Address</td>
                 <td>@resident.Age</td>
