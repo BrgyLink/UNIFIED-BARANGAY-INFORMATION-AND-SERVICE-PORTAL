@@ -6,33 +6,44 @@
 }
 
 <link rel="stylesheet" href="~/css/ResidentsPage/ResidentManage.css" asp-append-version="true" />
+<!-- Table Title -->
+<div class="dark-mode-adapt mb-4">
+    <div class="card shadow-sm border-0">
+        <div class="card-body d-flex justify-content-between align-items-center">
+            <!-- Section Title -->
+            <div>
+                <h3 class="card-title mb-0">Residents <b>Management</b></h3>
+                <p class="text-muted mb-0">Manage your residents efficiently and effortlessly.</p>
+            </div>
 
-<div class="table-title">
-    <div class="row">
-        <div class="col-sm-5">
-            <h2>Residents <b>Management</b></h2>
-        </div>
-        <div class="col-sm-7">
-            <a asp-area="" asp-page="/ManageResident/Create" class="btn btn-secondary">
-                <i class="material-icons"></i> <span>Add New Resident</span>
-            </a>
-            <a asp-page="/ManageResident/Index" asp-handler="ExportToExcel" class="btn btn-secondary">
-                <i class="material-icons"></i> <span>Export to Excel</span>
-            </a>
+            <!-- Button Group for actions -->
+            <div class="btn-group">
+                <!-- Add New Resident Button -->
+                <a asp-area="" asp-page="/ManageResident/Create" class="btn btn-outline-primary d-flex align-items-center px-3 shadow-sm rounded-3 me-3">
+                    <i class="bi bi-person-plus"></i>
+                    <span class="ms-2">Add New Resident</span>
+                </a>
+                <!-- Export to Excel Button -->
+                <a asp-page="/ManageResident/Index" asp-handler="ExportToExcel" class="btn btn-outline-success d-flex align-items-center px-3 shadow-sm rounded-3">
+                    <i class="bi bi-file-earmark-spreadsheet"></i>
+                    <span class="ms-2">Export to Excel</span>
+                </a>
+            </div>
         </div>
     </div>
 </div>
 
+
 <!-- Search Form -->
 <form method="get">
-    <div class="input-group mb-3">
+    <div class="input-group mb-3 dark-mode-adapt">
         <input type="text" name="SearchString" value="@Model.SearchString" class="form-control" placeholder="Search residents...">
-        <button class="btn btn-primary" type="submit">Search</button>
+        <button class="btn btn-primary dark-mode-adapt" type="submit">Search</button>
     </div>
 </form>
 
 <!-- Residents Table -->
-<table class="table table-striped table-hover table-bordered">
+<table class="table table-striped table-hover table-bordered dark-mode-adapt">
     <thead>
         <tr>
             <th>#</th>
@@ -61,16 +72,16 @@
                         <img src="/images/avatarPlaceholder.jpg" class="img-fluid rounded-circle" alt="BarangayOfficial Image" height="75" width="75" />
                     }
                 </td>
-                <td>@resident.FirstName @resident.LastName</td>
+                <td class="fs-5 fw-bold">@resident.FirstName @resident.LastName</td>
                 <td>@resident.Address</td>
                 <td>@resident.Age</td>
                 <td>@resident.Gender</td>
                 <td>@resident.Nationality</td>
                 <td>
                     <div class="action-buttons d-flex justify-content-center">
-                        <a asp-page="./Details" asp-route-id="@resident.ResidentID" class="view" title="View" data-bs-toggle="tooltip"><i class="material-icons">visibility</i></a>
-                        <a asp-page="./Edit" asp-route-id="@resident.ResidentID" class="edit" title="Edit"><i class="material-icons">edit</i></a>
-                        <a asp-page="./Delete" asp-route-id="@resident.ResidentID" class="delete" title="Delete"><i class="material-icons">delete</i></a>
+                        <a asp-page="./Details" asp-route-id="@resident.ResidentID" class="view" title="View" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="View"><i class="material-icons">visibility</i></a>
+                        <a asp-page="./Edit" asp-route-id="@resident.ResidentID" class="edit" title="Edit" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Edit"><i class="material-icons">edit</i></a>
+                        <a asp-page="./Delete" asp-route-id="@resident.ResidentID" class="delete" title="Delete" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Delete"><i class="material-icons">delete</i></a>
                     </div>
                 </td>
             </tr>
@@ -95,7 +106,7 @@
         else
         {
             <li class="page-item disabled">
-                <a href="#" class="page-link">Previous</a>
+                <span class="page-link">Previous</span>
             </li>
         }
 
@@ -117,8 +128,16 @@
         else
         {
             <li class="page-item disabled">
-                <a href="#" class="page-link">Next</a>
+                <span class="page-link">Next</span>
             </li>
         }
     </ul>
 </div>
+
+@section Scripts {
+    <script>
+        // Initialize tooltips (Bootstrap 5)
+        var tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+        var tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+    </script>
+}

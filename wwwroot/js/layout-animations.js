@@ -11,14 +11,15 @@ const profileButton = document.querySelector('.btn-profile');
 
 // Toggle dark mode
 darkModeToggle.addEventListener('click', function () {
+    // Toggle the dark mode class on the relevant elements
     body.classList.toggle('bg-dark');
     sidebar.classList.toggle('bg-dark');
-    sidebarHeader.classList.toggle('bg-dark'); // Add this line to toggle dark mode for sidebar header
+    sidebarHeader.classList.toggle('bg-dark');
     header.classList.toggle('bg-dark');
     navLinks.forEach(link => link.classList.toggle('bg-dark'));
     profileMenu.classList.toggle('bg-dark');
     profileButton.classList.toggle('bg-dark');
-    profileMenuItems.forEach(item => item.classList.toggle('bg-dark')); // Toggle dark mode for each dropdown item
+    profileMenuItems.forEach(item => item.classList.toggle('bg-dark'));
 
     // Toggle icon between moon and sun
     const darkModeIcon = darkModeToggle.querySelector('i');
@@ -49,20 +50,18 @@ sidebarToggler.addEventListener('click', function () {
     }
 });
 
-// Initialize Bootstrap dropdown for profile menu
+// Dropdown animation handling (for the profile dropdown)
+const profileDropdown = document.getElementById('profileDropdown');
+const dropdownMenu = document.querySelector('.dropdown-menu');
+profileDropdown.addEventListener('click', function () {
+    dropdownMenu.classList.toggle('show');
+});
+
+// Initialize Bootstrap dropdown for toggling (needed for Bootstrap JS components)
+const bsDropdown = new bootstrap.Dropdown(profileDropdown);
+
+// On page load, restore dark mode and sidebar state
 document.addEventListener('DOMContentLoaded', function () {
-    const profileDropdown = document.getElementById('profileDropdown');
-
-    // Bootstrap dropdown initialization for profile menu
-    if (profileDropdown) {
-        try {
-            new bootstrap.Dropdown(profileDropdown);  // Initialize dropdown using Bootstrap's API
-        } catch (error) {
-            console.error('Error initializing Bootstrap Dropdown:', error);
-        }
-    }
-
-    // On page load, restore dark mode and sidebar state
     // Temporarily remove transitions to prevent animations during page load
     sidebar.style.transition = 'none';
     headerContent.style.transition = 'none';
