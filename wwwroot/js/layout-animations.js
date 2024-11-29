@@ -49,15 +49,20 @@ sidebarToggler.addEventListener('click', function () {
     }
 });
 
-// Dropdown animation handling
-const profileDropdown = document.getElementById('profileDropdown');
-const dropdownMenu = document.querySelector('.dropdown-menu');
-profileDropdown.addEventListener('click', function () {
-    dropdownMenu.classList.toggle('show');
-});
-
-// On page load, restore dark mode and sidebar state
+// Initialize Bootstrap dropdown for profile menu
 document.addEventListener('DOMContentLoaded', function () {
+    const profileDropdown = document.getElementById('profileDropdown');
+
+    // Bootstrap dropdown initialization for profile menu
+    if (profileDropdown) {
+        try {
+            new bootstrap.Dropdown(profileDropdown);  // Initialize dropdown using Bootstrap's API
+        } catch (error) {
+            console.error('Error initializing Bootstrap Dropdown:', error);
+        }
+    }
+
+    // On page load, restore dark mode and sidebar state
     // Temporarily remove transitions to prevent animations during page load
     sidebar.style.transition = 'none';
     headerContent.style.transition = 'none';

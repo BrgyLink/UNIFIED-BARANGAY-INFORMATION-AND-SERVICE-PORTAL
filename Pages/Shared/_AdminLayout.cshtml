@@ -61,27 +61,29 @@
             <div class="d-flex align-items-center">
                 <!-- Align items for the right section -->
                 <div class="dropdown me-3">
-                    <!-- Dropdown for profile -->
-                    <button class="btn btn-profile dropdown-toggle" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="border: none;">
-                        <a style="color: white;" id="manage" class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+                    <button class="btn-profile dropdown-toggle" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="border: none;">
+                        Hello @UserManager.GetUserName(User)!
                     </button>
 
-                    <ul class="dropdown-menu" aria-labelledby="profileDropdown">
-                        <li><a class="dropdown-item" href="#">Manage Account</a></li>
-                        
-                        <li class="nav-item">
+                    <ul class="dropdown-menu" aria-labelledby="profileDropdown" id="profileDropdown">
+                        <li>
                             <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="/">
-                                <button type="submit" class="btn">Logout</button>
+                                <a class="dropdown-item">Logout</a>
                             </form>
-                            <a class="btn btn" asp-page="/Index">Landing Page</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" asp-page="/Index">Back to home</a>
                         </li>
                     </ul>
+
                 </div>
+
                 <button id="darkModeToggle" class="toggler-button">
                     <i class="bi bi-moon"></i> <!-- Dark mode toggler icon -->
                 </button>
             </div>
         </header>
+
 
         <div class="content">
             <!-- Content area -->
