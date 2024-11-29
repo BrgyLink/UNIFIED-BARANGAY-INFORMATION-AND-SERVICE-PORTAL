@@ -7,7 +7,7 @@
 }
 
 <h2 class="text-center mb-5 text-primary">Edit Barangay Official</h2>
-<form method="post" enctype="multipart/form-data">
+<form method="post" enctype="multipart/form-data" >
     <div asp-validation-summary="ModelOnly" class="text-danger mb-4"></div>
     <input type="hidden" asp-for="BarangayOfficial.Id" />
 <div class="container">
@@ -167,23 +167,16 @@
 </div>
 
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-
-    }
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         function previewImage(input) {
             if (input.files && input.files[0]) {
                 const file = input.files[0];
-
-                // Validate file size (5MB)
                 if (file.size > 5 * 1024 * 1024) {
                     alert('File size cannot exceed 5MB');
                     input.value = '';
                     return;
                 }
-
                 const reader = new FileReader();
                 reader.onload = function (e) {
                     document.getElementById('imagePreview').src = e.target.result;
@@ -192,25 +185,23 @@
             }
         }
 
-                 // Show SweetAlert on success after form submission
+        @* Here is the corrected handling of the SweetAlert message and redirection *@
         @if (TempData["SuccessMessage"] != null)
         {
             <text>
-                         $(document).ready(function () {
-                             Swal.fire({
-                                 title: 'Success',
-                                 text: 'Barangay Official updated successfully!',
-                                 icon: 'success',
-                                 confirmButtonText: 'OK'
-                             }).then((result) => {
-                                 if (result.isConfirmed) {
-                                     // Reset all form inputs
-                                     $('#createBarangayOfficialForm')[0].reset();
-                                     // Reset the image preview
-                                     $('#imagePreview').attr('src', '/images/avatarPlaceholder.jpg');
-                                 }
-                             });
-                         });
+                $(document).ready(function () {
+                    Swal.fire({
+                        title: 'Success',
+                        text: 'Barangay Official Updated successfully!',
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Redirect to the Manage Barangay Officials Index page
+                            window.location.href = '/ManageBarangayOfficials/Index';
+                        }
+                    });
+                });
             </text>
         }
     </script>

@@ -177,8 +177,6 @@
 
 
 
-
-
 @section Scripts {
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
@@ -198,6 +196,7 @@
             }
         }
 
+        @* Here is the corrected handling of the SweetAlert message and redirection *@
         @if (TempData["SuccessMessage"] != null)
         {
             <text>
@@ -209,8 +208,8 @@
                         confirmButtonText: 'OK'
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            $('#createResidentForm')[0].reset();
-                            $('#imagePreview').attr('src', '/images/avatarPlaceholder.jpg');
+                            // Redirect to the Manage Barangay Officials Index page
+                            window.location.href = '/ManageResident/Index';
                         }
                     });
                 });

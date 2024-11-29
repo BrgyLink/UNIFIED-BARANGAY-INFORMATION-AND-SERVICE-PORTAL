@@ -165,9 +165,6 @@
 </form>
 
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         function previewImage(input) {
@@ -186,18 +183,20 @@
             }
         }
 
+        @* Success message and redirection handling *@
         @if (TempData["SuccessMessage"] != null)
         {
             <text>
                 $(document).ready(function () {
                     Swal.fire({
                         title: 'Success',
-                        text: 'Resident updated successfully!',
+                        text: 'Resident Updated successfully!',
                         icon: 'success',
                         confirmButtonText: 'OK'
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            $('#imagePreview').attr('src', '/images/avatarPlaceholder.jpg');
+                            // Redirect to the Manage Barangay Officials Index page
+                            window.location.href = '/ManageResident/Index';
                         }
                     });
                 });

@@ -91,7 +91,10 @@ namespace BrgyLink.Pages.ManageResident
                 }
             }
 
-            return RedirectToPage("/ManageResident/Index");
+            // Set success message and redirect to the list page
+            TempData["SuccessMessage"] = "Barangay Official updated successfully!";
+            //return RedirectToPage("./Index");
+            return Page();
 
         }
 
