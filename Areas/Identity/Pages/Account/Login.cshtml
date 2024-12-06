@@ -33,7 +33,7 @@
 
     .form-control {
         border: 1px solid #dee2e6;
-        padding: 0.5rem 0.75rem;
+        padding: 0.5rem 1.0rem;
         font-size: 14px;
     }
 
@@ -148,9 +148,6 @@
                                 <input asp-for="Input.Password" class="form-control"
                                        type="password"
                                        placeholder="Password" />
-                                <span class="input-group-text" style="background-color: transparent; cursor: pointer;" id="togglePassword">
-                                    <i class="bi bi-eye-slash"></i>
-                                </span>
                             </div>
                             <span asp-validation-for="Input.Password" class="text-danger small"></span>
                         </div>

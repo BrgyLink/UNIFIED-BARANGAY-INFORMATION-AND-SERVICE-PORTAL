@@ -46,7 +46,6 @@ namespace BrgyLink.Pages.ManageBarangayOfficials
             BarangayOfficial = barangayofficial;
             return Page();
         }
-
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -56,7 +55,7 @@ namespace BrgyLink.Pages.ManageBarangayOfficials
 
             try
             {
-                // Handle image upload if a new image is provided
+                // If a new image is uploaded, process it
                 if (ImageFile != null && ImageFile.Length > 0)
                 {
                     // Validate file type (only jpg, jpeg, and png)
@@ -111,14 +110,14 @@ namespace BrgyLink.Pages.ManageBarangayOfficials
                         }
                     }
                 }
+                // If no new image is uploaded, retain the existing photo (no need to update BarangayOfficial.Photo)
 
                 // Attach the modified BarangayOfficial to the context and save changes
                 _context.Attach(BarangayOfficial).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
 
-                // Set success message and redirect to the list page
+                // Set success message and return the page
                 TempData["SuccessMessage"] = "Barangay Official updated successfully!";
-                //return RedirectToPage("./Index");
                 return Page();
             }
             catch (Exception ex)
@@ -129,6 +128,8 @@ namespace BrgyLink.Pages.ManageBarangayOfficials
                 return Page();
             }
         }
+
+
 
     }
 }

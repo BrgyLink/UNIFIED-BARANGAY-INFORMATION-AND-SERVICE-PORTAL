@@ -55,7 +55,7 @@
                 <div class="card" style="background-color: #F8F9FA; border: 1px solid #ddd;">
                     @if (official.Photo != null && official.Photo.Length > 0)
                     {
-                        <img src="data:image/jpeg;base64,@Convert.ToBase64String(official.Photo)" class="card-img-top d-block mx-auto mt-2" alt="@official.FirstName @official.LastName" style="max-height: 200px; object-fit: cover;">
+                        <img src="data:image/jpeg;base64,@Convert.ToBase64String(official.Photo)" class="card-img-top d-block mx-auto mt-2" alt="@official.FirstName @official.LastName" style="max-height: 200px; object-fit:contain;">
 
                     }
                     else
