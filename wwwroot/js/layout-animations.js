@@ -44,11 +44,11 @@ sidebarToggler.addEventListener('click', function () {
     // Check if the sidebar is hidden
     if (sidebar.classList.contains('hidden')) {
         headerContent.style.marginLeft = '-180px'; // Move content left when sidebar is hidden
-        localStorage.setItem('logoText', 'true'); //save logo state in localstorage
+        logoText.style.display = 'none';
         localStorage.setItem('sidebarHidden', 'true'); // Save sidebar state in localStorage
     } else {
         headerContent.style.marginLeft = '0'; // Reset margin when sidebar is visible
-        localStorage.setItem('logoText', 'false'); //save logo state in localstorage
+        logoText.style.display = 'block';
         localStorage.setItem('sidebarHidden', 'false'); // Save sidebar state in localStorage
     }
 });
@@ -66,8 +66,8 @@ const bsDropdown = new bootstrap.Dropdown(profileDropdown);
 // On page load, restore dark mode and sidebar state
 document.addEventListener('DOMContentLoaded', function () {
     // Temporarily remove transitions to prevent animations during page load
-    sidebar.style.transition = 'all 0.3s ease';
-    headerContent.style.transition = 'all 0.3s ease';
+    sidebar.style.transition = 'none';
+    headerContent.style.transition = 'none';
 
     // Restore dark mode from localStorage
     const darkModeState = localStorage.getItem('darkMode');
@@ -89,10 +89,11 @@ document.addEventListener('DOMContentLoaded', function () {
     const sidebarState = localStorage.getItem('sidebarHidden');
     if (sidebarState === 'true') {
         sidebar.classList.add('hidden');
-        logoText.classList.add('hidden')
+        logoText.style.display = 'none';
         headerContent.style.marginLeft = '-180px'; // Move content left when sidebar is hidden
     } else {
         sidebar.classList.remove('hidden');
+        logoText.style.display = 'block';
         headerContent.style.marginLeft = '0'; // Reset margin when sidebar is visible
     }
 
@@ -100,5 +101,5 @@ document.addEventListener('DOMContentLoaded', function () {
     setTimeout(function () {
         sidebar.style.transition = 'all 0.3s ease';
         headerContent.style.transition = 'margin-left 0.3s ease';
-    }, 50); // Add a small delay to ensure styles are applied before the transition
+    }, 150); // Add a small delay to ensure styles are applied before the transition
 });

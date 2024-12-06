@@ -14,6 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Candara:wght@400&display=swap" rel="stylesheet"> <!-- Include Candara font -->
     <link rel="stylesheet" href="~/css/sidebar-style.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/adminAnimations.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/adminDarkmodes.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
@@ -23,7 +24,9 @@
 <body>
     <nav class="sidebar">
         <div class="sidebar-header ms-0 me-0">
-            <a class="btn" asp-area="" asp-page="/Index"><h5 class="lh-1 ms-3 mB-0 logo-text">BrgyLink</h5></a>
+            <a class="btn" asp-area="" asp-page="/Index">
+                <h5 class="lh-1 ms-3 mB-0 logo-text">BrgyLink</h5>
+            </a>
         </div>
         <div class="nav-buttons d-flex flex-column mt-1">
             <a asp-area="" asp-page="/AdminDashboard" class="nav-link mb-0 mt-1">
@@ -60,14 +63,15 @@
             </button>
             <div class="d-flex align-items-center">
                 <div class="dropdown me-3">
-                    <button class="btn-profile dropdown-toggle" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="border: none;">
+                    <!-- Profile Button -->
+                    <button class="btn-profile dropdown-toggle" type="button" id="profileDropdownButton" data-bs-toggle="dropdown" aria-expanded="false" style="border: none;">
                         @UserManager.GetUserName(User)
                     </button>
 
-                    <ul class="dropdown-menu" aria-labelledby="profileDropdown" id="profileDropdown">
+                    <!-- Dropdown Menu -->
+                    <ul class="dropdown-menu" aria-labelledby="profileDropdownButton">
                         <li>
                             <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="/">
-                                <!-- Making the text uncopyable and the cursor pointer on hover -->
                                 <a class="dropdown-item" style="user-select: none; cursor: pointer;">Logout</a>
                             </form>
                         </li>
@@ -77,12 +81,13 @@
                     </ul>
                 </div>
 
-
-               <button id="darkModeToggle" class="toggler-button">
-                    <i class="bi bi-moon"></i> <!-- Dark mode toggler icon -->
+                <!-- Dark Mode Toggle Button -->
+                <button id="darkModeToggle" class="toggler-button ms-2">
+                    @* <i class="bi bi-moon"></i> <!-- Dark mode toggler icon --> *@
                 </button>
             </div>
         </header>
+
 
 
         <div class="content">
