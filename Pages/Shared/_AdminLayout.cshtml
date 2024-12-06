@@ -59,26 +59,26 @@
                 <i class="bi bi-list"></i> <!-- Navbar toggler icon -->
             </button>
             <div class="d-flex align-items-center">
-                <!-- Align items for the right section -->
                 <div class="dropdown me-3">
                     <button class="btn-profile dropdown-toggle" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="border: none;">
-                        Hello @UserManager.GetUserName(User)!
+                        @UserManager.GetUserName(User)
                     </button>
 
                     <ul class="dropdown-menu" aria-labelledby="profileDropdown" id="profileDropdown">
                         <li>
                             <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="/">
-                                <a class="dropdown-item">Logout</a>
+                                <!-- Making the text uncopyable and the cursor pointer on hover -->
+                                <a class="dropdown-item" style="user-select: none; cursor: pointer;">Logout</a>
                             </form>
                         </li>
                         <li>
                             <a class="dropdown-item" asp-page="/Index">Back to home</a>
                         </li>
                     </ul>
-
                 </div>
 
-                <button id="darkModeToggle" class="toggler-button">
+
+               <button id="darkModeToggle" class="toggler-button">
                     <i class="bi bi-moon"></i> <!-- Dark mode toggler icon -->
                 </button>
             </div>

@@ -35,6 +35,7 @@ darkModeToggle.addEventListener('click', function () {
 // Sidebar toggle functionality
 const sidebarToggler = document.getElementById('sidebarToggler');
 const headerContent = document.querySelector('.header-content');
+const logoText = document.querySelector('.logo-text');
 
 // Function to handle sidebar toggle and persistence
 sidebarToggler.addEventListener('click', function () {
@@ -43,9 +44,11 @@ sidebarToggler.addEventListener('click', function () {
     // Check if the sidebar is hidden
     if (sidebar.classList.contains('hidden')) {
         headerContent.style.marginLeft = '-180px'; // Move content left when sidebar is hidden
+        localStorage.setItem('logoText', 'true'); //save logo state in localstorage
         localStorage.setItem('sidebarHidden', 'true'); // Save sidebar state in localStorage
     } else {
         headerContent.style.marginLeft = '0'; // Reset margin when sidebar is visible
+        localStorage.setItem('logoText', 'false'); //save logo state in localstorage
         localStorage.setItem('sidebarHidden', 'false'); // Save sidebar state in localStorage
     }
 });
@@ -63,8 +66,8 @@ const bsDropdown = new bootstrap.Dropdown(profileDropdown);
 // On page load, restore dark mode and sidebar state
 document.addEventListener('DOMContentLoaded', function () {
     // Temporarily remove transitions to prevent animations during page load
-    sidebar.style.transition = 'none';
-    headerContent.style.transition = 'none';
+    sidebar.style.transition = 'all 0.3s ease';
+    headerContent.style.transition = 'all 0.3s ease';
 
     // Restore dark mode from localStorage
     const darkModeState = localStorage.getItem('darkMode');
@@ -86,6 +89,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const sidebarState = localStorage.getItem('sidebarHidden');
     if (sidebarState === 'true') {
         sidebar.classList.add('hidden');
+        logoText.classList.add('hidden')
         headerContent.style.marginLeft = '-180px'; // Move content left when sidebar is hidden
     } else {
         sidebar.classList.remove('hidden');
