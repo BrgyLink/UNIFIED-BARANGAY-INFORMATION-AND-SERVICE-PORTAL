@@ -65,13 +65,16 @@
                 <td class="d-flex justify-content-center align-items-center">
                     @if (resident.ImageData != null && resident.ImageData.Length > 0)
                     {
-                        <img src="data:image/jpeg;base64,@Convert.ToBase64String(resident.ImageData)" class="img-fluid rounded-circle" alt="BarangayOfficial Image" height="75" width="75" />
+                        <!-- Show resident's photo with a fixed size -->
+                        <img src="data:image/jpeg;base64,@Convert.ToBase64String(resident.ImageData)" class="img-fluid rounded-circle" alt="Resident Image" style="width: 75px; height: 75px; object-fit: cover;" />
                     }
                     else
                     {
-                        <img src="/images/avatarPlaceholder.jpg" class="img-fluid rounded-circle" alt="BarangayOfficial Image" height="75" width="75" />
+                        <!-- Show placeholder image with a fixed size -->
+                        <img src="/images/avatarPlaceholder.jpg" class="img-fluid rounded-circle"  alt="Resident Image" style="width: 75px; height: 75px; object-fit: cover;" />
                     }
                 </td>
+
                 <td class="fs-5 fw-bold">@resident.FirstName @resident.LastName</td>
                 <td>@resident.Address</td>
                 <td>@resident.Age</td>

@@ -15,16 +15,19 @@
         <!-- Image Upload Column (Left) -->
         <div class="col-12 col-md-4 mb-4">
             <div class="card shadow-sm border-light rounded-3">
-                <div class="card-header bg-primary text-white text-center">Image Upload</div>
+                    <div class="card-header bg-primary text-white text-center">Image Upload</div>
                     <div class="card-body text-center">
                         @if (Model.BarangayOfficial.Photo != null && Model.BarangayOfficial.Photo.Length > 0)
                         {
+                            <!-- Show existing photo if available -->
                             <img id="imagePreview" src="data:image/jpeg;base64,@Convert.ToBase64String(Model.BarangayOfficial.Photo)" class="img-fluid rounded-circle shadow-lg" alt="Barangay Official Photo" style="width: 180px; height: 180px; object-fit: cover;" />
                         }
                         else
                         {
+                            <!-- Default avatar if no photo is available -->
                             <img id="imagePreview" src="/images/avatarPlaceholder.jpg" class="img-fluid rounded-circle shadow-lg" alt="Barangay Official Photo" style="width: 180px; height: 180px;" />
                         }
+
                         <div class="mb-3">
                             <label for="ImageFile" class="form-label">Upload Image</label>
                             <input type="file" class="form-control form-control-lg" asp-for="ImageFile" accept=".jpg,.jpeg,.png" onchange="previewImage(this)" />
@@ -32,6 +35,10 @@
                             <small class="form-text text-muted">Maximum file size: 5MB. Allowed formats: JPG, JPEG, PNG</small>
                         </div>
                     </div>
+
+                    <!-- Hidden field to preserve the existing photo (Base64 encoded if present) -->
+                    <input type="hidden" id="ExistingPhoto" name="ExistingPhoto" value="@Convert.ToBase64String(Model.BarangayOfficial.Photo ?? new byte[0])" />
+
             </div>
         </div>
 
@@ -171,18 +178,23 @@
         function previewImage(input) {
             if (input.files && input.files[0]) {
                 const file = input.files[0];
+
+                // Validate file size
                 if (file.size > 5 * 1024 * 1024) {
                     alert('File size cannot exceed 5MB');
-                    input.value = '';
+                    input.value = ''; // Clear file input
                     return;
                 }
+
                 const reader = new FileReader();
                 reader.onload = function (e) {
+                    // Update the preview image
                     document.getElementById('imagePreview').src = e.target.result;
                 };
                 reader.readAsDataURL(file);
             }
         }
+
 
         @* Here is the corrected handling of the SweetAlert message and redirection *@
         @if (TempData["SuccessMessage"] != null)

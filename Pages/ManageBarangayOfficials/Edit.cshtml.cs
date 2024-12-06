@@ -46,6 +46,7 @@ namespace BrgyLink.Pages.ManageBarangayOfficials
             BarangayOfficial = barangayofficial;
             return Page();
         }
+
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -55,10 +56,10 @@ namespace BrgyLink.Pages.ManageBarangayOfficials
 
             try
             {
-                // If a new image is uploaded, process it
+                // If an image is provided, handle the upload
                 if (ImageFile != null && ImageFile.Length > 0)
                 {
-                    // Validate file type (only jpg, jpeg, and png)
+                    // Validate file type (only .jpg, .jpeg, and .png)
                     var allowedExtensions = new[] { ".jpg", ".jpeg", ".png" };
                     var extension = Path.GetExtension(ImageFile.FileName).ToLowerInvariant();
 
@@ -110,13 +111,22 @@ namespace BrgyLink.Pages.ManageBarangayOfficials
                         }
                     }
                 }
-                // If no new image is uploaded, retain the existing photo (no need to update BarangayOfficial.Photo)
+                else
+                {
+                    // If no new image is uploaded, use the existing photo if available
+                    if (!string.IsNullOrEmpty(Request.Form["ExistingPhoto"]))
+                    {
+                        // Convert the base64 string back to byte array
+                        var base64Image = Request.Form["ExistingPhoto"];
+                        BarangayOfficial.Photo = Convert.FromBase64String(base64Image);
+                    }
+                }
 
                 // Attach the modified BarangayOfficial to the context and save changes
                 _context.Attach(BarangayOfficial).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
 
-                // Set success message and return the page
+                // Set success message and redirect to the list page
                 TempData["SuccessMessage"] = "Barangay Official updated successfully!";
                 return Page();
             }
@@ -128,7 +138,6 @@ namespace BrgyLink.Pages.ManageBarangayOfficials
                 return Page();
             }
         }
-
 
 
     }

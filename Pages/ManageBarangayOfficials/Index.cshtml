@@ -65,13 +65,16 @@
                 <td class="text-center">
                     @if (official.Photo != null && official.Photo.Length > 0)
                     {
-                        <img src="data:image/jpeg;base64,@Convert.ToBase64String(official.Photo)" class="img-fluid rounded-circle" alt="Barangay Official Image" height="75" width="75" />
+                        <!-- Show the official's photo with a fixed size -->
+                        <img src="data:image/jpeg;base64,@Convert.ToBase64String(official.Photo)" class="img-fluid rounded-circle" alt="Barangay Official Image" style="width: 75px; height: 75px; object-fit: cover;" />
                     }
                     else
                     {
-                        <img src="/images/avatarPlaceholder.jpg" class="img-fluid rounded-circle" alt="Barangay Official Image" height="75" width="75" />
+                        <!-- Show placeholder image with a fixed size -->
+                        <img src="/images/avatarPlaceholder.jpg" class="img-fluid rounded-circle" alt="Barangay Official Image" style="width: 75px; height: 75px; object-fit: cover;" />
                     }
                 </td>
+
                 <td class="fs-5 fw-bold">@official.FirstName @official.LastName</td>
                 <td>@official.BarangayPosition</td>
                 <td>@official.Status</td>
