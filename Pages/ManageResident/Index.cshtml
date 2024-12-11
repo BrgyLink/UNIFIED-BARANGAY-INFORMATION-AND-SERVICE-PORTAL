@@ -5,9 +5,8 @@
     Layout = "_AdminLayout";
 }
 
-<link rel="stylesheet" href="~/css/ResidentsPage/ResidentManage.css" asp-append-version="true" />
 <!-- Table Title -->
-<div class="dark-mode-adapt mb-4">
+<div class="mb-4">
     <div class="card shadow-sm border-0">
         <div class="card-body d-flex justify-content-between align-items-center">
             <!-- Section Title -->
@@ -19,125 +18,157 @@
             <!-- Button Group for actions -->
             <div class="btn-group">
                 <!-- Add New Resident Button -->
-                <a asp-area="" asp-page="/ManageResident/Create" class="btn btn-outline-primary d-flex align-items-center px-3 shadow-sm rounded-3 me-3">
-                    <i class="bi bi-person-plus"></i>
-                    <span class="ms-2">Add New Resident</span>
+                <a asp-page="/ManageResident/Create" class="btn btn-primary btn-icon-text d-flex align-items-center px-3 shadow-sm rounded-3 me-3">
+                    <i class="mdi mdi-account-plus btn-icon-prepend"></i>
+                    Add New Resident
                 </a>
+
                 <!-- Export to Excel Button -->
-                <a asp-page="/ManageResident/Index" asp-handler="ExportToExcel" class="btn btn-outline-success d-flex align-items-center px-3 shadow-sm rounded-3">
-                    <i class="bi bi-file-earmark-spreadsheet"></i>
-                    <span class="ms-2">Export to Excel</span>
+                <a asp-page="/ManageResident/Index" class="btn btn-success btn-icon-text d-flex align-items-center px-3 shadow-sm rounded-3 me-3">
+                    <i class="mdi mdi-file-excel-box btn-icon-prepend"></i>
+                    Export to Excel
                 </a>
             </div>
         </div>
     </div>
 </div>
+<div class="card">
+    <div class="card-body">
+        <!-- Title and Search Form Side by Side -->
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h4 class="card-title">Barangay Residents</h4>
 
+            <!-- Search Form -->
+            <form method="get" class="d-flex w-35">
+                <div class="input-group">
+                    <span class="input-group-text"><i class="mdi mdi-magnify"></i></span> <!-- MDI search icon inside the input -->
+                    <input type="text" name="SearchString" value="@Model.SearchString" class="form-control" placeholder="Search residents...">
+                </div>
+            </form>
 
-<!-- Search Form -->
-<form method="get">
-    <div class="input-group mb-3 dark-mode-adapt">
-        <input type="text" name="SearchString" value="@Model.SearchString" class="form-control" placeholder="Search residents...">
-        <button class="btn btn-primary dark-mode-adapt" type="submit">Search</button>
-    </div>
-</form>
+        </div>
 
-<!-- Residents Table -->
-<table class="table table-striped table-hover table-bordered dark-mode-adapt">
-    <thead>
-        <tr>
-            <th>#</th>
-            <th>Profile</th>
-            <th>Name <i class="fa fa-sort"></i></th>
-            <th>Address</th>
-            <th>Age <i class="fa fa-sort"></i></th>
-            <th>Gender</th>
-            <th>Nationality <i class="fa fa-sort"></i></th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @for (var i = 0; i < Model.Resident.Count; i++)
-        {
-            var resident = Model.Resident[i];
-            <tr>
-                <td>@((Model.PageIndex - 1) * 10 + i + 1)</td>
-                <td class="d-flex justify-content-center align-items-center">
-                    @if (resident.ImageData != null && resident.ImageData.Length > 0)
+        <div class="row">
+            <div class="col-12">
+                <div class="table-responsive">
+                    <table id="order-listing" class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Profile</th>
+                                <th>Name <i class="fa fa-sort"></i></th>
+                                <th>Address</th>
+                                <th>Age <i class="fa fa-sort"></i></th>
+                                <th>Gender</th>
+                                <th>Nationality <i class="fa fa-sort"></i></th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (var i = 0; i < Model.Resident.Count; i++)
+                            {
+                                var resident = Model.Resident[i];
+                                <tr>
+                                    <td>@((Model.PageIndex - 1) * 10 + i + 1)</td>
+                                    <td class="d-flex justify-content-center align-items-center">
+                                        @if (resident.ImageData != null && resident.ImageData.Length > 0)
+                                        {
+                                            <!-- Show resident's photo with a fixed size -->
+                                            <img src="data:image/jpeg;base64,@Convert.ToBase64String(resident.ImageData)" class="img-fluid rounded-circle" alt="Resident Image" style="width: 75px; height: 75px; object-fit: cover;" />
+                                        }
+                                        else
+                                        {
+                                            <!-- Show placeholder image with a fixed size -->
+                                            <img src="/images/avatarPlaceholder.jpg" class="img-fluid rounded-circle" alt="Resident Image" style="width: 75px; height: 75px; object-fit: cover;" />
+                                        }
+                                    </td>
+                                    <td class="fs-5 fw-bold">@resident.FirstName @resident.LastName</td>
+                                    <td>@resident.Address</td>
+                                    <td>@resident.Age</td>
+                                    <td>@resident.Gender</td>
+                                    <td>@resident.Nationality</td>
+                                    <td>
+                                        <div class="action-buttons d-flex justify-content-center">
+                                            <!-- View Button -->
+                                            <a asp-page="./Details" asp-route-id="@resident.ResidentID">
+                                                <button class="btn btn-outline-primary btn-sm">
+                                                    <i class="mdi mdi-eye"></i> <!-- MDI eye icon for view -->
+                                                </button>
+                                            </a>
+
+                                            <!-- Delete Button -->
+                                            <a asp-page="./Delete" asp-route-id="@resident.ResidentID">
+                                                <button class="btn btn-outline-danger btn-sm mx-2">
+                                                    <i class="mdi mdi-delete"></i> <!-- MDI delete icon for delete -->
+                                                </button>
+                                            </a>
+                                        </div>
+
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="stretch-card d-flex justify-content-between align-items-center">
+            <!-- Hint Text on the Left -->
+            <div class="hint-text">
+                Showing <b>@Model.Resident.Count</b> out of <b>@Model.Resident.TotalItems</b> entries
+            </div>
+
+            <!-- Pagination on the Right -->
+            <nav>
+                <ul class="pagination flex-wrap pagination-rounded-flat pagination-success">
+                    <!-- Previous Page Link -->
+                    @if (Model.Resident.HasPreviousPage)
                     {
-                        <!-- Show resident's photo with a fixed size -->
-                        <img src="data:image/jpeg;base64,@Convert.ToBase64String(resident.ImageData)" class="img-fluid rounded-circle" alt="Resident Image" style="width: 75px; height: 75px; object-fit: cover;" />
+                        <li class="page-item">
+                            <a asp-page="./Index" asp-route-pageIndex="@(Model.PageIndex - 1)" asp-route-searchString="@Model.SearchString" class="page-link"><i class="ti-angle-left"></i></a>
+                        </li>
                     }
                     else
                     {
-                        <!-- Show placeholder image with a fixed size -->
-                        <img src="/images/avatarPlaceholder.jpg" class="img-fluid rounded-circle"  alt="Resident Image" style="width: 75px; height: 75px; object-fit: cover;" />
+                        <li class="page-item disabled">
+                            <span class="page-link"><i class="ti-angle-left"></i></span>
+                        </li>
                     }
-                </td>
 
-                <td class="fs-5 fw-bold">@resident.FirstName @resident.LastName</td>
-                <td>@resident.Address</td>
-                <td>@resident.Age</td>
-                <td>@resident.Gender</td>
-                <td>@resident.Nationality</td>
-                <td>
-                    <div class="action-buttons d-flex justify-content-center">
-                        <a asp-page="./Details" asp-route-id="@resident.ResidentID" class="view" title="View" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="View"><i class="material-icons">visibility</i></a>
-                        <a asp-page="./Edit" asp-route-id="@resident.ResidentID" class="edit" title="Edit" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Edit"><i class="material-icons">edit</i></a>
-                        <a asp-page="./Delete" asp-route-id="@resident.ResidentID" class="delete" title="Delete" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Delete"><i class="material-icons">delete</i></a>
-                    </div>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+                    <!-- Page Number Links -->
+                    @for (int i = 1; i <= Model.Resident.TotalPages; i++)
+                    {
+                        <li class="page-item @(i == Model.PageIndex ? "active" : "")">
+                            <a asp-page="./Index" asp-route-pageIndex="@i" asp-route-searchString="@Model.SearchString" class="page-link">@i</a>
+                        </li>
+                    }
 
-<!-- Pagination Controls -->
-<div class="clearfix">
-    <div class="hint-text">
-        Showing <b>@Model.Resident.Count</b> out of <b>@Model.Resident.TotalItems</b> entries
+                    <!-- Next Page Link -->
+                    @if (Model.Resident.HasNextPage)
+                    {
+                        <li class="page-item">
+                            <a asp-page="./Index" asp-route-pageIndex="@(Model.PageIndex + 1)" asp-route-searchString="@Model.SearchString" class="page-link"><i class="ti-angle-right"></i></a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="page-item disabled">
+                            <span class="page-link"><i class="ti-angle-right"></i></span>
+                        </li>
+                    }
+                </ul>
+            </nav>
+        </div>
+
     </div>
-
-    <ul class="pagination">
-        <!-- Previous Page Link -->
-        @if (Model.Resident.HasPreviousPage)
-        {
-            <li class="page-item">
-                <a asp-page="./Index" asp-route-pageIndex="@(Model.PageIndex - 1)" asp-route-searchString="@Model.SearchString" class="page-link">Previous</a>
-            </li>
-        }
-        else
-        {
-            <li class="page-item disabled">
-                <span class="page-link">Previous</span>
-            </li>
-        }
-
-        <!-- Page Number Links -->
-        @for (int i = 1; i <= Model.Resident.TotalPages; i++)
-        {
-            <li class="page-item @(i == Model.PageIndex ? "active" : "")">
-                <a asp-page="./Index" asp-route-pageIndex="@i" asp-route-searchString="@Model.SearchString" class="page-link">@i</a>
-            </li>
-        }
-
-        <!-- Next Page Link -->
-        @if (Model.Resident.HasNextPage)
-        {
-            <li class="page-item">
-                <a asp-page="./Index" asp-route-pageIndex="@(Model.PageIndex + 1)" asp-route-searchString="@Model.SearchString" class="page-link">Next</a>
-            </li>
-        }
-        else
-        {
-            <li class="page-item disabled">
-                <span class="page-link">Next</span>
-            </li>
-        }
-    </ul>
 </div>
 
+
+
+
 @section Scripts {
+
     <script>
         // Initialize tooltips (Bootstrap 5)
         var tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');

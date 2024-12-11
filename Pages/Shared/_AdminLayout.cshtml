@@ -7,103 +7,187 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-    <link href="https://fonts.googleapis.com/css2?family=Candara:wght@400&display=swap" rel="stylesheet"> <!-- Include Candara font -->
-    <link rel="stylesheet" href="~/css/sidebar-style.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/adminAnimations.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/adminDarkmodes.css" asp-append-version="true" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>BrgyLink - @ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/vendors/feather/feather.css">
+    <link rel="stylesheet" href="~/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="~/vendors/ti-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="~/vendors/typicons/typicons.css">
+    <link rel="stylesheet" href="~/vendors/simple-line-icons/css/simple-line-icons.css">
+    <link rel="stylesheet" href="~/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="~/css/vertical-layout-light/style.css">
+    <link rel="stylesheet" href="~/vendors/datatables.net-bs4/dataTables.bootstrap4.css">
+    <link rel="stylesheet" type="text/css" href="~/js/select.dataTables.min.css">
+    <link rel="shortcut icon" href="~/images/favicon.png" />
 </head>
 <body>
-    <nav class="sidebar">
-        <div class="sidebar-header ms-0 me-0">
-            <a class="btn" asp-area="" asp-page="/Index">
-                <h5 class="lh-1 ms-3 mB-0 logo-text">BrgyLink</h5>
-            </a>
-        </div>
-        <div class="nav-buttons d-flex flex-column mt-1">
-            <a asp-area="" asp-page="/AdminDashboard" class="nav-link mb-0 mt-1">
-                <i class="bi bi-house-door"></i><span>Home</span>
-            </a>
-            <a asp-area="" asp-page="/ManageResident/Index" class="nav-link mb-0">
-                <i class="bi bi-person-badge"></i><span>Resident</span>
-            </a>
-            <a asp-area="" asp-page="/ManageBarangayOfficials/Index" class="nav-link mb-0">
-                <i class="bi bi-person-lines-fill"></i><span>Officials</span>
-            </a>
-            <a asp-area="" asp-page="/ManageBlotter/Index" class="nav-link mb-0">
-                <i class="bi bi-journal-text"></i><span>Blotter</span>
-            </a>
-            <a asp-area="" asp-page="/Manage/Index" class="nav-link mb-0">
-                <i class="bi bi-file-earmark-text"></i><span>Certificates</span>
-            </a>
-            <a asp-area="" asp-page="/EquipmentRequests/Index" class="nav-link mb-0">
-                <i class="bi bi-tools"></i><span>Equipment</span>
-            </a>
-            <a asp-area="" asp-page="/Reports/Index" class="nav-link mb-0">
-                <i class="bi bi-graph-up-arrow"></i><span>Reports</span>
-            </a>
-            <a asp-area="" asp-page="/Settings/Index" class="nav-link mb-0">
-                <i class="bi bi-gear"></i><span>Settings</span>
-            </a>
-        </div>
-    </nav>
-
-    <div class="header-content">
-        <header>
-            <button id="sidebarToggler" class="toggler-button">
-                <i class="bi bi-list"></i> <!-- Navbar toggler icon -->
-            </button>
-            <div class="d-flex align-items-center">
-                <div class="dropdown me-3">
-                    <!-- Profile Button -->
-                    <button class="btn-profile dropdown-toggle" type="button" id="profileDropdownButton" data-bs-toggle="dropdown" aria-expanded="false" style="border: none;">
-                        @UserManager.GetUserName(User)
+    <div class="container-scroller">
+        <!-- NAVBBAR NI HA YAWa -->
+        <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex align-items-top flex-row">
+            <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
+                <div class="me-3">
+                    <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-bs-toggle="minimize">
+                        <span class="icon-menu"></span>
                     </button>
-
-                    <!-- Dropdown Menu -->
-                    <ul class="dropdown-menu" aria-labelledby="profileDropdownButton">
-                        <li>
-                            <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="/">
-                                <a class="dropdown-item" style="user-select: none; cursor: pointer;">Logout</a>
-                            </form>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" asp-page="/Index">Back to home</a>
-                        </li>
-                    </ul>
                 </div>
+                <div>
+                    <a class="navbar-brand brand-logo" href="~/index.html">
+                        <img src="~/images/brgylink.png" alt="logo" />
+                    </a>
+                    <a class="navbar-brand brand-logo-mini" href="~/index.html">
+                        <img src="~/images/logo.png" alt="logo" />
+                    </a>
+                </div>
+            </div>
+            <div class="navbar-menu-wrapper d-flex align-items-top">
+                <ul class="navbar-nav">
+                    <li class="nav-item font-weight-semibold d-none d-lg-block ms-0">
+                        <h1 class="welcome-text">Good Morning, <span class="text-black fw-bold">@UserManager.GetUserName(User)</span></h1>
+                        <h3 class="welcome-sub-text">Welcome back to BrgyLink, Have a great day managing the barangay! </h3>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item dropdown d-none d-lg-block user-dropdown">
+                        <a class="nav-link d-flex align-items-center" id="UserDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img class="img-xs rounded-circle" src="~/images/avatarPlaceholder.jpg" alt="Profile image">
+                            <p class="font-weight-semibold ms-2 mb-0">@UserManager.GetUserName(User)</p>
+                        </a>
 
-                <!-- Dark Mode Toggle Button -->
-                <button id="darkModeToggle" class="toggler-button ms-2">
-                    @* <i class="bi bi-moon"></i> <!-- Dark mode toggler icon --> *@
+                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
+                            <div class="dropdown-header text-center">
+                                <img class="img-xs rounded-circle" src="~/images/avatarPlaceholder.jpg" alt="Profile image">
+                                <p class="mb-1 mt-3 font-weight-semibold">@UserManager.GetUserName(User)</p>
+                                <p class="fw-light text-muted mb-0">@UserManager.GetUserName(User)</p>
+                            </div>
+                            <!-- Logout -->
+                            <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="/" method="post">
+                                <button type="submit" class="dropdown-item">
+                                    <i class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>Sign Out
+                                </button>
+                            </form>
+                            <!-- Back to Home -->
+                            <a class="dropdown-item" asp-page="/Index">
+                                <i class="dropdown-item-icon mdi mdi-home text-primary me-2"></i>Back to Home
+                            </a>
+                        </div>
+                    </li>
+
+
+                </ul>
+                <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-bs-toggle="offcanvas">
+                    <span class="mdi mdi-menu"></span>
                 </button>
             </div>
-        </header>
+        </nav>
 
 
 
-        <div class="content">
-            <!-- Content area -->
-            @RenderBody()
-        </div>
+        <!-- SIDE BAR NI -->
+        <div class="container-fluid page-body-wrapper">
+            <nav class="sidebar sidebar-offcanvas" id="sidebar">
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a asp-area="" asp-page="/AdminDashboard" class="nav-link">
+                            <i class="mdi mdi-grid-large menu-icon"></i>
+                            <span class="menu-title">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item nav-category">Residents Management</li>
+                    <li class="nav-item">
+                        <a asp-area="" asp-page="/ManageResident/Index" class="nav-link">
+                            <i class="mdi mdi-odnoklassniki menu-icon"></i>
+                            <span class="menu-title">Barangay Residents</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="collapse" href="#barangay-officials" aria-expanded="false" aria-controls="barangay-officials">
+                            <i class="mdi mdi-account-star menu-icon"></i>
+                            <span class="menu-title">Barangay Official</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="barangay-officials">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item">
+                                    <a asp-area="" asp-page="/ManageBarangayOfficials/Index" class="nav-link">Officials</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-area="" asp-page="/ManageBarangayCommittee/Index" class="nav-link">Committee</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-area="" asp-page="/ManageBarangayOther/Index" class="nav-link">Blabla</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item nav-category">Barangay Management</li>
+                    <li class="nav-item">
+                        <a asp-area="" asp-page="/ManageBlotter/Index" class="nav-link">
+                            <i class="mdi mdi-heart-broken menu-icon"></i>
+                            <span class="menu-title">Blotter</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-area="" asp-page="/Manage/Index" class="nav-link">
+                            <i class="mdi mdi-certificate menu-icon"></i>
+                            <span class="menu-title">Certificates</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-area="" asp-page="/Reports/Index" class="nav-link">
+                            <i class="mdi mdi-case-sensitive-alt menu-icon"></i>
+                            <span class="menu-title">Reports</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="collapse" href="#equipments" aria-expanded="false" aria-controls="equipments">
+                            <i class="mdi mdi-sofa menu-icon"></i>
+                            <span class="menu-title">Equipments</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="equipments">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item">
+                                    <a asp-area="" asp-page="/EquipmentRequests/Index" class="nav-link">Blabla</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-area="" asp-page="/EquipmentRequests/Other" class="nav-link">Blabla 1</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- partial -->
+            <div class="main-panel">
+                <div class="content-wrapper">
+                    @RenderBody()
+                    <footer class="footer">
+                        <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Copyright © 2024. All rights reserved.</span>
+                        </div>
+                    </footer>
+                </div>
+            </div>
     </div>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/layout-animations.js" asp-append-version="true"></script>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+
+        <script src="~/vendors/js/vendor.bundle.base.js"></script>
+        <script src="~/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+        <script src="~/js/off-canvas.js"></script>
+        <script src="~/js/hoverable-collapse.js"></script>
+        <script src="~/js/template.js"></script>
+        <script src="~/js/settings.js"></script>
+        <script src="~/js/todolist.js"></script>
+        <script src="~/js/jquery.cookie.js" type="text/javascript"></script>
+        <script src="~/js/Chart.roundedBarCharts.js"></script>
+
 
     @await RenderSectionAsync("Scripts", required: false)
+
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const currentPath = window.location.pathname;

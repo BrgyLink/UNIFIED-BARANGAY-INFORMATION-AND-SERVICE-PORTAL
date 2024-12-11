@@ -4,55 +4,165 @@
     ViewData["Title"] = "Admin Dashboard";
     Layout = "_AdminLayout";
 }
-
-    <h2>Dashboard Overview</h2>
-    <p>Welcome, Admin! Here’s an overview of the latest activities and statistics.</p>
-
-    <section class="statistics mb-4">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="card text-center">
-                    <div class="card-body">
-                        <h3 class="card-title">Total Users</h3>
-                        <p class="card-text display-4">@Model.TotalResidents</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card text-center">
-                    <div class="card-body">
-                        <h3 class="card-title">Pending Requests</h3>
-                        <p class="card-text display-4">12</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card text-center">
-                    <div class="card-body">
-                        <h3 class="card-title">Resolved Blotter Reports</h3>
-                        <p class="card-text display-4">5</p>
+            
+    <section>
+    <div class="row">
+        <div class="col-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Staff Lists</h4>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th class="pt-1 ps-0">
+                                        Barangay Official
+                                    </th>
+                                    <th class="pt-1">
+                                        Committee
+                                    </th>
+                                    <th class="pt-1">
+                                        Status
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="py-1 ps-0">
+                                        <div class="d-flex align-items-center">
+                                            <img src="~/images/avatarPlaceholder.jpg" alt="profile" />
+                                            <div class="ms-3">
+                                                <p class="mb-0">Pyanz Jheo Quiros</p>
+                                                <p class="mb-0 text-muted text-small">Philippines President</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        Barangay Captain
+                                    </td>
+                                    <td>
+                                        <label class="badge badge-success">Online</label> <!-- ERP PAG ADD DATABASE IF "Online" = 0 then Result Offline -->
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="py-1 ps-0">
+                                        <div class="d-flex align-items-center">
+                                            <img src="~/images/avatarPlaceholder.jpg" alt="profile" />
+                                            <div class="ms-3">
+                                                <p class="mb-0">John Chris Pardo</p>
+                                                <p class="mb-0 text-muted text-small">SK Chairman</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        SK Chairman Kagawad
+                                    </td>
+                                    <td>
+                                        <label class="badge badge-warning">Offline</label>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </section>
 
     <section>
-        <h2>Recent Activities</h2>
-        <div class="list-group">
-            <a href="#" class="list-group-item list-group-item-action">
-                User <strong>John Doe</strong> requested a certificate on <em>2024-10-25</em>
-            </a>
-            <a href="#" class="list-group-item list-group-item-action">
-                Blotter report closed by Admin <strong>Jane Smith</strong> on <em>2024-10-24</em>
-            </a>
-        </div>
+       <div class="row">
+        <div class="col-md-6 grid-margin grid-margin-md-0 stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Barangay Officials Logs</h4>
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Profile
+                                        </th>
+                                        <th>
+                                            First name
+                                        </th>
+                                        <th>
+                                            Description
+                                        </th>
+                                        <th>
+                                            Position
+                                        </th>
+                                        <th>
+                                            Date
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="py-1">
+                                            <img src="~/images/avatarPlaceholder.jpg" alt="image" />
+                                        </td>
+                                        <td>
+                                            Pyanz Jheo Quiros
+                                        </td>
+                                        <td>
+                                            Added John Chris Pardo as new SK Chairman on Barangay Officials
+                                        </td>
+                                        <td>
+                                            <div class="badge badge-danger">Administrator</div>
+                                        </td>
+                                        <td>
+                                            December 11, 2024 8:19pm
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-1">
+                                            <img src="~/images/avatarPlaceholder.jpg" alt="image" />
+                                        </td>
+                                        <td>
+                                            Edrian Visagas
+                                        </td>
+                                        <td>
+                                            Added approved Sir Jay rent the gym listed on Equipments
+                                        </td>
+                                        <td>
+                                            <div class="badge badge-info">Secretary</div>
+                                        </td>
+                                        <td>
+                                            December 11, 2024 8:19pm
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 grid-margin grid-margin-md-0 stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Barangay Statistics</h4>
+                        <div class="template-demo">
+                            <div class="d-flex justify-content-between mt-2">
+                                <small>Total Residents</small>
+                                <small>@Model.TotalResidents</small>
+                            </div>
+                            <div class="progress progress-sm mt-2">
+                                <div class="progress-bar bg-success" role="progressbar" style="width: @Model.ResidentsProgress%" aria-valuenow="@Model.ResidentsProgress" aria-valuemin="0" aria-valuemax="100">
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between mt-3">
+                                <small>Total Barangay Officials</small>
+                                <small>@Model.TotalOfficials</small>
+                            </div>
+                            <div class="progress progress-sm mt-2">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: @Model.OfficialsProgress%" aria-valuenow="@Model.OfficialsProgress" aria-valuemin="0" aria-valuemax="100">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+       </div>
     </section>
-
-<section>
-    <h2>Quick Actions</h2>
-    <button>Manage Users</button>
-    <button>View Reports</button>
-    <button>Settings</button>
-</section>
-

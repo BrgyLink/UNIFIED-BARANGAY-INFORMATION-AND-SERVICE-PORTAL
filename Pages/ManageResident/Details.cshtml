@@ -5,14 +5,23 @@
     ViewData["Title"] = "Resident Details";
     Layout = "~/Pages/Shared/_AdminLayout.cshtml";
 }
-
-<div class="container mt-5">
-
+<!-- Table Title -->
+<div class="mb-4">
+    <div class="card shadow-sm border-0">
+        <div class="card-body d-flex justify-content-between align-items-center">
+            <!-- Section Title -->
+            <div>
+                <h3 class="card-title mb-0">@Html.DisplayFor(model => model.Resident.FirstName) @Html.DisplayFor(model => model.Resident.LastName) <b> - Details</b></h3>
+                <p class="text-muted mb-0">You are now viewing @Html.DisplayFor(model => model.Resident.FirstName) informations.</p>
+            </div>
+        </div>
+    </div>
+</div>
     <!-- Resident Info (Profile Image & Personal Information) -->
     <div class="row mb-4">
         <!-- Profile Image Card -->
-        <div class="col-md-3 text-center">
-            <div class="card shadow-sm border-light rounded-3">
+        <div class="mx grid-margin col-md-3 text-center">
+            <div class="card shadow-sm">
                 <div class="card-body">
                     <h5 class="card-title mb-3">Profile</h5>
                     @if (Model.Resident.ImageData != null)
@@ -30,7 +39,7 @@
 
         <!-- Personal Information Card -->
         <div class="col-md-9">
-            <div class="card mb-4 shadow-sm border-light rounded-3">
+            <div class="card mb-4 shadow-sm">
                 <div class="card-body">
                     <h5 class="card-title">Personal Information</h5>
                     <dl class="row">
@@ -61,7 +70,7 @@
     <div class="row mb-4">
         <!-- Contact Information Card -->
         <div class="col-md-6">
-            <div class="card mb-4 shadow-sm border-light rounded-3">
+            <div class="card mb-4 shadow-sm">
                 <div class="card-body">
                     <h5 class="card-title">Contact Information</h5>
                     <dl class="row">
@@ -80,7 +89,7 @@
 
         <!-- Residency and Special Status Information Card -->
         <div class="col-md-6">
-            <div class="card mb-4 shadow-sm border-light rounded-3">
+            <div class="card mb-4 shadow-sm">
                 <div class="card-body">
                     <h5 class="card-title">Residency & Special Status</h5>
                     <dl class="row">
@@ -102,37 +111,45 @@
         </div>
     </div>
 
-    <!-- Voter Status and Registration Card -->
-    <div class="card mb-4 shadow-sm border-light rounded-3">
-        <div class="card-body">
-            <h5 class="card-title">Voter Status & Registration</h5>
-            <dl class="row">
-                <dt class="col-sm-4">Voter Status</dt>
-                <dd class="col-sm-8">@Html.DisplayFor(model => model.Resident.VoterStatus)</dd>
+    <!-- Voter Status and Emergency Cards Side-by-Side -->
+    <div class="row mb-4">
+        <!-- Voter Status & Registration Card -->
+        <div class="col-md-6">
+            <div class="card mb-4 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Voter Status & Registration</h5>
+                    <dl class="row">
+                        <dt class="col-sm-4">Voter Status</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.Resident.VoterStatus)</dd>
 
-                <dt class="col-sm-4">Date Registered</dt>
-                <dd class="col-sm-8">@Model.Resident.DateRegistered.ToString("MMMM dd, yyyy")</dd>
-            </dl>
+                        <dt class="col-sm-4">Date Registered</dt>
+                        <dd class="col-sm-8">@Model.Resident.DateRegistered.ToString("MMMM dd, yyyy")</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+
+        <!-- Health & Emergency Information Card -->
+        <div class="col-md-6">
+            <div class="card mb-4 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Health & Emergency Information</h5>
+                    <dl class="row">
+                        <dt class="col-sm-4">Emergency Contact</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.Resident.EmergencyContact)</dd>
+
+                        <dt class="col-sm-4">Health Conditions</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.Resident.HealthConditions)</dd>
+                    </dl>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- Health and Emergency Card -->
-    <div class="card mb-4 shadow-sm border-light rounded-3">
-        <div class="card-body">
-            <h5 class="card-title">Health & Emergency Information</h5>
-            <dl class="row">
-                <dt class="col-sm-4">Emergency Contact</dt>
-                <dd class="col-sm-8">@Html.DisplayFor(model => model.Resident.EmergencyContact)</dd>
-
-                <dt class="col-sm-4">Health Conditions</dt>
-                <dd class="col-sm-8">@Html.DisplayFor(model => model.Resident.HealthConditions)</dd>
-            </dl>
-        </div>
-    </div>
 
     <!-- Action Links -->
     <div class="mt-4 text-center">
-        <a class="btn btn-warning btn-lg rounded-pill px-4" asp-page="./Edit" asp-route-id="@Model.Resident?.ResidentID">Edit</a>
-        <a class="btn btn-secondary btn-lg rounded-pill px-4" asp-page="./Index">Back to List</a>
+        <a class="btn btn-danger" asp-page="./Index">Back to List</a>
+        <a class="btn btn-warning" asp-page="./Edit" asp-route-id="@Model.Resident?.ResidentID">Edit</a>
     </div>
 </div>
