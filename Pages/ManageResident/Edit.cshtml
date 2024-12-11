@@ -5,171 +5,228 @@
     ViewData["Title"] = "Edit Resident";
     Layout = "~/Pages/Shared/_AdminLayout.cshtml";
 }
+<!-- Table Title -->
+<div class="mb-4">
+    <div class="card shadow-sm border-0">
+        <div class="card-body d-flex justify-content-between align-items-center">
+            <!-- Section Title -->
+            <div>
+                <h3 class="card-title mb-0">Adding New <b>Resident</b></h3>
+                <p class="text-muted mb-0">Make sure you check before you add.</p>
+            </div>
+        </div>
+    </div>
+</div>
 
-<h4 class="text-center mb-3 text-primary">Edit Resident</h4>
 <form method="post" enctype="multipart/form-data" id="createResidentForm">
     <div asp-validation-summary="ModelOnly" class="text-danger mb-2"></div>
     <input type="hidden" asp-for="Resident.ResidentID" />
-    <div class="container">
-        <div class="row justify-content-center">
-            <!-- Image Upload Column -->
-            <div class="col-12 col-md-4 mb-3">
-                <div class="card shadow-sm">
-                    <div class="card-header py-2 bg-primary text-white">Image Upload</div>
-                    <div class="card-body text-center">
-                        @if (Model.Resident.ImageData != null && Model.Resident.ImageData.Length > 0)
-                        {
-                            <!-- Show existing image if available -->
-                            <img id="imagePreview" src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Resident.ImageData)" class="img-fluid rounded-circle shadow-lg" alt="Resident Photo" style="width: 180px; height: 180px; object-fit: cover;" />
-                        }
-                        else
-                        {
-                            <!-- Default avatar if no photo is available -->
-                            <img id="imagePreview" src="/images/avatarPlaceholder.jpg" class="img-fluid rounded-circle shadow-lg" alt="Resident Photo" style="width: 180px; height: 180px;" />
-                        }
+    <div class="row">
+        <!-- Image Upload Card -->
+        <div class="mx grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h4 class="card-title">Image Upload</h4>
+                    @if (Model.Resident.ImageData != null && Model.Resident.ImageData.Length > 0)
+                    {
+                        <!-- Show existing image if available -->
+                        <img id="imagePreview" src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Resident.ImageData)" class="img-fluid rounded-circle mb-3" style="width: 250px; height: 250px; object-fit: cover;" />
+                    }
+                    else
+                    {
+                        <!-- Default avatar if no photo is available -->
+                        <img id="imagePreview" src="/images/avatarPlaceholder.jpg" class="img-fluid rounded-circle mb-3" style="width: 250px; height: 250px; object-fit: cover;" />
+                    }
 
-                        <div class="mb-3">
-                            <label for="ImageFile" class="form-label">Upload Image</label>
-                            <input type="file" class="form-control form-control-lg" asp-for="Resident.ImageFile" accept=".jpg,.jpeg,.png" onchange="previewImage(this)" />
-                            <span asp-validation-for="Resident.ImageFile" class="text-danger"></span>
-                            <small class="form-text text-muted">Maximum file size: 5MB. Allowed formats: JPG, JPEG, PNG</small>
-                        </div>
+                    <div>
+                        <input type="file" class="form-control form-control-sm" asp-for="Resident.ImageFile" accept=".jpg,.jpeg,.png" onchange="previewImage(this)" />
+                        <small class="text-muted">Max: 5MB (JPG, JPEG, PNG)</small>
                     </div>
 
                     <!-- Hidden field to preserve the existing photo -->
                     <input type="hidden" id="ExistingPhoto" name="ExistingPhoto" value="@Convert.ToBase64String(Model.Resident.ImageData ?? new byte[0])" />
-
-                </div>
-            </div>
-
-            <!-- Form Cards Column -->
-            <div class="col-12 col-md-8">
-                <!-- Name Section -->
-                <div class="card mb-3 shadow-sm">
-                    <div class="card-header py-1 bg-secondary text-white">Name</div>
-                    <div class="card-body p-2">
-                        <div class="row g-2">
-                            <div class="col-sm-6">
-                                <label class="form-label mb-1">First Name</label>
-                                <input type="text" class="form-control form-control-sm" placeholder="First Name" asp-for="Resident.FirstName" required />
-                            </div>
-                            <div class="col-sm-6">
-                                <label class="form-label mb-1">Last Name</label>
-                                <input type="text" class="form-control form-control-sm" placeholder="Last Name" asp-for="Resident.LastName" required />
-                            </div>
-                            <div class="col-12">
-                                <label class="form-label mb-1">Middle Name</label>
-                                <input type="text" class="form-control form-control-sm" placeholder="Middle Name" asp-for="Resident.MiddleName" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Personal Information -->
-                <div class="card mb-3 shadow-sm">
-                    <div class="card-header py-1 bg-secondary text-white">Personal Information</div>
-                    <div class="card-body p-2">
-                        <div class="row g-2">
-                            <div class="col-sm-4">
-                                <label class="form-label mb-1">Birthdate</label>
-                                <input type="date" class="form-control form-control-sm" asp-for="Resident.BirthDate" required />
-                            </div>
-                            <div class="col-sm-4">
-                                <label class="form-label mb-1">Gender</label>
-                                <select class="form-select form-select-sm" asp-for="Resident.Gender" required>
-                                    <option value="">Select</option>
-                                    <option value="Male">Male</option>
-                                    <option value="Female">Female</option>
-                                    <option value="Other">Other</option>
-                                </select>
-                            </div>
-                            <div class="col-sm-4">
-                                <label class="form-label mb-1">Civil Status</label>
-                                <select class="form-select form-select-sm" asp-for="Resident.CivilStatus" required>
-                                    <option value="Single">Single</option>
-                                    <option value="Married">Married</option>
-                                    <option value="Divorced">Divorced</option>
-                                    <option value="Widowed">Widowed</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Contact Information -->
-                <div class="card mb-3 shadow-sm">
-                    <div class="card-header py-1 bg-secondary text-white">Contact Information</div>
-                    <div class="card-body p-2">
-                        <div class="row g-2">
-                            <div class="col-12">
-                                <label class="form-label mb-1">Address</label>
-                                <textarea class="form-control form-control-sm" rows="1" asp-for="Resident.Address" required></textarea>
-                            </div>
-                            <div class="col-sm-6">
-                                <label class="form-label mb-1">Contact Number</label>
-                                <input type="tel" class="form-control form-control-sm" asp-for="Resident.ContactNumber" required />
-                            </div>
-                            <div class="col-sm-6">
-                                <label class="form-label mb-1">Email</label>
-                                <input type="email" class="form-control form-control-sm" asp-for="Resident.Email" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Special Information -->
-                <div class="card mb-3 shadow-sm">
-                    <div class="card-header py-1 bg-secondary text-white">Special Information</div>
-                    <div class="card-body p-2">
-                        <div class="row g-2">
-                            <div class="col-sm-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" asp-for="Resident.IsSeniorCitizen" />
-                                    <label class="form-check-label">Senior Citizen</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" asp-for="Resident.IsPWD" />
-                                    <label class="form-check-label">PWD</label>
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <label class="form-label mb-1">Voter Status</label>
-                                <select class="form-select form-select-sm" asp-for="Resident.VoterStatus" required>
-                                    <option value="Non-voter">Non-voter</option>
-                                    <option value="Voter">Voter</option>
-                                </select>
-                            </div>
-                            <div class="col-sm-4">
-                                <label class="form-label mb-1">Occupation</label>
-                                <input type="text" class="form-control form-control-sm" asp-for="Resident.Occupation" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Emergency Contact -->
-                <div class="card mb-3 shadow-sm">
-                    <div class="card-header py-1 bg-secondary text-white">Emergency Contact</div>
-                    <div class="card-body p-2">
-                        <div class="row g-2">
-                            <div class="col-sm-6">
-                                <label class="form-label mb-1">Emergency Contact</label>
-                                <input type="text" class="form-control form-control-sm" asp-for="Resident.EmergencyContact" required />
-                            </div>
-                            <div class="col-sm-6">
-                                <label class="form-label mb-1">Health Conditions</label>
-                                <textarea class="form-control form-control-sm" rows="1" asp-for="Resident.HealthConditions"></textarea>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Submit Button -->
-                <div class="text-end mb-3">
-                    <button type="submit" class="btn btn-primary">Save Resident</button>
                 </div>
             </div>
         </div>
+
+        <!-- Name Section Card -->
+        <div class="col-md-8 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Personal Information</h4>
+                    <p class="card-description">Enter the resident's name details</p>
+                    <div class="form-group position-relative">
+                        <label for="FirstName">First Name</label>
+                        <i class="mdi mdi-account-circle position-absolute" style="top: 36px; left: 10px;"></i>
+                        <input type="text" class="form-control ps-5" asp-for="Resident.FirstName" placeholder="First Name" required />
+                        <span asp-validation-for="Resident.FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group position-relative">
+                        <label for="LastName">Last Name</label>
+                        <i class="mdi mdi-account-circle position-absolute" style="top: 36px; left: 10px;"></i>
+                        <input type="text" class="form-control ps-5" asp-for="Resident.LastName" placeholder="Last Name" required />
+                        <span asp-validation-for="Resident.LastName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group position-relative">
+                        <label for="MiddleName">Middle Name</label>
+                        <i class="mdi mdi-account-circle position-absolute" style="top: 36px; left: 10px;"></i>
+                        <input type="text" class="form-control ps-5" asp-for="Resident.MiddleName" placeholder="Middle Name" />
+                        <span asp-validation-for="Resident.MiddleName" class="text-danger"></span>
+                        <small class="text-muted">If no middle name, put "None"</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Personal Information Card -->
+        <div class="col-md-4 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Personal Details</h4>
+                    <p class="card-description">Provide personal details</p>
+                    <div class="form-group position-relative">
+                        <label for="BirthDate">Birthdate</label>
+                        <i class="mdi mdi-calendar position-absolute" style="top: 36px; left: 10px;"></i>
+                        <input type="date" class="form-control ps-5" asp-for="Resident.BirthDate" required />
+                        <span asp-validation-for="Resident.BirthDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group position-relative">
+                        <label for="Gender">Gender</label>
+                        <i class="mdi mdi-gender-male-female position-absolute" style="top: 36px; left: 10px;"></i>
+                        <select class="form-control ps-5" asp-for="Resident.Gender" required>
+                            <option value="">Select</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <span asp-validation-for="Resident.Gender" class="text-danger"></span>
+                    </div>
+                    <div class="form-group position-relative">
+                        <label for="CivilStatus">Civil Status</label>
+                        <i class="mdi mdi-ring position-absolute" style="top: 36px; left: 10px;"></i>
+                        <select class="form-control ps-5" asp-for="Resident.CivilStatus" required>
+                            <option value="Single">Single</option>
+                            <option value="Married">Married</option>
+                            <option value="Divorced">Divorced</option>
+                            <option value="Widowed">Widowed</option>
+                        </select>
+                        <span asp-validation-for="Resident.CivilStatus" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Emergency Contact Card -->
+        <div class="col-md-4 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Emergency Contact</h4>
+                    <p class="card-description">Provide emergency contact details</p>
+                    <div class="form-group position-relative">
+                        <label for="EmergencyContact">Emergency Contact</label>
+                        <i class="mdi mdi-phone position-absolute" style="top: 36px; left: 10px;"></i>
+                        <input type="text" class="form-control ps-5" asp-for="Resident.EmergencyContact" placeholder="Enter Emergency Contact" required />
+                        <span asp-validation-for="Resident.EmergencyContact" class="text-danger"></span>
+                    </div>
+                    <div class="form-group position-relative">
+                        <label for="HealthConditions">Health Conditions</label>
+                        <i class="mdi mdi-heart position-absolute" style="top: 36px; left: 10px;"></i>
+                        <input type="text" class="form-control ps-5" rows="2" asp-for="Resident.HealthConditions" placeholder="Enter any health conditions"></input>
+                        <span asp-validation-for="Resident.HealthConditions" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Information Card -->
+        <div class="col-md-4 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Contact Information</h4>
+                    <p class="card-description">Provide contact details</p>
+                    <div class="form-group position-relative">
+                        <label for="Address">Address</label>
+                        <i class="mdi mdi-map-marker position-absolute" style="top: 36px; left: 10px;"></i>
+                        <select class="form-control ps-5" asp-for="Resident.Address" required>
+                            <option value="" disabled selected>Select Purok</option>
+                            <option value="Cabadiangan, Compostela Cebu, Purok 1">Purok 1</option>
+                            <option value="Cabadiangan, Compostela Cebu, Purok 2">Purok 2</option>
+                            <option value="Cabadiangan, Compostela Cebu, Purok 3">Purok 3</option>
+                            <option value="Cabadiangan, Compostela Cebu, Purok 4">Purok 4</option>
+                            <option value="Cabadiangan, Compostela Cebu, Purok 5">Purok 5</option>
+                            <option value="Cabadiangan, Compostela Cebu, Purok 6">Purok 6</option>
+                            <option value="Cabadiangan, Compostela Cebu, Purok 7">Purok 7</option>
+                            <option value="Cabadiangan, Compostela Cebu, Purok 8">Purok 8</option>
+                        </select>
+                        <span asp-validation-for="Resident.Address" class="text-danger"></span>
+                    </div>
+                    <div class="form-group position-relative">
+                        <label for="ContactNumber">Contact Number</label>
+                        <i class="mdi mdi-phone position-absolute" style="top: 36px; left: 10px;"></i>
+                        <input type="tel" class="form-control ps-5" asp-for="Resident.ContactNumber" placeholder="Enter Contact Number" required />
+                        <span asp-validation-for="Resident.ContactNumber" class="text-danger"></span>
+                    </div>
+                    <div class="form-group position-relative">
+                        <label for="Email">Email</label>
+                        <i class="mdi mdi-email position-absolute" style="top: 36px; left: 10px;"></i>
+                        <input type="email" class="form-control ps-5" asp-for="Resident.Email" placeholder="Enter Email" />
+                        <span asp-validation-for="Resident.Email" class="text-danger"></span>
+                        <small class="text-muted">If no email, put "None@mail.com"</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Special Information Card -->
+        <div class="col-md-4 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Special Information</h4>
+                    <p class="card-description">Provide additional special information</p>
+                    <div class="form-group position-relative">
+                        <!-- Senior Citizen Checkbox -->
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" asp-for="Resident.IsSeniorCitizen" />
+                                Senior Citizen
+                            </label>
+                        </div>
+                        <!-- PWD Checkbox -->
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" asp-for="Resident.IsPWD" />
+                                Person With Disability ( PWD )
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group position-relative">
+                        <!-- Voter Status Dropdown -->
+                        <label for="VoterStatus">Voter Status</label>
+                        <select class="form-control ps-5" asp-for="Resident.VoterStatus" required>
+                            <option value="Non-voter">Non-voter</option>
+                            <option value="Voter">Voter</option>
+                        </select>
+                        <span asp-validation-for="Resident.VoterStatus" class="text-danger"></span>
+                    </div>
+                    <div class="form-group position-relative">
+                        <!-- Occupation Input -->
+                        <label for="Occupation">Occupation</label>
+                        <i class="mdi mdi-briefcase position-absolute" style="top: 36px; left: 10px;"></i>
+                        <input type="text" class="form-control ps-5" placeholder="Enter Occupation" asp-for="Resident.Occupation" />
+                        <span asp-validation-for="Resident.Occupation" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mx d-flex justify-content-between">
+            <a asp-page="/ManageResident/Index" class="btn btn-danger">
+
+                Back
+            </a>
+            <button type="submit" class="btn btn-primary">Save Resident</button>
+        </div>
+
     </div>
 </form>
 
