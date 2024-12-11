@@ -143,12 +143,39 @@ Made with ❤️ using **ASP.NET Core** and **Bootstrap 5**.
 ![image](https://github.com/user-attachments/assets/4d65b6df-ebc4-4fc9-a410-9545a9c64772)
 
 
-## ADMIN Dashboard [Not Final]
-![image](https://github.com/user-attachments/assets/17d5a7aa-753c-4fa4-848d-23136acb7ee9)
+## ADMIN Dashboard DESKTOP & Mobile [Not Final]
 
-![image](https://github.com/user-attachments/assets/b40660bf-2fdd-4040-9112-7211dd0a476a)
+**DASHBOARD VIEW DESKTOP**
+![image](https://github.com/user-attachments/assets/bdabdcda-8e77-4547-955a-6dbe72b917a7)
 
-![image](https://github.com/user-attachments/assets/74ec725c-9663-45e8-b866-85803a9ba450)
+**DASHBOARD VIEW MOBILE**
+![image](https://github.com/user-attachments/assets/87a1d11d-064b-4528-812e-c4f30f2b1f16)
+
+**Manage Resident VIEW DESKTOP**
+![image](https://github.com/user-attachments/assets/9395f8b0-c3c3-413b-a42e-212d7177dafc)
+
+![image](https://github.com/user-attachments/assets/3a2b5d09-5fb8-4d66-b44e-3b69deb286a0)
+
+![image](https://github.com/user-attachments/assets/0d18cfd5-9359-4efc-af22-501a73332206)
+
+![image](https://github.com/user-attachments/assets/70154315-a1a5-4c8c-9b76-f2995c8132be)
+
+![image](https://github.com/user-attachments/assets/63600f10-ddb5-4a15-9518-78fd2006cdb7)
+
+
+**Manage Resident VIEW MOBILE**
+![image](https://github.com/user-attachments/assets/d28e9a34-359a-4110-b556-711eb103a2e3)
+
+![image](https://github.com/user-attachments/assets/276ebe2c-37e6-41bb-90a1-74046ef7532f)
+
+![image](https://github.com/user-attachments/assets/73cfec07-4299-4468-b7d3-c1cf9aaa9f2a)
+
+![image](https://github.com/user-attachments/assets/992d693b-ce04-4930-a8c8-8b60a8d453a5)
+
+![image](https://github.com/user-attachments/assets/1780f41a-c8ad-4196-88f6-99dd17fc3261)
+
+
+
 
 
 
