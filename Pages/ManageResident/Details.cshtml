@@ -74,8 +74,11 @@
                 <div class="card-body">
                     <h5 class="card-title">Contact Information</h5>
                     <dl class="row">
+                        <dt class="col-sm-4">Purok</dt>
+                        <dd class="col-sm-8">@Model.Resident.Purok?.Name</dd>
+
                         <dt class="col-sm-4">Address</dt>
-                        <dd class="col-sm-8">@Html.DisplayFor(model => model.Resident.Address)</dd>
+                        <dd class="col-sm-8">Cabadiangan, Compostela, Cebu</dd>
 
                         <dt class="col-sm-4">Contact Number</dt>
                         <dd class="col-sm-8">@Html.DisplayFor(model => model.Resident.ContactNumber)</dd>

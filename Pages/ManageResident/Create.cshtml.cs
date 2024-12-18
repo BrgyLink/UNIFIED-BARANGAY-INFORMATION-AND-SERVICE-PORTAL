@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using BrgyLink.Models;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Processing;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace BrgyLink.Pages.ManageResident
 {
@@ -32,6 +33,7 @@ namespace BrgyLink.Pages.ManageResident
 
         public IActionResult OnGet()
         {
+            ViewData["Puroks"] = new SelectList(_context.Puroks, "Id", "Name");
             return Page();
         }
 

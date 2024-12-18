@@ -20,6 +20,9 @@
     <link rel="stylesheet" href="~/vendors/datatables.net-bs4/dataTables.bootstrap4.css">
     <link rel="stylesheet" type="text/css" href="~/js/select.dataTables.min.css">
     <link rel="shortcut icon" href="~/images/favicon.png" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
 </head>
 <body>
     <div class="container-scroller">
@@ -112,10 +115,24 @@
                                     <a asp-area="" asp-page="/ManageBarangayOfficials/Index" class="nav-link">Officials</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a asp-area="" asp-page="/ManageBarangayCommittee/Index" class="nav-link">Committee</a>
+                                    <a asp-area="" asp-page="/ManageBarangayOfficialCommittee/Index" class="nav-link">Committee Officials</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a asp-area="" asp-page="/ManageBarangayOther/Index" class="nav-link">Blabla</a>
+                                    <a asp-area="" asp-page="/ManageCommittee/Index" class="nav-link">Committees </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="collapse" href="#barangay-puroks" aria-expanded="false" aria-controls="barangay-officials">
+                            <i class="mdi mdi-home-assistant menu-icon"></i>
+                            <span class="menu-title">Barangay Puroks</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="barangay-puroks">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item">
+                                    <a asp-area="" asp-page="/ManagePurok/Index" class="nav-link">Puroks</a>
                                 </li>
                             </ul>
                         </div>

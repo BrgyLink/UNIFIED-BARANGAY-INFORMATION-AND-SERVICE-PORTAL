@@ -1,0 +1,42 @@
+﻿@page
+@model BrgyLink.Pages.ManageBarangayOfficialCommittee.IndexModel
+@{
+    ViewData["Title"] = "Barangay Official Committees";
+    Layout = "~/Pages/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Barangay Official Committees</h1>
+<p>
+    <a asp-page="Create" class="btn btn-primary">Create New</a>
+</p>
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>Official Name</th>
+            <th>Barangay Position</th>
+            <th>Committee</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.BarangayOfficialCommittee)
+        {
+            <tr>
+                <td>
+                    @item.BarangayOfficial.FullName
+                </td>
+                <td>
+                    @item.BarangayOfficial.BarangayPosition
+                </td>
+                <td>
+                    @item.Committee.CommitteeName
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.BarangayOfficialId" class="btn btn-sm btn-warning">Edit</a>
+                    <a asp-page="./Details" asp-route-id="@item.BarangayOfficialId" class="btn btn-sm btn-info">Details</a>
+                    <a asp-page="./Delete" asp-route-id="@item.BarangayOfficialId" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

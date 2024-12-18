@@ -27,6 +27,10 @@ namespace BrgyLink.Pages.ManageBarangayOfficials
         [BindProperty]
         public BarangayOfficial BarangayOfficial { get; set; } = default!;
 
+        public List<Committee> Committees { get; set; } = new();
+        [BindProperty]
+        public List<int> SelectedCommitteeIds { get; set; } = new();
+
         [BindProperty]
         public IFormFile? ImageFile { get; set; }
 
@@ -38,6 +42,7 @@ namespace BrgyLink.Pages.ManageBarangayOfficials
             }
 
             var barangayofficial = await _context.BarangayOfficials.FirstOrDefaultAsync(m => m.Id == id);
+            Committees = _context.Committees.ToList();
             if (barangayofficial == null)
             {
                 return NotFound();
@@ -51,6 +56,7 @@ namespace BrgyLink.Pages.ManageBarangayOfficials
         {
             if (!ModelState.IsValid)
             {
+                Committees = _context.Committees.ToList();
                 return Page();  // Return the page if the model state is not valid
             }
 
@@ -124,8 +130,25 @@ namespace BrgyLink.Pages.ManageBarangayOfficials
 
                 // Attach the modified BarangayOfficial to the context and save changes
                 _context.Attach(BarangayOfficial).State = EntityState.Modified;
-                await _context.SaveChangesAsync();
 
+                // Update committees
+                var existingCommittees = _context.BarangayOfficialCommittees
+                    .Where(boc => boc.BarangayOfficialId == BarangayOfficial.Id);
+                // Remove old associations
+                _context.BarangayOfficialCommittees.RemoveRange(existingCommittees);
+
+                if (SelectedCommitteeIds.Any())
+                {
+                    var officialCommittees = SelectedCommitteeIds.Select(id => new BarangayOfficialCommittee
+                    {
+                        BarangayOfficialId = BarangayOfficial.Id,
+                        CommitteeId = id
+                    });
+                    _context.BarangayOfficialCommittees.AddRange(officialCommittees);
+                   
+                }
+
+                await _context.SaveChangesAsync();
                 // Set success message and redirect to the list page
                 TempData["SuccessMessage"] = "Barangay Official updated successfully!";
                 return Page();

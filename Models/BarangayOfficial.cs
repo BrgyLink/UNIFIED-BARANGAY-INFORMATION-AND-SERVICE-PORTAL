@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using BrgyLink.Models;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 public class BarangayOfficial
@@ -33,9 +34,6 @@ public class BarangayOfficial
     [StringLength(100, ErrorMessage = "Barangay position cannot be longer than 100 characters.")]
     public string BarangayPosition { get; set; }
 
-    [StringLength(100, ErrorMessage = "Committee name cannot be longer than 100 characters.")]
-    public string Committee { get; set; }
-
     [Required(ErrorMessage = "Term start date is required.")]
     [DataType(DataType.Date)]
     public DateTime? TermStart { get; set; }
@@ -58,10 +56,15 @@ public class BarangayOfficial
     // The byte array to store the photo data in the database
     public byte[]? Photo { get; set; }
 
+    // Navigation property for Many-to-Many relationship through BarangayOfficialCommittee
+    public ICollection<BarangayOfficialCommittee> BarangayOfficialCommittees { get; set; } = new List<BarangayOfficialCommittee>();
+
+    // Computed FullName property for display in the dropdown
+    public string FullName => $"{FirstName} {LastName}";
 }
 
 
-    public class TermEndValidationAttribute : ValidationAttribute
+public class TermEndValidationAttribute : ValidationAttribute
 {
     protected override ValidationResult IsValid(object value, ValidationContext validationContext)
     {

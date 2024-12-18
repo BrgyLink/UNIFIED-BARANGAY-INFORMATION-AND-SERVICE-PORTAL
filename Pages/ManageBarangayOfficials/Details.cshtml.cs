@@ -26,7 +26,12 @@ namespace BrgyLink.Pages.ManageBarangayOfficials
                 return NotFound();
             }
 
-            var barangayofficial = await _context.BarangayOfficials.FirstOrDefaultAsync(m => m.Id == id);
+            var barangayofficial = await _context.BarangayOfficials
+               .Include(bo => bo.BarangayOfficialCommittees)
+            .ThenInclude(boc => boc.Committee) // Include the related Committees
+        .FirstOrDefaultAsync(bo => bo.Id == id);
+
+
             if (barangayofficial == null)
             {
                 return NotFound();

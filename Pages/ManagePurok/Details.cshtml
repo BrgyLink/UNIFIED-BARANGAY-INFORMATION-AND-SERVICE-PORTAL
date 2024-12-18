@@ -1,0 +1,54 @@
+﻿@page
+@model BrgyLink.Pages.ManagePurok.DetailsModel
+@{
+    ViewData["Title"] = "Purok Details";
+    Layout = "~/Pages/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row mb-3 align-items-center">
+        <div class="col">
+            <h1 class="display-6">Purok Details</h1>
+        </div>
+        <div class="col-auto">
+            <a asp-page="./Index" class="btn btn-secondary">
+                <i class="fas fa-arrow-left me-2"></i>Back to List
+            </a>
+        </div>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <dl class="row mb-0">
+                <dt class="col-sm-3">Purok Name</dt>
+                <dd class="col-sm-9">@Model.Purok.Name</dd>
+
+                <dt class="col-sm-3">Description</dt>
+                <dd class="col-sm-9">
+                    @if (string.IsNullOrEmpty(Model.Purok.Description))
+                    {
+                        <span class="text-muted fst-italic">No description provided</span>
+                    }
+                    else
+                    {
+                        @Model.Purok.Description
+                    }
+                </dd>
+
+                <dt class="col-sm-3">Number of Registered People</dt>
+                <dd class="col-sm-9">
+                    <span class="badge bg-primary">@Model.Purok.NumberOfRegisteredPeople</span>
+                </dd>
+            </dl>
+        </div>
+    </div>
+
+    <div class="mt-3">
+        <a asp-page="./Edit" asp-route-id="@Model.Purok.Id" class="btn btn-warning">
+            <i class="fas fa-edit me-1"></i>Edit
+        </a>
+        <a asp-page="./Index" class="btn btn-secondary">
+            <i class="fas fa-arrow-left me-2"></i>Back to List
+        </a>
+    </div>
+</div>

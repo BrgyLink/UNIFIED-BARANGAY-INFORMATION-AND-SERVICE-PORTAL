@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BrgyLink.Migrations
 {
     /// <inheritdoc />
-    public partial class Final : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -63,9 +63,8 @@ namespace BrgyLink.Migrations
                     Gender = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
                     MaritalStatus = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     BarangayPosition = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Committee = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    TermStart = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    TermEnd = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    TermStart = table.Column<DateTime>(type: "date", nullable: false),
+                    TermEnd = table.Column<DateTime>(type: "date", nullable: false),
                     RankNo = table.Column<int>(type: "int", nullable: true),
                     Status = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     Photo = table.Column<byte[]>(type: "varbinary(max)", nullable: true)
@@ -73,6 +72,20 @@ namespace BrgyLink.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_BarangayOfficials", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Committees",
+                columns: table => new
+                {
+                    CommitteeId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CommitteeName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    CommitteeDescription = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Committees", x => x.CommitteeId);
                 });
 
             migrationBuilder.CreateTable(
@@ -212,6 +225,30 @@ namespace BrgyLink.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "BarangayOfficialCommittees",
+                columns: table => new
+                {
+                    BarangayOfficialId = table.Column<int>(type: "int", nullable: false),
+                    CommitteeId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BarangayOfficialCommittees", x => new { x.BarangayOfficialId, x.CommitteeId });
+                    table.ForeignKey(
+                        name: "FK_BarangayOfficialCommittees_BarangayOfficials_BarangayOfficialId",
+                        column: x => x.BarangayOfficialId,
+                        principalTable: "BarangayOfficials",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_BarangayOfficialCommittees_Committees_CommitteeId",
+                        column: x => x.CommitteeId,
+                        principalTable: "Committees",
+                        principalColumn: "CommitteeId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -250,6 +287,11 @@ namespace BrgyLink.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BarangayOfficialCommittees_CommitteeId",
+                table: "BarangayOfficialCommittees",
+                column: "CommitteeId");
         }
 
         /// <inheritdoc />
@@ -271,7 +313,7 @@ namespace BrgyLink.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "BarangayOfficials");
+                name: "BarangayOfficialCommittees");
 
             migrationBuilder.DropTable(
                 name: "Residents");
@@ -281,6 +323,12 @@ namespace BrgyLink.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "BarangayOfficials");
+
+            migrationBuilder.DropTable(
+                name: "Committees");
         }
     }
 }

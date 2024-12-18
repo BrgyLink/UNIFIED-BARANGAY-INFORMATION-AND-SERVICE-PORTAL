@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Processing;
 using SixLabors.ImageSharp.Formats.Jpeg;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace BrgyLink.Pages.ManageResident
 {
@@ -31,12 +32,15 @@ namespace BrgyLink.Pages.ManageResident
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
+            ViewData["Puroks"] = new SelectList(_context.Puroks, "Id", "Name");
+
             if (id == null || _context.Residents == null)
             {
                 return NotFound();
             }
 
             var resident = await _context.Residents.FirstOrDefaultAsync(m => m.ResidentID == id);
+
             if (resident == null)
             {
                 return NotFound();

@@ -29,7 +29,9 @@ namespace BrgyLink.Pages.ManageResident
             // Default to page 1 if no page index is provided
             PageIndex = pageIndex ?? 1;
 
-            var query = _context.Residents.AsQueryable();
+            var query = _context.Residents
+                .Include(r => r.Purok)
+                .AsQueryable();
 
             // Apply search filter if provided
             if (!string.IsNullOrEmpty(SearchString))

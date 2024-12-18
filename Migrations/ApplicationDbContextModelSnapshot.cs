@@ -38,11 +38,6 @@ namespace BrgyLink.Migrations
                         .IsRequired()
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Committee")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -81,15 +76,78 @@ namespace BrgyLink.Migrations
 
                     b.Property<DateTime?>("TermEnd")
                         .IsRequired()
-                        .HasColumnType("datetime2");
+                        .HasColumnType("date");
 
                     b.Property<DateTime?>("TermStart")
                         .IsRequired()
-                        .HasColumnType("datetime2");
+                        .HasColumnType("date");
 
                     b.HasKey("Id");
 
                     b.ToTable("BarangayOfficials");
+                });
+
+            modelBuilder.Entity("BrgyLink.Models.BarangayOfficialCommittee", b =>
+                {
+                    b.Property<int>("BarangayOfficialId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CommitteeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("BarangayOfficialId", "CommitteeId");
+
+                    b.HasIndex("CommitteeId");
+
+                    b.ToTable("BarangayOfficialCommittees");
+                });
+
+            modelBuilder.Entity("BrgyLink.Models.Committee", b =>
+                {
+                    b.Property<int>("CommitteeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CommitteeId"));
+
+                    b.Property<string>("CommitteeDescription")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("CommitteeName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("CommitteeId");
+
+                    b.ToTable("Committees");
+                });
+
+            modelBuilder.Entity("BrgyLink.Models.Purok", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("NumberOfRegisteredPeople")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Puroks");
                 });
 
             modelBuilder.Entity("BrgyLink.Models.Resident", b =>
@@ -99,11 +157,6 @@ namespace BrgyLink.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ResidentID"));
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
 
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime2");
@@ -177,6 +230,9 @@ namespace BrgyLink.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<int>("PurokId")
+                        .HasColumnType("int");
+
                     b.Property<string>("ResidencyStatus")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
@@ -192,6 +248,8 @@ namespace BrgyLink.Migrations
                         .HasDefaultValue("Non-voter");
 
                     b.HasKey("ResidentID");
+
+                    b.HasIndex("PurokId");
 
                     b.ToTable("Residents");
                 });
@@ -394,6 +452,36 @@ namespace BrgyLink.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("BrgyLink.Models.BarangayOfficialCommittee", b =>
+                {
+                    b.HasOne("BarangayOfficial", "BarangayOfficial")
+                        .WithMany("BarangayOfficialCommittees")
+                        .HasForeignKey("BarangayOfficialId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BrgyLink.Models.Committee", "Committee")
+                        .WithMany("BarangayOfficialCommittees")
+                        .HasForeignKey("CommitteeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("BarangayOfficial");
+
+                    b.Navigation("Committee");
+                });
+
+            modelBuilder.Entity("BrgyLink.Models.Resident", b =>
+                {
+                    b.HasOne("BrgyLink.Models.Purok", "Purok")
+                        .WithMany("Residents")
+                        .HasForeignKey("PurokId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Purok");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -443,6 +531,21 @@ namespace BrgyLink.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("BarangayOfficial", b =>
+                {
+                    b.Navigation("BarangayOfficialCommittees");
+                });
+
+            modelBuilder.Entity("BrgyLink.Models.Committee", b =>
+                {
+                    b.Navigation("BarangayOfficialCommittees");
+                });
+
+            modelBuilder.Entity("BrgyLink.Models.Purok", b =>
+                {
+                    b.Navigation("Residents");
                 });
 #pragma warning restore 612, 618
         }

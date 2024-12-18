@@ -80,9 +80,9 @@
                 <td>@official.Status</td>
                 <td>
                     <div class="action-buttons d-flex justify-content-center">
-                        <a asp-page="./Details" asp-route-id="@official.Id" class="view" title="View" data-bs-toggle="tooltip"><i class="material-icons">visibility</i></a>
-                        <a asp-page="./Edit" asp-route-id="@official.Id" class="edit" title="Edit"><i class="material-icons">edit</i></a>
-                        <a asp-page="./Delete" asp-route-id="@official.Id" class="delete" title="Delete"><i class="material-icons">delete</i></a>
+                        <a asp-page="./Edit" asp-route-id="@official.Id" class="btn btn-sm btn-warning">Edit</a>
+                        <a asp-page="./Details" asp-route-id="@official.Id" class="btn btn-sm btn-info">Details</a>
+                        <a asp-page="./Delete" asp-route-id="@official.Id" class="btn btn-sm btn-danger">Delete</a>
                     </div>
                 </td>
             </tr>

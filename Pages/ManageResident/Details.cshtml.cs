@@ -29,7 +29,10 @@ namespace BrgyLink.Pages.ManageResident
                 return NotFound();
             }
 
-            var resident = await _context.Residents.FirstOrDefaultAsync(m => m.ResidentID == id);
+           var resident = await _context.Residents
+                .Include(r => r.Purok)
+                .FirstOrDefaultAsync(r => r.ResidentID == id);
+        
             if (resident == null)
             {
                 return NotFound();

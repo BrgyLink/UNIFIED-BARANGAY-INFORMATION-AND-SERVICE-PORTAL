@@ -1,0 +1,50 @@
+﻿@page
+@model BrgyLink.Pages.ManageBarangayOfficialCommittee.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Pages/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>BarangayOfficialCommittee</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <<form method="post" id="createForm">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="BarangayOfficialCommittee.BarangayOfficialId" class="control-label">Select Barangay Official</label>
+                <select asp-for="BarangayOfficialCommittee.BarangayOfficialId"
+                        class="form-control"
+                        asp-items="@(ViewData["BarangayOfficialId"] as SelectList)">
+                    <option value="">-- Select Barangay Official --</option>
+                </select>
+                <span asp-validation-for="BarangayOfficialCommittee.BarangayOfficialId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BarangayOfficialCommittee.CommitteeId" class="control-label">Select Committee</label>
+                <select asp-for="BarangayOfficialCommittee.CommitteeId"
+                        class="form-control"
+                        asp-items="@(ViewData["CommitteeId"] as SelectList)">
+                    <option value="">-- Select Committee --</option>
+                </select>
+                <span asp-validation-for="BarangayOfficialCommittee.CommitteeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

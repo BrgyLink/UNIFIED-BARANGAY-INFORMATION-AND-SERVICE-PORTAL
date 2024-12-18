@@ -103,15 +103,43 @@
                                 <span asp-validation-for="BarangayOfficial.BarangayPosition" class="text-danger"></span>
                             </div>
                             <div class="col-4">
-                                <label for="Committee" class="form-label">Committee</label>
-                                <input type="text" class="form-control form-control-lg" placeholder="Enter Committee" asp-for="BarangayOfficial.Committee" id="Committee" />
-                                <span asp-validation-for="BarangayOfficial.Committee" class="text-danger"></span>
-                            </div>
-                            <div class="col-4">
                                 <label for="RankNo" class="form-label">Rank Number</label>
                                 <input type="number" class="form-control form-control-lg" placeholder="Enter Rank Number" asp-for="BarangayOfficial.RankNo" required id="RankNo" />
                                 <span asp-validation-for="BarangayOfficial.RankNo" class="text-danger"></span>
                             </div>
+                            <!-- Committees Section -->
+                            <div class="col-4">
+                                <label for="Committees" class="form-label">Committees</label>
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle"
+                                            type="button"
+                                            id="dropdownMenuButton"
+                                            data-bs-toggle="dropdown"
+                                            aria-expanded="false">
+                                        Select Committees
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        @foreach (var committee in Model.Committees)
+                                        {
+                                            <li>
+                                                <div class="form-check px-3">
+                                                    <input class="form-check-input  ms-1"
+                                                           type="checkbox"
+                                                           id="committee-@committee.CommitteeId"
+                                                           value="@committee.CommitteeId"
+                                                           name="SelectedCommitteeIds" />
+                                                    <label class="form-check-label"
+                                                           for="committee-@committee.CommitteeId">
+                                                        @committee.CommitteeName
+                                                    </label>
+                                                </div>
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                                <span asp-validation-for="SelectedCommitteeIds" class="text-danger"></span>
+                            </div>
+
                         </div>
                     </div>
                 </div>

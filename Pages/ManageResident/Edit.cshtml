@@ -147,18 +147,10 @@
                     <div class="form-group position-relative">
                         <label for="Address">Address</label>
                         <i class="mdi mdi-map-marker position-absolute" style="top: 36px; left: 10px;"></i>
-                        <select class="form-control ps-5" asp-for="Resident.Address" required>
-                            <option value="" disabled selected>Select Purok</option>
-                            <option value="Cabadiangan, Compostela Cebu, Purok 1">Purok 1</option>
-                            <option value="Cabadiangan, Compostela Cebu, Purok 2">Purok 2</option>
-                            <option value="Cabadiangan, Compostela Cebu, Purok 3">Purok 3</option>
-                            <option value="Cabadiangan, Compostela Cebu, Purok 4">Purok 4</option>
-                            <option value="Cabadiangan, Compostela Cebu, Purok 5">Purok 5</option>
-                            <option value="Cabadiangan, Compostela Cebu, Purok 6">Purok 6</option>
-                            <option value="Cabadiangan, Compostela Cebu, Purok 7">Purok 7</option>
-                            <option value="Cabadiangan, Compostela Cebu, Purok 8">Purok 8</option>
+                        <select class="form-control ps-5" asp-for="Resident.PurokId" asp-items="@(ViewData["Puroks"] as SelectList)" required>
+                            <option>Select Purok Address</option>
                         </select>
-                        <span asp-validation-for="Resident.Address" class="text-danger"></span>
+                        <span asp-validation-for="Resident.Purok" class="text-danger"></span>
                     </div>
                     <div class="form-group position-relative">
                         <label for="ContactNumber">Contact Number</label>

@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BrgyLink.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241211091004_Final")]
-    partial class Final
+    [Migration("20241214134407_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -40,11 +40,6 @@ namespace BrgyLink.Migrations
                     b.Property<DateTime?>("Birthdate")
                         .IsRequired()
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("Committee")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -84,15 +79,53 @@ namespace BrgyLink.Migrations
 
                     b.Property<DateTime?>("TermEnd")
                         .IsRequired()
-                        .HasColumnType("datetime2");
+                        .HasColumnType("date");
 
                     b.Property<DateTime?>("TermStart")
                         .IsRequired()
-                        .HasColumnType("datetime2");
+                        .HasColumnType("date");
 
                     b.HasKey("Id");
 
                     b.ToTable("BarangayOfficials");
+                });
+
+            modelBuilder.Entity("BrgyLink.Models.BarangayOfficialCommittee", b =>
+                {
+                    b.Property<int>("BarangayOfficialId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CommitteeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("BarangayOfficialId", "CommitteeId");
+
+                    b.HasIndex("CommitteeId");
+
+                    b.ToTable("BarangayOfficialCommittees");
+                });
+
+            modelBuilder.Entity("BrgyLink.Models.Committee", b =>
+                {
+                    b.Property<int>("CommitteeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CommitteeId"));
+
+                    b.Property<string>("CommitteeDescription")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("CommitteeName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("CommitteeId");
+
+                    b.ToTable("Committees");
                 });
 
             modelBuilder.Entity("BrgyLink.Models.Resident", b =>
@@ -397,6 +430,25 @@ namespace BrgyLink.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("BrgyLink.Models.BarangayOfficialCommittee", b =>
+                {
+                    b.HasOne("BarangayOfficial", "BarangayOfficial")
+                        .WithMany("BarangayOfficialCommittees")
+                        .HasForeignKey("BarangayOfficialId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BrgyLink.Models.Committee", "Committee")
+                        .WithMany("BarangayOfficialCommittees")
+                        .HasForeignKey("CommitteeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("BarangayOfficial");
+
+                    b.Navigation("Committee");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -446,6 +498,16 @@ namespace BrgyLink.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("BarangayOfficial", b =>
+                {
+                    b.Navigation("BarangayOfficialCommittees");
+                });
+
+            modelBuilder.Entity("BrgyLink.Models.Committee", b =>
+                {
+                    b.Navigation("BarangayOfficialCommittees");
                 });
 #pragma warning restore 612, 618
         }

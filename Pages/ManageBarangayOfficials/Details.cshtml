@@ -69,10 +69,6 @@
                     <dl class="row">
                         <dt class="col-sm-4">Position</dt>
                         <dd class="col-sm-8">@Html.DisplayFor(model => model.BarangayOfficial.BarangayPosition)</dd>
-
-                        <dt class="col-sm-4">Committee</dt>
-                        <dd class="col-sm-8">@Html.DisplayFor(model => model.BarangayOfficial.Committee)</dd>
-
                         <dt class="col-sm-4">Rank No</dt>
                         <dd class="col-sm-8">@Html.DisplayFor(model => model.BarangayOfficial.RankNo)</dd>
                     </dl>
@@ -97,8 +93,10 @@
         </div>
     </div>
 
+    <div class="row mb-4">
     <!-- Status Card -->
-    <div class="card mb-4 shadow-sm border-light rounded-3">
+    <div class="col-md-6">
+    <div class="card mb-6 shadow-sm border-light rounded-3">
         <div class="card-body">
             <h5 class="card-title">Status</h5>
             <dl class="row">
@@ -107,6 +105,35 @@
             </dl>
         </div>
     </div>
+    </div>
+
+
+    <!-- Committees Card -->
+    <div class="col-md-6">
+    <div class="card mb-6 shadow-sm border-light rounded-3">
+        <div class="card-body">
+            <h5 class="card-title">Committees</h5>
+            <dl class="row">
+                <dd class="col-sm-8">
+                   @if (Model.BarangayOfficial.BarangayOfficialCommittees.Any())
+                {
+                    <ul>
+                        @foreach (var committee in Model.BarangayOfficial.BarangayOfficialCommittees)
+                        {
+                            <li>@committee.Committee?.CommitteeName</li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <span>No committees assigned.</span>
+                }
+                 </dd>
+            </dl>
+        </div>
+    </div>
+  </div>
+</div>
 
     <!-- Action Links -->
     <div class="mt-4 text-center">

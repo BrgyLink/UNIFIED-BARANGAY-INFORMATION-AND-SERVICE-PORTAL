@@ -5,23 +5,28 @@ namespace BrgyLink.Models
 {
     public class Resident
     {
+
         [Key]
         public int ResidentID { get; set; }
 
         [Required]
         [StringLength(50)]
-        public string? FirstName { get; set; }
+        public string FirstName { get; set; }
 
         [Required]
         [StringLength(50)]
-        public string? LastName { get; set; }
+        public string LastName { get; set; }
 
         [StringLength(50)]
-        public string? MiddleName { get; set; }
+        public string MiddleName { get; set; }
 
+        // Foreign key for Purok
         [Required]
-        [StringLength(200)]
-        public string? Address { get; set; }
+        public int PurokId { get; set; } // Foreign key
+
+
+        // Navigation property for Purok
+        public Purok? Purok { get; set; } // Navigation property
 
         [Required]
         [Phone]
@@ -43,6 +48,7 @@ namespace BrgyLink.Models
         [Required]
         [StringLength(20)]
         public string ResidencyStatus { get; set; } = "Resident";
+
         public bool IsSeniorCitizen { get; set; }
 
         public bool IsPWD { get; set; }
@@ -70,10 +76,10 @@ namespace BrgyLink.Models
         [StringLength(100)]
         public string? EmergencyContact { get; set; }
 
-        [NotMapped] // This is for the uploaded file, not stored in the database
+        [NotMapped]
         public IFormFile? ImageFile { get; set; }
 
-        public byte[]? ImageData { get; set; } // This stores the byte data in the database
+        public byte[]? ImageData { get; set; }
 
         [StringLength(500)]
         public string? HealthConditions { get; set; }
@@ -82,4 +88,6 @@ namespace BrgyLink.Models
         public int Age => DateTime.Today.Year - BirthDate.Year;
 
     }
+
+
 }
