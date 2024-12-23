@@ -1,0 +1,70 @@
+﻿@page
+@model BrgyLink.Pages.ManageEquipment.CreateModel
+
+@{
+    ViewData["Title"] = "Create Equipment";
+    Layout = "_AdminLayout";
+}
+
+<h1>Create Equipment</h1>
+
+<h4>Equipment Details</h4>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form method="post" id="createForm">
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <!-- Facility Dropdown -->
+            <div class="form-group">
+                <label asp-for="Equipment.FacilityId" class="control-label">Select Facility</label>
+                <select asp-for="Equipment.FacilityId" class="form-control" asp-items="@(ViewData["FacilityId"] as SelectList)">
+                    <option value="">-- Select a Facility --</option>
+                </select>
+                <span asp-validation-for="Equipment.FacilityId" class="text-danger"></span>
+            </div>
+
+            <!-- Equipment Name -->
+            <div class="form-group">
+                <label asp-for="Equipment.Name" class="control-label">Equipment Name</label>
+                <input asp-for="Equipment.Name" class="form-control" />
+                <span asp-validation-for="Equipment.Name" class="text-danger"></span>
+            </div>
+
+            <!-- Equipment Description -->
+            <div class="form-group">
+                <label asp-for="Equipment.Description" class="control-label">Description</label>
+                <textarea asp-for="Equipment.Description" class="form-control"></textarea>
+                <span asp-validation-for="Equipment.Description" class="text-danger"></span>
+            </div>
+
+            <!-- Equipment Quantity -->
+            <div class="form-group">
+                <label asp-for="Equipment.Quantity" class="control-label">Quantity</label>
+                <input asp-for="Equipment.Quantity" class="form-control" />
+                <span asp-validation-for="Equipment.Quantity" class="text-danger"></span>
+            </div>
+
+            <!-- Equipment Status -->
+            <div class="form-group">
+                <label asp-for="Equipment.Status" class="control-label">Status</label>
+                <input asp-for="Equipment.Status" class="form-control" />
+                <span asp-validation-for="Equipment.Status" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create Equipment" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to Equipment List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

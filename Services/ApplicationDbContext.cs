@@ -16,6 +16,11 @@ public class ApplicationDbContext : IdentityDbContext
     public DbSet<Committee> Committees { get; set; }
     public DbSet<BarangayOfficialCommittee> BarangayOfficialCommittees { get; set; }
     public DbSet<Purok> Puroks { get; set; } // DbSet for Purok
+    public DbSet<Facility> Facilities { get; set; }
+    public DbSet<Equipment> Equipments { get; set; }
+    public DbSet<EquipmentLog> EquipmentLogs { get; set; }
+    public DbSet<FacilityLog> FacilityLogs { get; set; }
+
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -168,5 +173,13 @@ public class ApplicationDbContext : IdentityDbContext
                 .WithMany(c => c.BarangayOfficialCommittees)
                 .HasForeignKey(bc => bc.CommitteeId);
         });
+
+        // Configure the relationship between Equipment and Facility (Foreign Key)
+        modelBuilder.Entity<Equipment>()
+            .HasOne(e => e.Facility)
+            .WithMany(f => f.Equipments)
+            .HasForeignKey(e => e.FacilityId)
+            .OnDelete(DeleteBehavior.Cascade); // Choose your preferred delete behavior (Cascade, SetNull, etc.)
+
     }
 }

@@ -19,9 +19,11 @@ namespace BrgyLink.Pages
         // Property to hold the total number of residents
         public int TotalResidents { get; set; }
         public int TotalOfficials { get; set; }
+        public int TotalEquipments { get; set; }
         // Property for calculating progress percentages
         public double ResidentsProgress => TotalResidents; // No max value, just the total
         public double OfficialsProgress => TotalOfficials;
+        public double EquipmentsProgress => TotalEquipments;
 
         // OnGetAsync method to fetch data
         public async Task OnGetAsync()
@@ -29,6 +31,7 @@ namespace BrgyLink.Pages
             TotalOfficials = await _context.BarangayOfficials.CountAsync();
             // Retrieve the total count of residents from the database
             TotalResidents = await _context.Residents.CountAsync(); // Fetch the count of residents
+            TotalEquipments = await _context.Equipments.CountAsync();
         }
     }
 }

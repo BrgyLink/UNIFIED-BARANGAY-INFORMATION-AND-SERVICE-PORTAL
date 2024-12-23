@@ -22,7 +22,6 @@
     <link rel="shortcut icon" href="~/images/favicon.png" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-
 </head>
 <body>
     <div class="container-scroller">
@@ -159,16 +158,22 @@
                     <li class="nav-item">
                         <a class="nav-link" data-bs-toggle="collapse" href="#equipments" aria-expanded="false" aria-controls="equipments">
                             <i class="mdi mdi-sofa menu-icon"></i>
-                            <span class="menu-title">Equipments</span>
+                            <span class="menu-title">Manage Equipment</span>
                             <i class="menu-arrow"></i>
                         </a>
                         <div class="collapse" id="equipments">
                             <ul class="nav flex-column sub-menu">
                                 <li class="nav-item">
-                                    <a asp-area="" asp-page="/EquipmentRequests/Index" class="nav-link">Blabla</a>
+                                    <a asp-area="" asp-page="/ManageEquipment/Index" class="nav-link">Equipments</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a asp-area="" asp-page="/EquipmentRequests/Other" class="nav-link">Blabla 1</a>
+                                    <a asp-area="" asp-page="/ManageFacility/Index" class="nav-link">Facility</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-area="" asp-page="/ManageFacilityLog/Index" class="nav-link">Facilities Logs</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-area="" asp-page="/ManageEquipmentLog/Index" class="nav-link">Equipments Logs</a>
                                 </li>
                             </ul>
                         </div>

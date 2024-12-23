@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BrgyLink.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241214134407_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20241223135923_facility")]
+    partial class facility
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -128,6 +128,31 @@ namespace BrgyLink.Migrations
                     b.ToTable("Committees");
                 });
 
+            modelBuilder.Entity("BrgyLink.Models.Purok", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("NumberOfRegisteredPeople")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Puroks");
+                });
+
             modelBuilder.Entity("BrgyLink.Models.Resident", b =>
                 {
                     b.Property<int>("ResidentID")
@@ -135,11 +160,6 @@ namespace BrgyLink.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ResidentID"));
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
 
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime2");
@@ -213,6 +233,9 @@ namespace BrgyLink.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<int>("PurokId")
+                        .HasColumnType("int");
+
                     b.Property<string>("ResidencyStatus")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
@@ -229,7 +252,136 @@ namespace BrgyLink.Migrations
 
                     b.HasKey("ResidentID");
 
+                    b.HasIndex("PurokId");
+
                     b.ToTable("Residents");
+                });
+
+            modelBuilder.Entity("Equipment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<int>("FacilityId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("LastUpdated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FacilityId");
+
+                    b.ToTable("Equipments");
+                });
+
+            modelBuilder.Entity("EquipmentLog", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Action")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<int?>("EquipmentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("EquipmentName")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<DateTime>("LogDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EquipmentId");
+
+                    b.ToTable("EquipmentLogs");
+                });
+
+            modelBuilder.Entity("Facility", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<DateTime>("LastUpdated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Facilities");
+                });
+
+            modelBuilder.Entity("FacilityLog", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Action")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<int?>("FacilityId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("FacilityName")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<DateTime>("LogDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FacilityId");
+
+                    b.ToTable("FacilityLogs");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -449,6 +601,42 @@ namespace BrgyLink.Migrations
                     b.Navigation("Committee");
                 });
 
+            modelBuilder.Entity("BrgyLink.Models.Resident", b =>
+                {
+                    b.HasOne("BrgyLink.Models.Purok", "Purok")
+                        .WithMany("Residents")
+                        .HasForeignKey("PurokId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Purok");
+                });
+
+            modelBuilder.Entity("Equipment", b =>
+                {
+                    b.HasOne("Facility", "Facility")
+                        .WithMany("Equipments")
+                        .HasForeignKey("FacilityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Facility");
+                });
+
+            modelBuilder.Entity("EquipmentLog", b =>
+                {
+                    b.HasOne("Equipment", null)
+                        .WithMany("EquipmentLogs")
+                        .HasForeignKey("EquipmentId");
+                });
+
+            modelBuilder.Entity("FacilityLog", b =>
+                {
+                    b.HasOne("Facility", null)
+                        .WithMany("FacilityLogs")
+                        .HasForeignKey("FacilityId");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -508,6 +696,23 @@ namespace BrgyLink.Migrations
             modelBuilder.Entity("BrgyLink.Models.Committee", b =>
                 {
                     b.Navigation("BarangayOfficialCommittees");
+                });
+
+            modelBuilder.Entity("BrgyLink.Models.Purok", b =>
+                {
+                    b.Navigation("Residents");
+                });
+
+            modelBuilder.Entity("Equipment", b =>
+                {
+                    b.Navigation("EquipmentLogs");
+                });
+
+            modelBuilder.Entity("Facility", b =>
+                {
+                    b.Navigation("Equipments");
+
+                    b.Navigation("FacilityLogs");
                 });
 #pragma warning restore 612, 618
         }

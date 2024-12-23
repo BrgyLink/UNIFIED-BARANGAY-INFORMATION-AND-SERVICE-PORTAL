@@ -1,5 +1,9 @@
+use BrgyLinkDB;
+go
+
+
 -- Insert Puroks
-INSERT INTO Purok (Name, Description, NumberOfRegisteredPeople) VALUES
+INSERT INTO Puroks (Name, Description, NumberOfRegisteredPeople) VALUES
 ('Purok 1', 'Description for Purok 1', 0),
 ('Purok 2', 'Description for Purok 2', 0),
 ('Purok 3', 'Description for Purok 3', 0),
@@ -10,7 +14,7 @@ INSERT INTO Purok (Name, Description, NumberOfRegisteredPeople) VALUES
 ('Purok 8', 'Description for Purok 8', 0);
 
 -- Insert Committees
-INSERT INTO Committee (CommitteeName, CommitteeDescription) VALUES
+INSERT INTO Committees (CommitteeName, CommitteeDescription) VALUES
 ('Committee on Health', 'Responsible for health-related issues.'),
 ('Committee on Education', 'Handles education programs and initiatives.'),
 ('Committee on Environment', 'Focuses on environmental protection.'),
@@ -21,7 +25,7 @@ INSERT INTO Committee (CommitteeName, CommitteeDescription) VALUES
 ('Committee on Sports', 'Encourages sports activities and events.');
 
 -- Insert Barangay Officials
-INSERT INTO BarangayOfficial (FirstName, MiddleName, LastName, Birthdate, Gender, MaritalStatus, BarangayPosition, TermStart, TermEnd, RankNo, Status, Photo) VALUES
+INSERT INTO BarangayOfficials (FirstName, MiddleName, LastName, Birthdate, Gender, MaritalStatus, BarangayPosition, TermStart, TermEnd, RankNo, Status, Photo) VALUES
 ('Juan', 'Dela', 'Cruz', '1980-01-01', 'Male', 'Single', 'Barangay Captain', '2022-01-01', '2025-12-31', 1, 'Active', NULL),
 ('Maria', 'Santos', 'Reyes', '1985-05-10', 'Female', 'Married', 'Barangay Kagawad', '2022-01-01', '2025-12-31', 2, 'Active', NULL),
 ('Pedro', 'Pablo', 'Gomez', '1978-07-15', 'Male', 'Single', 'Barangay Kagawad', '2022-01-01', '2025-12-31', 3, 'Active', NULL),
@@ -34,7 +38,7 @@ INSERT INTO BarangayOfficial (FirstName, MiddleName, LastName, Birthdate, Gender
 ('Ana', 'Fernandez', 'Serrano', '1993-09-11', 'Female', 'Single', 'Barangay Kagawad', '2022-01-01', '2025-12-31', 10, 'Active', NULL);
 
 -- Insert Residents
-INSERT INTO Resident (FirstName, LastName, MiddleName, PurokId, ContactNumber, Email, BirthDate, Gender, ResidencyStatus, IsSeniorCitizen, IsPWD, Nationality, CivilStatus, Occupation, VoterStatus, DateRegistered, EmergencyContact, ImageData, HealthConditions) VALUES
+INSERT INTO Residents (FirstName, LastName, MiddleName, PurokId, ContactNumber, Email, BirthDate, Gender, ResidencyStatus, IsSeniorCitizen, IsPWD, Nationality, CivilStatus, Occupation, VoterStatus, DateRegistered, EmergencyContact, ImageData, HealthConditions) VALUES
 ('John', 'Doe', 'A.', 1, '09123456789', 'johndoe@example.com', '2000-01-01', 'Male', 'Resident', 0, 0, 'Filipino', 'Single', 'Student', 'Non-voter', '2023-01-01', 'Jane Doe', NULL, NULL),
 ('Jane', 'Smith', 'B.', 2, '09123456788', 'janesmith@example.com', '1995-02-02', 'Female', 'Resident', 0, 0, 'Filipino', 'Single', 'Teacher', 'Non-voter', '2023-01-01', 'John Smith', NULL, NULL),
 ('Emily', 'Johnson', 'C.', 3, '09123456787', 'emilyjohnson@example.com', '1988-03-03', 'Female', 'Resident', 0, 0, 'Filipino', 'Single', 'Engineer', 'Non-voter', '2023-01-01', 'Mark Johnson', NULL, NULL),
@@ -55,3 +59,38 @@ INSERT INTO Resident (FirstName, LastName, MiddleName, PurokId, ContactNumber, E
 ('Sophia', 'Adams', 'R.', 2, '09123456772', 'sophiaadams@example.com', '1984-06-18', 'Female', 'Resident', 0, 0, 'Filipino', 'Single', 'Social Worker', 'Non-voter', '2023-01-01', 'James Adams', NULL, NULL),
 ('Ryan', 'Nelson', 'S.', 3, '09123456771', 'ryannelson@example.com', '1998-07-19', 'Male', 'Resident', 0, 0, 'Filipino', 'Single', 'Web Designer', 'Non-voter', '2023-01-01', 'Zoe Nelson', NULL, NULL),
 ('Olivia', 'Carter', 'T.', 4, '09123456770', 'oliviacarter@example.com', '1990-08-20', 'Female', 'Resident', 0, 0, 'Filipino', 'Single', 'Fashion Designer', 'Non-voter', '2023-01-01', 'Henry Carter', NULL, NULL);
+
+go
+
+
+INSERT INTO Facilities (Name, Description, LastUpdated)
+VALUES 
+    ('Barangay Health Center', 'Health facility serving the local community', GETDATE()),
+    ('Barangay Hall', 'Administrative center for Barangay operations', GETDATE()),
+    ('Barangay Fire Station', 'Facility for firefighting and rescue operations', GETDATE()),
+    ('Barangay Tanod Station', 'Facility for the Barangay Tanod (security personnel) operations', GETDATE());
+
+go
+
+-- Insert sample data for Equipments
+INSERT INTO Equipments (FacilityId, Name, Description, Quantity, Status, LastUpdated)
+VALUES 
+    -- Barangay Health Center
+    (1, 'Medical Bed', 'Bed for health centers', 12, 'In Use', GETDATE()),
+    (1, 'Oxygen Tank', 'Tank for providing oxygen', 5, 'In Use', GETDATE()),
+    (1, 'Surgical Tools', 'Tools for surgeries in health centers', 30, 'Reserved', GETDATE()),
+
+    -- Barangay Hall
+    (2, 'Office Desk', 'Desk for staff', 20, 'In Use', GETDATE()),
+    (2, 'Filing Cabinet', 'Cabinet for storing files', 10, 'In Use', GETDATE()),
+    (2, 'Projector', 'Projector for presentations', 2, 'Out of Stock', GETDATE()),
+
+    -- Barangay Fire Station
+    (3, 'Fire Hose', 'Hose for firefighting', 6, 'In Use', GETDATE()),
+    (3, 'Fire Extinguisher', 'Portable extinguisher for fire control', 12, 'In Use', GETDATE()),
+    (3, 'Rescue Ladder', 'Ladder for rescue operations', 4, 'Reserved', GETDATE()),
+
+    -- Barangay Tanod Station
+    (4, 'Tanod Uniform', 'Uniform for Barangay Tanods', 15, 'In Use', GETDATE()),
+    (4, 'Safety Vest', 'Vest for safety', 15, 'In Use', GETDATE()),
+    (4, 'Tanod ID', 'ID for Barangay Tanods', 20, 'In Use', GETDATE());
