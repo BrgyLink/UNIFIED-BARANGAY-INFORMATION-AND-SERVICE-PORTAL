@@ -73,7 +73,16 @@ namespace BrgyLink.Pages.ManageEquipment
                 Action = $"Deleted by: {currentUserName}", // Action including user and equipment name
                 LogDate = DateTime.Now // Current date and time
             };
-
+            
+            var adminLog = new AdminLogs
+            {
+                Firstname = $"{currentUserName}",
+                Actions = "Equipment",
+                Description = $"Deleted " + Equipment.Name + " on the equipments",
+                Role = "Official",
+                Date = DateTime.Now
+            };
+            _context.AdminLogs.Add(adminLog);
             // Add the log entry to the database
             _context.EquipmentLogs.Add(equipmentLog);
             await _context.SaveChangesAsync();

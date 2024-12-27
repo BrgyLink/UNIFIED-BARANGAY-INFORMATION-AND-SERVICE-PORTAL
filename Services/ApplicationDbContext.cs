@@ -19,6 +19,7 @@ public class ApplicationDbContext : IdentityDbContext
     public DbSet<Facility> Facilities { get; set; }
     public DbSet<Equipment> Equipments { get; set; }
     public DbSet<EquipmentLog> EquipmentLogs { get; set; }
+    public DbSet<AdminLogs> AdminLogs { get; set; }
     public DbSet<FacilityLog> FacilityLogs { get; set; }
 
 
@@ -182,4 +183,7 @@ public class ApplicationDbContext : IdentityDbContext
             .OnDelete(DeleteBehavior.Cascade); // Choose your preferred delete behavior (Cascade, SetNull, etc.)
 
     }
+
+
+    public DbSet<BrgyLink.Models.Blotter> Blotter { get; set; } = default!;
 }

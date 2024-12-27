@@ -2,6 +2,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BrgyLink.Pages
 {
@@ -15,6 +18,9 @@ namespace BrgyLink.Pages
         {
             _context = context;
         }
+
+        public IList<AdminLogs> AdminLogs { get; set; } = default!;
+        public IList<BarangayOfficial> Officials { get; set; } = default!;
 
         // Property to hold the total number of residents
         public int TotalResidents { get; set; }
@@ -32,6 +38,25 @@ namespace BrgyLink.Pages
             // Retrieve the total count of residents from the database
             TotalResidents = await _context.Residents.CountAsync(); // Fetch the count of residents
             TotalEquipments = await _context.Equipments.CountAsync();
+
+
+            if (_context.AdminLogs != null)
+            {
+                AdminLogs = await _context.AdminLogs.ToListAsync();
+                // Fetch only the first 5 rows
+                AdminLogs = await _context.AdminLogs
+                    .OrderByDescending(log => log.Date) // Optional: Order by Date or other criteria
+                    .Take(5)
+                    .ToListAsync();
+
+                Console.WriteLine($"AdminLogs count: {AdminLogs.Count}"); // Log the count
+            }
+
+            if (_context.BarangayOfficials != null)
+            {
+                Officials = await _context.BarangayOfficials.ToListAsync();
+                Console.WriteLine($"Officials count: {Officials.Count}");
+            }
         }
     }
 }

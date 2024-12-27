@@ -1,0 +1,73 @@
+﻿@page
+@model BrgyLink.Pages.ManageBlotterReports.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "_AdminLayout";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Blotter[0].Incident)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Blotter[0].Complainant)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Blotter[0].Respondent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Blotter[0].DateReported)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Blotter[0].LastUpdated)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Blotter[0].ActionTaken)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Blotter[0].Status)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Blotter) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Incident)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Complainant)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Respondent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateReported)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastUpdated)
+            </td>
+            <td>
+            @Html.DisplayFor(modelItem => item.ActionTaken)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

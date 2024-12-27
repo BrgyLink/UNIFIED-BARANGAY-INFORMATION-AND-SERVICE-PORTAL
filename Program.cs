@@ -5,6 +5,7 @@ using BrgyLink.Services;
 using BrgyLink.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
+//builder.Services.AddSingleton<PdfService>();
 
 // Add services to the container.
 builder.Services.AddDbContext<ApplicationDbContext>(options =>

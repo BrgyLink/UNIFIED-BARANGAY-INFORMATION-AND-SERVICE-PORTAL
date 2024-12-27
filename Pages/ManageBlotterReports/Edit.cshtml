@@ -1,0 +1,61 @@
+﻿@page
+@model BrgyLink.Pages.ManageBlotterReports.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "_AdminLayout";
+}
+
+<h1>Edit</h1>
+
+<h4>Blotter</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Blotter.Id" />
+            <div class="form-group">
+                <label asp-for="Blotter.Incident" class="control-label"></label>
+                <input asp-for="Blotter.Incident" class="form-control" />
+                <span asp-validation-for="Blotter.Incident" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Blotter.Complainant" class="control-label"></label>
+                <input asp-for="Blotter.Complainant" class="form-control" />
+                <span asp-validation-for="Blotter.Complainant" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Blotter.Respondent" class="control-label"></label>
+                <input asp-for="Blotter.Respondent" class="form-control" />
+                <span asp-validation-for="Blotter.Respondent" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Blotter.DateReported" class="control-label"></label>
+                <input asp-for="Blotter.DateReported" class="form-control" />
+                <span asp-validation-for="Blotter.DateReported" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Blotter.ActionTaken" class="control-label"></label>
+                <input asp-for="Blotter.ActionTaken" class="form-control" />
+                <span asp-validation-for="Blotter.ActionTaken" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Blotter.Status" class="control-label"></label>
+                <input asp-for="Blotter.Status" class="form-control" />
+                <span asp-validation-for="Blotter.Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

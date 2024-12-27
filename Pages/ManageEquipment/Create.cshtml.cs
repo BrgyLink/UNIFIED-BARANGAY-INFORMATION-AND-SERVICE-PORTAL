@@ -53,8 +53,18 @@ namespace BrgyLink.Pages.ManageEquipment
                 LogDate = DateTime.Now // Current date and time
             };
 
+            var adminLog = new AdminLogs
+            {
+                Firstname = $"{currentUserName}",
+                Actions = "Equipment",
+                Description = $"Added " + Equipment.Name + " on the equipments",
+                Role = "Official",
+                Date = DateTime.Now
+            };
+
             // Add the log entry to the database
             _context.EquipmentLogs.Add(equipmentLog);
+            _context.AdminLogs.Add(adminLog);
             await _context.SaveChangesAsync();
 
             // Set a success message and redirect to the Equipment list page
