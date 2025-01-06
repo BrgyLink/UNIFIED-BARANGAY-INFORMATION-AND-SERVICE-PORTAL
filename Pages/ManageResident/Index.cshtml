@@ -38,14 +38,26 @@
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h4 class="card-title">Barangay Residents</h4>
 
-            <!-- Search Form -->
-            <form method="get" class="d-flex w-35">
-                <div class="input-group">
-                    <span class="input-group-text"><i class="mdi mdi-magnify"></i></span> <!-- MDI search icon inside the input -->
-                    <input type="text" name="SearchString" value="@Model.SearchString" class="form-control" placeholder="Search residents...">
+            <!-- Search Form and filters -->
+            <form method="get" class="d-flex w-15 ms-1">
+                <select name="Filter" class="form-select">
+                    <option value="">All Residents</option>
+                    <option value="Purok">Purok</option>
+                    <option value="Gender">Gender</option>
+                    <option value="AgeGroup">Age Group</option>
+                </select>
+                <select name="SortOrder" class="form-select ms-1">
+                    <option value="NameAsc">Name (A-Z)</option>
+                    <option value="NameDesc">Name (Z-A)</option>
+                    <option value="AgeAsc">Age (Youngest First)</option>
+                    <option value="AgeDesc">Age (Oldest First)</option>
+                </select>
+                <!-- Add length to the searchbar -->
+                <div class="input-group ms-1">
+                    <input type="text" name="SearchString" value="@Model.SearchString" class="form-control" placeholder="Search residents..." style="height: 50px; width: 200px">
                 </div>
+                <button type="submit" class="btn btn-primary">Filter</button>
             </form>
-
         </div>
 
         <div class="row">
@@ -164,11 +176,7 @@
     </div>
 </div>
 
-
-
-
 @section Scripts {
-
     <script>
         // Initialize tooltips (Bootstrap 5)
         var tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');

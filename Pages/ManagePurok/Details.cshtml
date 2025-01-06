@@ -34,7 +34,7 @@
                         @Model.Purok.Description
                     }
                 </dd>
-
+             
                 <dt class="col-sm-3">Number of Registered People</dt>
                 <dd class="col-sm-9">
                     <span class="badge bg-primary">@Model.Purok.NumberOfRegisteredPeople</span>
@@ -50,5 +50,44 @@
         <a asp-page="./Index" class="btn btn-secondary">
             <i class="fas fa-arrow-left me-2"></i>Back to List
         </a>
+    </div>
+
+    <div class="card mt-4">
+        <div class="card-header">
+            <h5 class="card-title">Residents in @Model.Purok.Name</h5>
+        </div>
+        <div class="card-body">
+            @if (Model.Residents.Count == 0)
+            {
+                <p class="text-muted">No residents found in this Purok.</p>
+            }
+            else
+            {
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Gender</th>
+                            <th>Age</th>
+                            <th>Contact Number</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (var i = 0; i < Model.Residents.Count; i++)
+                        {
+                            var resident = Model.Residents[i];
+                            <tr>
+                                <td>@(i + 1)</td>
+                                <td>@resident.FirstName @resident.LastName</td>
+                                <td>@resident.Gender</td>
+                                <td>@resident.Age</td>
+                                <td>@resident.ContactNumber</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        </div>
     </div>
 </div>

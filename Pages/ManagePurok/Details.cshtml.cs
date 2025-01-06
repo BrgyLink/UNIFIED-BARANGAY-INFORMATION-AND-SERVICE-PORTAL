@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using BrgyLink.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using BrgyLink.Models;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace BrgyLink.Pages.ManagePurok
 {
@@ -18,24 +17,29 @@ namespace BrgyLink.Pages.ManagePurok
             _context = context;
         }
 
-      public Purok Purok { get; set; } = default!; 
+        public Purok Purok { get; set; }
+        public IList<Resident> Residents { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.Puroks == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var purok = await _context.Puroks.FirstOrDefaultAsync(m => m.Id == id);
-            if (purok == null)
+            Purok = await _context.Puroks
+                .Include(p => p.Residents)
+                .FirstOrDefaultAsync(m => m.Id == id);
+
+            if (Purok != null)
             {
-                return NotFound();
+                Purok.NumberOfRegisteredPeople = Purok.Residents.Count;
             }
-            else 
-            {
-                Purok = purok;
-            }
+
+            Residents = await _context.Residents
+                .Where(r => r.PurokId == id)
+                .ToListAsync();
+
             return Page();
         }
     }

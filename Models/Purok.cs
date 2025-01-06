@@ -16,6 +16,7 @@ namespace BrgyLink.Models
         public int NumberOfRegisteredPeople { get; set; } // Add this property
 
         public ICollection<Resident> Residents { get; set; } = new List<Resident>();
+        public int? PurokId { get; internal set; }
     }
 
 }

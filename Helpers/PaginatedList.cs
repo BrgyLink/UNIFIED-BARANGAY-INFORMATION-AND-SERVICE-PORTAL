@@ -1,4 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace BrgyLink.Helpers
 {
@@ -13,18 +17,14 @@ namespace BrgyLink.Helpers
             PageIndex = pageIndex;
             TotalPages = (int)Math.Ceiling(count / (double)pageSize);
             TotalItems = count;
-
             this.AddRange(items);
         }
 
-        // Check if there are previous pages
         public bool HasPreviousPage => PageIndex > 1;
-
-        // Check if there are next pages
         public bool HasNextPage => PageIndex < TotalPages;
 
-        // Create the PaginatedList asynchronously
-        public static async Task<PaginatedList<T>> CreateAsync(IQueryable<T> source, int pageIndex, int pageSize)
+        public static async Task<PaginatedList<T>> CreateAsync(
+            IQueryable<T> source, int pageIndex, int pageSize, string searchString, string filter, string sortOrder, string sortOrder1)
         {
             var count = await source.CountAsync();
             var items = await source.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToListAsync();
