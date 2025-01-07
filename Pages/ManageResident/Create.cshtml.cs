@@ -8,6 +8,8 @@ using BrgyLink.Models;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Processing;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Hosting;
 
 namespace BrgyLink.Pages.ManageResident
 {
@@ -110,8 +112,7 @@ namespace BrgyLink.Pages.ManageResident
                 // Set success message
                 TempData["SuccessMessage"] = "Resident created successfully!";
 
-                //return RedirectToPage("./Index");
-                return Page();
+                return RedirectToPage("./Create");
             }
             catch (Exception ex)
             {

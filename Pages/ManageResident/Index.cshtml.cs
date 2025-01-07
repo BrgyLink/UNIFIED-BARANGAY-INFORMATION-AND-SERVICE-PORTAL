@@ -35,6 +35,7 @@ namespace BrgyLink.Pages.ManageResident
             // Default to page 1 if no page index is provided
             PageIndex = pageIndex ?? 1;
 
+            TempData["SuccessMessage"] = null;
             var query = _context.Residents.AsQueryable();
 
             // Load Puroks for the dropdown

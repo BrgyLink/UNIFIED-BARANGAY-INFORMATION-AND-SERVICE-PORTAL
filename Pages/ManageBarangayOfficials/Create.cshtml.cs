@@ -114,7 +114,7 @@ namespace BrgyLink.Pages.ManageBarangayOfficials
                 }
 
                 TempData["SuccessMessage"] = "Barangay Official created successfully!";
-                return RedirectToPage("/ManageBarangayOfficials/Index");
+                return RedirectToPage("./Create");
             }
             catch (Exception ex)
             {
