@@ -1,9 +1,8 @@
 ﻿using BrgyLink.Models;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-public class ApplicationDbContext : IdentityDbContext
+public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
@@ -21,7 +20,7 @@ public class ApplicationDbContext : IdentityDbContext
     public DbSet<EquipmentLog> EquipmentLogs { get; set; }
     public DbSet<AdminLogs> AdminLogs { get; set; }
     public DbSet<FacilityLog> FacilityLogs { get; set; }
-
+    public DbSet<Blotter> Blotter { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -43,7 +42,6 @@ public class ApplicationDbContext : IdentityDbContext
             entity.HasOne(r => r.Purok)
                 .WithMany(p => p.Residents)
                 .HasForeignKey(r => r.PurokId);
-
 
             // Configure image data to use efficient storage
             entity.Property(e => e.ImageData)
@@ -181,9 +179,5 @@ public class ApplicationDbContext : IdentityDbContext
             .WithMany(f => f.Equipments)
             .HasForeignKey(e => e.FacilityId)
             .OnDelete(DeleteBehavior.Cascade); // Choose your preferred delete behavior (Cascade, SetNull, etc.)
-
     }
-
-
-    public DbSet<BrgyLink.Models.Blotter> Blotter { get; set; } = default!;
 }

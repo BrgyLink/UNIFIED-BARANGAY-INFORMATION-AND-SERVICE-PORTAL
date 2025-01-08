@@ -1,7 +1,8 @@
 ﻿@using Microsoft.AspNetCore.Identity
+ @using BrgyLink.Models
 
-@inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
 
 <ul class="navbar-nav">
     @if (SignInManager.IsSignedIn(User))
@@ -9,7 +10,7 @@
         <!-- Dropdown for logged-in users -->
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fas fa-user me-2"></i>@User.Identity.Name <!-- Display user name with user icon -->
+                <i class="fas fa-user me-2"></i>@UserManager.GetUserAsync(User).Result.FirstName <!-- Display user name with user icon -->
             </a>
 
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
