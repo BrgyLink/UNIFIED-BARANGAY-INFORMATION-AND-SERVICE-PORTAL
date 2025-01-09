@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 
 public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 {
+    internal readonly object CertificateRequest;
+
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
     {
@@ -21,6 +23,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<AdminLogs> AdminLogs { get; set; }
     public DbSet<FacilityLog> FacilityLogs { get; set; }
     public DbSet<Blotter> Blotter { get; set; }
+    public DbSet<AdminSettings> AdminSettings { get; set; }
+    public DbSet<CertificateRequest> CertificateRequests { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -179,5 +183,14 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
             .WithMany(f => f.Equipments)
             .HasForeignKey(e => e.FacilityId)
             .OnDelete(DeleteBehavior.Cascade); // Choose your preferred delete behavior (Cascade, SetNull, etc.)
+
+        // Configure decimal properties
+        modelBuilder.Entity<AdminSettings>()
+            .Property(a => a.CertificateFee)
+            .HasColumnType("decimal(18,2)");
+
+        modelBuilder.Entity<CertificateRequest>()
+            .Property(c => c.Fee)
+            .HasColumnType("decimal(18,2)");
     }
 }

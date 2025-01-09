@@ -94,3 +94,8 @@ VALUES
     (4, 'Tanod Uniform', 'Uniform for Barangay Tanods', 15, 'In Use', GETDATE()),
     (4, 'Safety Vest', 'Vest for safety', 15, 'In Use', GETDATE()),
     (4, 'Tanod ID', 'ID for Barangay Tanods', 20, 'In Use', GETDATE());
+
+    --Insert sample data for Certificate Fee and GCash ContactNumber
+
+    INSERT INTO AdminSettings (CertificateFee, GCashContactNumber) VALUES
+    (200.00, '09123456789');
