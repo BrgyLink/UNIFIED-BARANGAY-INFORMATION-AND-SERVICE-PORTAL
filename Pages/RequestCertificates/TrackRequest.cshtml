@@ -1,0 +1,54 @@
+﻿@page
+@model BrgyLink.Pages.RequestCertificates.TrackRequestModel
+@{
+    Layout = "_Layout"; 
+}
+
+<style>
+    .pb-3 {
+        height: 60vh;
+    }
+</style>
+<div class="container mt-5 mb-5">
+    <h2>Track Certificate Request</h2>
+    <form method="get">
+        <div>
+            <div class="form-group">
+                <label for="TrackingCode">Enter Tracking Code</label>
+                <input type="text" class="form-control" asp-for="TrackingCode" placeholder="Enter Tracking Code">
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Track Request</button>
+        </div>
+       
+     </form>
+    @if (Model.RequestDetails != null)
+    {
+        <div class="mt-5">
+            <h3>Results</h3>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Full Name</th>
+                        <th>Pick-Up Date</th>
+                        <th>Date Requested</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>@Model.RequestDetails.FullName</td>
+                        <td>@Model.RequestDetails.PickupDate</td>
+                        <td>@Model.RequestDetails.RequestDate</td>
+                        <td>@Model.RequestDetails.Status</td>
+                    </tr>
+                </tbody>
+            </table>
+  
+        </div>
+    }
+    else if(!string.IsNullOrEmpty(Model.TrackingCode))
+    {
+        <p>No results found for tracking code: @Model.TrackingCode</p>
+    }
+</div>
+

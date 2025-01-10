@@ -34,7 +34,9 @@ namespace BrgyLink.Pages.RequestCertificates
             CertificateRequest = new CertificateRequest
             {
                 TrackingCode = GenerateTrackingCode(),
-                PaymentContactNumber = adminSettings.ContactNumber
+                PaymentContactNumber = adminSettings.ContactNumber,
+                Fee = adminSettings.CertificateFee
+
             };
 
             return Page();
@@ -56,6 +58,7 @@ namespace BrgyLink.Pages.RequestCertificates
             }
 
             CertificateRequest.PaymentContactNumber = adminSettings.ContactNumber;
+            CertificateRequest.Fee = adminSettings.CertificateFee;
             CertificateRequest.RequestDate = DateTime.UtcNow;
 
             // Ensure TrackingCode is set

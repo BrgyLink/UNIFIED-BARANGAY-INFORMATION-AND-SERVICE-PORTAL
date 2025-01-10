@@ -85,9 +85,10 @@
 
                     <div class="mb-3">
                         <label asp-for="CertificateRequest.PickupDate" class="form-label">Pick-Up Date</label>
-                        <input asp-for="CertificateRequest.PickupDate" class="form-control" type="date">
+                        <input asp-for="CertificateRequest.PickupDate" class="form-control" type="date" min="@DateTime.UtcNow.ToString("yyyy-MM-dd")">
                         <span asp-validation-for="CertificateRequest.PickupDate" class="text-danger"></span>
                     </div>
+
 
                     <div class="mb-3">
                         <label asp-for="CertificateRequest.PaymentMethod" class="form-label">Payment Method</label>

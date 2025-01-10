@@ -16,7 +16,7 @@ namespace BrgyLink.Models
 
         [Required]
         [DataType(DataType.Date)]
-        public DateTime PickupDate { get; set; }
+        public DateTime PickupDate { get; set; } = DateTime.UtcNow.AddDays(1);
 
         [Required]
         [StringLength(50)]
@@ -38,4 +38,6 @@ namespace BrgyLink.Models
         [StringLength(15)]
         public string? PaymentContactNumber { get; set; }
     }
+
+
 }
