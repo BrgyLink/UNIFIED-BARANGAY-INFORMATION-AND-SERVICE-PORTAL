@@ -13,13 +13,11 @@ namespace BrgyLink.Pages.ManageBlotterReports
     public class CreateModel : PageModel
     {
         private readonly ApplicationDbContext _context;
-        private readonly PdfService _pdfService;
 
 
-        public CreateModel(ApplicationDbContext context, PdfService pdfService)
+        public CreateModel(ApplicationDbContext context)
         {
             _context = context;
-            _pdfService = pdfService;
         }
 
 
@@ -30,23 +28,45 @@ namespace BrgyLink.Pages.ManageBlotterReports
 
         [BindProperty]
         public Blotter Blotter { get; set; } = default!;
-        
+
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          if (!ModelState.IsValid || _context.Blotter == null || Blotter == null)
+            if (!ModelState.IsValid || _context.Blotter == null || Blotter == null)
             {
+                foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    Console.WriteLine($"Error: {error.ErrorMessage}");
+                }
                 return Page();
             }
 
+            //// Set default status if not provided
+            //if (string.IsNullOrEmpty(Blotter.Status))
+            //{
+            //    Blotter.Status = "Pending"; // Default value for Status
+            //}
+            // Get the current user's username from HttpContext
+            var currentUserName = HttpContext.User.Identity.Name; // Get username directly from the claims
+            var adminLog = new AdminLogs
+            {
+                Firstname = $"{currentUserName}",
+                Actions = "Blotter",
+                Description = $"Added a new Incident " + Blotter.Incident + " on Blotter Reports",
+                Role = "Official",
+                Date = DateTime.Now
+            };
+
+            Blotter.DateReported = DateTime.Now;
+            Blotter.LastUpdated = DateTime.Now;
+
+            _context.AdminLogs.Add(adminLog);
             _context.Blotter.Add(Blotter);
             await _context.SaveChangesAsync();
-            Blotter.DateReported = System.DateTime.Now;
-            Blotter.LastUpdated = System.DateTime.Now;
-            Blotter.Status = "Pending";
 
             return RedirectToPage("./Index");
         }
+
     }
 }

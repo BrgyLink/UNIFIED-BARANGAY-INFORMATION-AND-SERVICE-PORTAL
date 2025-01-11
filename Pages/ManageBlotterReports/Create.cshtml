@@ -13,39 +13,42 @@
 <form method="post">
     <div class="form-group">
         <label for="Incident">Incident</label>
-        <input type="text" class="form-control" id="Incident" name="Incident" required />
+        <input type="text" class="form-control" id="Incident" asp-for="Blotter.Incident" required />
     </div>
 
     <div class="form-group">
         <label for="Complainant">Complainant</label>
-        <input type="text" class="form-control" id="Complainant" name="Complainant" required />
+        <input type="text" class="form-control" id="Complainant" asp-for="Blotter.Complainant" required />
     </div>
 
     <div class="form-group">
         <label for="Respondent">Respondent</label>
-        <input type="text" class="form-control" id="Respondent" name="Respondent" required />
+        <input type="text" class="form-control" id="Respondent" asp-for="Blotter.Respondent" required />
     </div>
 
     <div class="form-group">
         <label for="ActionTaken">Action Taken</label>
-        <input type="text" class="form-control" id="ActionTaken" name="ActionTaken" />
+        <input type="text" class="form-control" id="ActionTaken" asp-for="Blotter.ActionTaken" />
     </div>
 
-   @*  <div class="form-group">
+    <!-- Dropdown for Status -->
+    <div class="form-group">
         <label for="Status">Status</label>
-        <select class="form-control" id="Status" name="Status">
+        <select class="form-control" id="Status" asp-for="Blotter.Status" required>
             <option value="Pending">Pending</option>
             <option value="Resolved">Resolved</option>
         </select>
-    </div> *@
+    </div>
 
     <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+</form>
 
 <div>
     <a asp-page="Index">Back to List</a>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
